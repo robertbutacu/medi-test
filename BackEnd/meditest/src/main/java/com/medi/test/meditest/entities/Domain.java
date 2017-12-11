@@ -1,13 +1,14 @@
-package com.medi.test.meditest.models;
-
+package com.medi.test.meditest.entities;
 
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity
-@Table(name = "domain")
+@Entity(name = "Domain")
+@Table(name = "domains")
 public class Domain {
     private static final long serialVersionUID = 4885215557937431660L;
 
@@ -17,11 +18,29 @@ public class Domain {
 
     @NotNull
     @Column(name = "name")
-    @Length(min = 5, max = 30)
+    @Length(max = 30)
     private String name;
+
+    @OneToMany(
+            mappedBy = "domain",
+            cascade = CascadeType.ALL
+    )
+    public List<Question> questions = new ArrayList<>();
 
     public Domain() {
 
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
     public long getId() {
