@@ -1,4 +1,34 @@
 <div>
-  Create the form for test generating here!
+  <form>
+
+    <label> Choose option:</label>
+    <select>
+      <option *ngFor="let option of options" [value]="option.value">
+        {{ option.viewValue }}
+      </option>
+    </select>
+    <br> <br>
+
+    <label> Choose difficulty level:</label>
+    <select>
+      <option *ngFor="let level of levels" [value]="level.value">
+        {{ level.viewValue }}
+      </option>
+    </select>
+
+    <br>
+    <label> Choose time:</label>
+    <select>
+      <option *ngFor="let time of times" [value]="time.value">
+        {{ time.viewValue }}
+      </option>
+    </select><br>
+    <label> Choose number of questions:</label>
+    <select>
+      <option *ngFor="let question of questions" [value]="question.value">
+        {{ question.viewValue }}
+      </option>
+    </select>
+  </form>
   <button (click)="generateTest()">GenerateTest</button>
 </div>
