@@ -6,6 +6,7 @@ import { QuestionListComponent } from './components/question-list/question-list.
 import { QuestionComponent } from './components/question-list/question/question.component';
 import { TestGeneratorComponent } from './components/test-generator/test-generator.component';
 import {TestService} from './test.service';
+import {CountdownComponent} from "./components/countdown/countdown.component";
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import {TestService} from './test.service';
     QuestionListComponent,
     QuestionComponent,
     TestGeneratorComponent,
+    CountdownComponent
   ],
   providers: [
     TestService
