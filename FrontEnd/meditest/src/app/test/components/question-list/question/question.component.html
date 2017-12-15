@@ -1,0 +1,12 @@
+<div class="question">
+  <div class="title">
+    <i class="fa fa-question-circle" aria-hidden="true"></i> Ce este craniul?
+  </div>
+  <div class="answers">
+    <div *ngFor="let answer of answers">
+      <span>{{answer.letter}} </span>
+      <input type="checkbox" class="form-group"/>
+      <span>{{answer.answer}}</span>
+    </div>
+  </div>
+</div>
