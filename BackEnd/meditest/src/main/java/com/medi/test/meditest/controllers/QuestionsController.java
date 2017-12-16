@@ -5,7 +5,8 @@ import com.medi.test.meditest.dtos.QuestionDto;
 import com.medi.test.meditest.entities.Answer;
 import com.medi.test.meditest.entities.Domain;
 import com.medi.test.meditest.entities.Question;
-import com.medi.test.meditest.entities.QuestionType;
+import com.medi.test.meditest.entities.enums.QuestionDifficulty;
+import com.medi.test.meditest.entities.enums.QuestionType;
 import com.medi.test.meditest.services.contracts.IDomainService;
 import com.medi.test.meditest.services.contracts.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class QuestionsController {
     }
 
     @RequestMapping(value = "/questions", method = RequestMethod.GET)
-    public ResponseEntity<List<QuestionDto>> getAllQuestionsByNumberAndDifficulty(
+    public ResponseEntity getAllQuestionsByNumberAndDifficulty(
             @RequestParam(value="numberOfQuestions", required=false) int numberOfQestions,
             @RequestParam(value="difficulty", required=false) String difficulty) {
         initializeDomain();
@@ -62,7 +63,7 @@ public class QuestionsController {
     private void initializeDomain(){
         Question question = new Question();
         question.setBody("question");
-        question.setDifficulty("hard");
+        question.setDifficulty(QuestionDifficulty.Hard);
         question.setQuestionType(QuestionType.MultipleChoice);
 
         Answer ans = new Answer();

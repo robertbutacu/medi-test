@@ -10,8 +10,6 @@ import java.util.List;
 @Entity(name = "Domain")
 @Table(name = "domains")
 public class Domain {
-    private static final long serialVersionUID = 4885215557937431660L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

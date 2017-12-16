@@ -8,8 +8,6 @@ import javax.validation.constraints.NotNull;
 @Entity(name = "Answer")
 @Table(name = "answers")
 public class Answer {
-    private static final long serialVersionUID = 4885215557937431660L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

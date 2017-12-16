@@ -1,12 +1,14 @@
 package com.medi.test.meditest.dtos;
 
+import com.medi.test.meditest.entities.enums.QuestionDifficulty;
+
 import java.util.List;
 
 public class QuestionDto {
 
-    public String body;
+    private String body;
 
-    public String difficulty;
+    private QuestionDifficulty difficulty;
 
     public List<AnswerDto> answers;
 
@@ -18,11 +20,11 @@ public class QuestionDto {
         this.body = body;
     }
 
-    public String getDifficulty() {
+    public QuestionDifficulty getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(String difficulty) {
+    public void setDifficulty(QuestionDifficulty difficulty) {
         this.difficulty = difficulty;
     }
 

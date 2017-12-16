@@ -1,5 +1,7 @@
 package com.medi.test.meditest.entities;
 
+import com.medi.test.meditest.entities.enums.QuestionDifficulty;
+import com.medi.test.meditest.entities.enums.QuestionType;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -10,8 +12,6 @@ import java.util.List;
 @Entity(name = "Question")
 @Table(name = "questions")
 public class Question {
-    private static long serialVersionUID = 0;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -23,8 +23,7 @@ public class Question {
 
     @NotNull
     @Column(name = "difficulty")
-    @Length(max = 30)
-    private String difficulty;
+    private QuestionDifficulty difficulty;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "domain_id")
@@ -37,7 +36,7 @@ public class Question {
     private QuestionType questionType;
 
     public Question() {  }
-//this.id = serialVersionUID; serialVersionUID += 1;
+
     public QuestionType getQuestionType(){ return this.questionType; }
 
     public void setQuestionType(QuestionType questionType) { this.questionType = questionType; }
@@ -54,7 +53,7 @@ public class Question {
         return id;
     }
 
-    public void setId() { this.id = serialVersionUID; serialVersionUID += 1; }
+    public void setId() { }
 
     public String getBody() {
         return body;
@@ -64,11 +63,11 @@ public class Question {
         this.body = body;
     }
 
-    public String getDifficulty() {
+    public QuestionDifficulty getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(String difficulty) {
+    public void setDifficulty(QuestionDifficulty difficulty) {
         this.difficulty = difficulty;
     }
 
