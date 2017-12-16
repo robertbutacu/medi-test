@@ -3,19 +3,23 @@ package com.medi.test.meditest.dtos.test.single.match.dto;
 import com.medi.test.meditest.dtos.AnswerDto;
 
 public class SingleMatchAnswerDto {
-    private int correctQuestionAnswerId;
-    private AnswerDto answer;
+    private String body;
 
-    public SingleMatchAnswerDto(int correctQuestionAnswerDto, AnswerDto answer){
-        this.correctQuestionAnswerId = correctQuestionAnswerDto;
-        this.answer = answer;
+    private int matchQuestionId;
+
+    public int getMatchQuestionId() {
+        return matchQuestionId;
     }
 
-    public int getCorrectQuestionAnswerDto() {
-        return correctQuestionAnswerId;
+    public void setMatchQuestionId(int matchQuestionId) {
+        this.matchQuestionId = matchQuestionId;
     }
 
-    public AnswerDto getAnswer() {
-        return answer;
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 }

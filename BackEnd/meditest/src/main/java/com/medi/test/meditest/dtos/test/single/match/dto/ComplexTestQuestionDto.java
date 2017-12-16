@@ -10,5 +10,4 @@ public class ComplexTestQuestionDto {
     public ComplexTestQuestionDto(List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> matches){
         this.matches = matches;
     }
-
 }

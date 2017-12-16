@@ -7,18 +7,12 @@ import com.medi.test.meditest.entities.Answer;
 
 public class SimpleTestQuestionDto implements ITestQuestion {
     private QuestionDto question;
-    private AnswerDto answer;
 
-    public SimpleTestQuestionDto(QuestionDto question, AnswerDto answer){
+    public SimpleTestQuestionDto(QuestionDto question){
         this.question = question;
-        this.answer = answer;
     }
 
     public QuestionDto getQuestion() {
         return question;
-    }
-
-    public AnswerDto getAnswer() {
-        return answer;
     }
 }
