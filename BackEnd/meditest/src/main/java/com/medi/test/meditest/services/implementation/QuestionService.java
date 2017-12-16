@@ -2,6 +2,7 @@ package com.medi.test.meditest.services.implementation;
 
 import com.medi.test.meditest.entities.Question;
 import com.medi.test.meditest.entities.enums.QuestionDifficulty;
+import com.medi.test.meditest.repositories.IDomainRepository;
 import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;

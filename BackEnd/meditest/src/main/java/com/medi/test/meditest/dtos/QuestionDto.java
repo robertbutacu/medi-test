@@ -10,6 +10,8 @@ public class QuestionDto {
 
     private QuestionDifficulty difficulty;
 
+    private DomainDto domain;
+
     public List<AnswerDto> answers;
 
     public String getBody() {
@@ -34,5 +36,13 @@ public class QuestionDto {
 
     public void setAnswers(List<AnswerDto> answers) {
         this.answers = answers;
+    }
+
+    public DomainDto getDomain() {
+        return domain;
+    }
+
+    public void setDomain(DomainDto domain) {
+        this.domain = domain;
     }
 }

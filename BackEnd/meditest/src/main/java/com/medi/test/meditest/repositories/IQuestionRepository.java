@@ -1,5 +1,6 @@
 package com.medi.test.meditest.repositories;
 
+import com.medi.test.meditest.entities.Domain;
 import com.medi.test.meditest.entities.Question;
 import com.medi.test.meditest.entities.enums.QuestionDifficulty;
 import org.springframework.data.jpa.repository.JpaRepository;

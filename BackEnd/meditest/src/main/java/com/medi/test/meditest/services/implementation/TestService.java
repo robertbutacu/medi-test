@@ -26,9 +26,10 @@ public class TestService implements ITestService{
         if (numberOfQuestions < 5)
             return Optional.empty();
 
-        List<QuestionDto> questions = questionsRepository.findByDifficulty(difficulty)
+        List<QuestionDto> possibleQuestions = questionsRepository.findByDifficulty(difficulty)
                 .stream()
                 .map(QuestionTransformer::toDto)
+                .filter(q -> q.getDomain() == domainDto)
                 .collect(Collectors.toList());
 
         TestDto test = new TestDto();

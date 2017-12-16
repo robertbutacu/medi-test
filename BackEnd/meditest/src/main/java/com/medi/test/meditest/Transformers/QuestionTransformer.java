@@ -4,6 +4,7 @@ import com.medi.test.meditest.dtos.AnswerDto;
 import com.medi.test.meditest.dtos.QuestionDto;
 import com.medi.test.meditest.entities.Answer;
 import com.medi.test.meditest.entities.Question;
+import com.sun.java.browser.plugin2.DOM;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class QuestionTransformer {
         questionDto.setBody(question.getBody());
         questionDto.setAnswers(answers);
         questionDto.setDifficulty(question.getDifficulty());
+        questionDto.setDomain(DomainTransformer.toDto(question.getDomain()));
         return questionDto;
     }
 
