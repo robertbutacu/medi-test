@@ -5,7 +5,7 @@ import com.medi.test.meditest.dtos.QuestionDto;
 import com.medi.test.meditest.entities.Answer;
 import com.medi.test.meditest.entities.Domain;
 import com.medi.test.meditest.entities.Question;
-import com.medi.test.meditest.entities.enums.QuestionDifficulty;
+import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.entities.enums.QuestionType;
 import com.medi.test.meditest.services.contracts.IDomainService;
 import com.medi.test.meditest.services.contracts.IQuestionService;
@@ -24,10 +24,10 @@ import java.util.List;
 public class QuestionsController {
 
     @Autowired
-    IQuestionService questionService;
+    private IQuestionService questionService;
 
     @Autowired
-    IDomainService domainService;
+    private IDomainService domainService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<List<QuestionDto>> getAllQuestions() {
@@ -63,7 +63,7 @@ public class QuestionsController {
     private void initializeDomain(){
         Question question = new Question();
         question.setBody("question");
-        question.setDifficulty(QuestionDifficulty.Hard);
+        question.setDifficulty(Difficulty.Hard);
         question.setQuestionType(QuestionType.MultipleChoice);
 
         Answer ans = new Answer();

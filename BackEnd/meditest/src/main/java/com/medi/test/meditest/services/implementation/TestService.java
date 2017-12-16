@@ -8,7 +8,7 @@ import com.medi.test.meditest.dtos.test.simple.test.dto.SimpleTestQuestionDto;
 import com.medi.test.meditest.dtos.test.single.match.dto.ComplexTestQuestionDto;
 import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchAnswerDto;
 import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchQuestionDto;
-import com.medi.test.meditest.entities.enums.QuestionDifficulty;
+import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.entities.enums.QuestionType;
 import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.ITestService;
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -28,9 +27,9 @@ public class TestService implements ITestService {
     private IQuestionRepository questionsRepository;
 
     @Override
-    public Optional<TestDto> getTest(DomainDto domainDto, QuestionDifficulty difficulty, int numberOfQuestions) {
+    public TestDto getTest(DomainDto domainDto, Difficulty difficulty, int numberOfQuestions) {
         if (numberOfQuestions < 5)
-            return Optional.empty();
+            return null;
 
         List<QuestionDto> possibleQuestions = questionsRepository.findByDifficulty(difficulty)
                 .stream()
@@ -39,7 +38,7 @@ public class TestService implements ITestService {
                 .collect(Collectors.toList());
 
         if (possibleQuestions.size() < numberOfQuestions)
-            return Optional.empty();
+            return null;
 
         TestDto test = new TestDto();
 
@@ -78,7 +77,7 @@ public class TestService implements ITestService {
             }
         }
 
-        return Optional.of(test);
+        return test;
     }
 
     private Pair<Integer, List<QuestionDto>> createSingleMatchQuestion(List<QuestionDto> questions) {

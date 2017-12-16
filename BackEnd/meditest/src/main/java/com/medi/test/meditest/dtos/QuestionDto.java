@@ -1,6 +1,6 @@
 package com.medi.test.meditest.dtos;
 
-import com.medi.test.meditest.entities.enums.QuestionDifficulty;
+import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.entities.enums.QuestionType;
 
 import java.util.List;
@@ -9,7 +9,7 @@ public class QuestionDto {
 
     private String body;
 
-    private QuestionDifficulty difficulty;
+    private Difficulty difficulty;
 
     private DomainDto domain;
 
@@ -25,11 +25,11 @@ public class QuestionDto {
         this.body = body;
     }
 
-    public QuestionDifficulty getDifficulty() {
+    public Difficulty getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(QuestionDifficulty difficulty) {
+    public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
 

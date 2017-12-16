@@ -1,8 +1,7 @@
 package com.medi.test.meditest.services.implementation;
 
 import com.medi.test.meditest.entities.Question;
-import com.medi.test.meditest.entities.enums.QuestionDifficulty;
-import com.medi.test.meditest.repositories.IDomainRepository;
+import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +43,7 @@ public class QuestionService implements IQuestionService {
     @Override
     public List<Question> GetQuestions(int number, String difficulty) {
         List<Question> selectedQuestions = new ArrayList<>();
-        List<Question> foundQuestions = questionsRepository.findByDifficulty(QuestionDifficulty.Easy);
+        List<Question> foundQuestions = questionsRepository.findByDifficulty(Difficulty.Easy);
         for(int i = 0; i < number && !foundQuestions.isEmpty(); i++){
             Random randomGenerator = new Random();
             int randomInt = randomGenerator.nextInt(foundQuestions.size());
