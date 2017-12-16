@@ -30,4 +30,8 @@ public class TestDto {
     public List<Pair<QuestionType, ITestQuestion>> getQuestions() {
         return questions;
     }
+
+    public void addQuestion(QuestionType questionType, ITestQuestion testQuestion) {
+        this.questions.add(new Pair<>(questionType, testQuestion));
+    }
 }
