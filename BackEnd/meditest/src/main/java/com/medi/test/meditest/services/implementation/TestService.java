@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -84,7 +85,7 @@ public class TestService implements ITestService {
         return questionsRepository.findByDifficulty(difficulty)
                 .stream()
                 .map(QuestionTransformer::toDto)
-                .filter(q -> q.getDomain() == domainDto)
+                .filter(q -> Objects.equals(q.getDomain().getDomain(), domainDto.getDomain()))
                 .collect(Collectors.toList());
     }
 

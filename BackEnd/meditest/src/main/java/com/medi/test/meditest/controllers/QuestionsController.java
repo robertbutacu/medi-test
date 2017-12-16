@@ -94,6 +94,7 @@ public class QuestionsController {
         domain.setName("domain");
 
         domain.setQuestions(questions);
+        question.setDomain(domain);
 
         domainService.save(domain);
     }

@@ -4,6 +4,7 @@ import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.entities.enums.QuestionType;
 import javafx.util.Pair;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestDto {
@@ -13,7 +14,9 @@ public class TestDto {
 
     private List<Pair<QuestionType, ITestQuestion>> questions;
 
-    public TestDto(){ }
+    public TestDto(){
+        this.questions = new ArrayList<>();
+    }
 
     public TestDto(DomainDto domain, String difficulty, List<Pair<QuestionType, ITestQuestion>> questions){
         this.domain = domain;
