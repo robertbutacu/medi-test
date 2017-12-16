@@ -13,6 +13,8 @@ public class TestDto {
 
     private List<Pair<QuestionType, ITestQuestion>> questions;
 
+    public TestDto(){ }
+
     public TestDto(DomainDto domain, String difficulty, List<Pair<QuestionType, ITestQuestion>> questions){
         this.domain = domain;
         this.difficulty = difficulty;
@@ -33,5 +35,14 @@ public class TestDto {
 
     public void addQuestion(QuestionType questionType, ITestQuestion testQuestion) {
         this.questions.add(new Pair<>(questionType, testQuestion));
+    }
+
+    public void setDomain(DomainDto domain) {
+
+        this.domain = domain;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
     }
 }
