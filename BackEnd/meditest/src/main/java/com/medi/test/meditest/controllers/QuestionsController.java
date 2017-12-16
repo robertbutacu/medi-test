@@ -9,6 +9,7 @@ import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.entities.enums.QuestionType;
 import com.medi.test.meditest.services.contracts.IDomainService;
 import com.medi.test.meditest.services.contracts.IQuestionService;
+import com.sun.java.browser.plugin2.DOM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,41 +62,116 @@ public class QuestionsController {
     }
 
     private void initializeDomain(){
-        Question question = new Question();
-        question.setBody("question");
-        question.setDifficulty(Difficulty.Hard);
-        question.setQuestionType(QuestionType.SingleMatch);
-
-        Answer ans = new Answer();
-        ans.setBody("answer");
-        ans.setIsCorrect(true);
-        ans.setQuestion(question);
-
-        Answer ans1 = new Answer();
-        ans1.setBody("answer");
-        ans1.setIsCorrect(true);
-        ans1.setQuestion(question);
-
-        Answer ans2 = new Answer();
-        ans2.setBody("answer");
-        ans2.setIsCorrect(false);
-        ans2.setQuestion(question);
-
-
-        List<Answer> answers = new ArrayList<>();
-        answers.add(ans);
-        answers.add(ans1);
-        answers.add(ans2);
-        question.setAnswers(answers);
-
-        List<Question> questions = new ArrayList<>();
-        questions.add(question);
         Domain domain = new Domain();
         domain.setName("domain");
 
+        generateFillInQuestions(domain);
+        generateMultipleChoiceQuestions(domain);
+        generateSingleMatchQuestions(domain);
+        generateTrueOrFalseQuestions(domain);
+    }
+
+    private void generateSingleMatchQuestions(Domain domain){
+
+    }
+
+    private void generateMultipleChoiceQuestions(Domain domain){
+        Question question1 = new Question();
+        question1.setBody("What is Java");
+        question1.setDifficulty(Difficulty.Hard);
+        question1.setQuestionType(QuestionType.MultipleChoice);
+
+        Answer ans = new Answer();
+        ans.setBody("A Programming Language");
+        ans.setIsCorrect(true);
+        ans.setQuestion(question1);
+
+        Answer ans1 = new Answer();
+        ans1.setBody("An island");
+        ans1.setIsCorrect(false);
+        ans1.setQuestion(question1);
+
+        Answer ans2 = new Answer();
+        ans2.setBody("an animal");
+        ans2.setIsCorrect(false);
+        ans2.setQuestion(question1);
+
+        List<Answer> answers1 = new ArrayList<>();
+        answers1.add(ans);
+        answers1.add(ans1);
+        answers1.add(ans2);
+        question1.setAnswers(answers1);
+
+        Question question2 = new Question();
+        question2.setBody("What is Scala");
+        question2.setDifficulty(Difficulty.Hard);
+        question2.setQuestionType(QuestionType.MultipleChoice);
+
+        Answer ans3 = new Answer();
+        ans3.setBody("A Functional Programming Language");
+        ans3.setIsCorrect(true);
+        ans3.setQuestion(question2);
+
+        Answer ans4 = new Answer();
+        ans4.setBody("A tasty beverage");
+        ans4.setIsCorrect(false);
+        ans4.setQuestion(question2);
+
+        Answer ans5 = new Answer();
+        ans5.setBody("A framework");
+        ans5.setIsCorrect(false);
+        ans5.setQuestion(question2);
+
+        List<Answer> answers2 = new ArrayList<>();
+        answers2.add(ans3);
+        answers2.add(ans4);
+        answers2.add(ans5);
+        question2.setAnswers(answers2);
+
+
+        Question question3 = new Question();
+        question3.setBody("What is Cobol");
+        question3.setDifficulty(Difficulty.Hard);
+        question3.setQuestionType(QuestionType.MultipleChoice);
+
+        Answer ans6 = new Answer();
+        ans6.setBody("An ancient Programming Language");
+        ans6.setIsCorrect(true);
+        ans6.setQuestion(question3);
+
+        Answer ans7 = new Answer();
+        ans7.setBody("A rat");
+        ans7.setIsCorrect(false);
+        ans7.setQuestion(question3);
+
+        Answer ans8 = new Answer();
+        ans8.setBody("a mistake");
+        ans8.setIsCorrect(false);
+        ans8.setQuestion(question3);
+
+        List<Answer> answers3 = new ArrayList<>();
+        answers3.add(ans6);
+        answers3.add(ans7);
+        answers3.add(ans8);
+        question3.setAnswers(answers3);
+
+
+        List<Question> questions = new ArrayList<>();
+        questions.add(question1);
+        questions.add(question2);
+        questions.add(question3);
+
         domain.setQuestions(questions);
-        question.setDomain(domain);
+        questions.forEach(q -> q.setDomain(domain));
 
         domainService.save(domain);
+    }
+
+    private void generateFillInQuestions(Domain domain) {
+
+    }
+
+    private void generateTrueOrFalseQuestions(Domain domain){
+
     }
 }
