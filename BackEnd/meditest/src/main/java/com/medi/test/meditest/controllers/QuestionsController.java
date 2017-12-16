@@ -260,6 +260,76 @@ public class QuestionsController {
     }
 
     private void generateTrueOrFalseQuestions(Domain domain){
+        Question question1 = new Question();
+        question1.setBody("Java 10 is out");
+        question1.setDifficulty(Difficulty.Hard);
+        question1.setQuestionType(QuestionType.TrueOrFalse);
 
+        Answer ans = new Answer();
+        ans.setBody("false");
+        ans.setIsCorrect(true);
+        ans.setQuestion(question1);
+
+        Answer ans1 = new Answer();
+        ans1.setBody("true");
+        ans1.setIsCorrect(false);
+        ans1.setQuestion(question1);
+
+        List<Answer> answers1 = new ArrayList<>();
+        answers1.add(ans);
+        answers1.add(ans1);
+        question1.setAnswers(answers1);
+
+        Question question2 = new Question();
+        question2.setBody("Scala 2.13 is out");
+        question2.setDifficulty(Difficulty.Hard);
+        question2.setQuestionType(QuestionType.TrueOrFalse);
+
+        Answer ans3 = new Answer();
+        ans3.setBody("false");
+        ans3.setIsCorrect(true);
+        ans3.setQuestion(question2);
+
+        Answer ans4 = new Answer();
+        ans4.setBody("true");
+        ans4.setIsCorrect(false);
+        ans4.setQuestion(question2);
+
+        List<Answer> answers2 = new ArrayList<>();
+        answers2.add(ans3);
+        answers2.add(ans4);
+        question2.setAnswers(answers2);
+
+
+        Question question3 = new Question();
+        question3.setBody("Cobol is a fresh language");
+        question3.setDifficulty(Difficulty.Hard);
+        question3.setQuestionType(QuestionType.TrueOrFalse);
+
+        Answer ans6 = new Answer();
+        ans6.setBody("false");
+        ans6.setIsCorrect(true);
+        ans6.setQuestion(question3);
+
+        Answer ans7 = new Answer();
+        ans7.setBody("true");
+        ans7.setIsCorrect(false);
+        ans7.setQuestion(question3);
+
+        List<Answer> answers3 = new ArrayList<>();
+        answers3.add(ans6);
+        answers3.add(ans7);
+        question3.setAnswers(answers3);
+
+
+        List<Question> questions = new ArrayList<>();
+        questions.add(question1);
+        questions.add(question2);
+        questions.add(question3);
+
+        domain.setQuestions(questions);
+        questions.forEach(q -> q.setDomain(domain));
+
+        domainService.save(domain);
     }
 }
