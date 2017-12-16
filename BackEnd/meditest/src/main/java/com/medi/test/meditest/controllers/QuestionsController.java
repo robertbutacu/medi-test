@@ -63,7 +63,7 @@ public class QuestionsController {
 
     private void initializeDomain(){
         Domain domain = new Domain();
-        domain.setName("domain");
+        domain.setName("programming");
 
         generateFillInQuestions(domain);
         generateMultipleChoiceQuestions(domain);
