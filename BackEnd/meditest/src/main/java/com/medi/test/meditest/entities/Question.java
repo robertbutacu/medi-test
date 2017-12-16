@@ -10,7 +10,7 @@ import java.util.List;
 @Entity(name = "Question")
 @Table(name = "questions")
 public class Question {
-    private static final long serialVersionUID = 4885215557937431660L;
+    private static long serialVersionUID = 0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,8 +36,8 @@ public class Question {
     @Column(name = "question_type")
     private QuestionType questionType;
 
-    public Question() { }
-
+    public Question() {  }
+//this.id = serialVersionUID; serialVersionUID += 1;
     public QuestionType getQuestionType(){ return this.questionType; }
 
     public void setQuestionType(QuestionType questionType) { this.questionType = questionType; }
@@ -54,7 +54,7 @@ public class Question {
         return id;
     }
 
-    public void setId(long id) { this.id = id; }
+    public void setId() { this.id = serialVersionUID; serialVersionUID += 1; }
 
     public String getBody() {
         return body;

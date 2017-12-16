@@ -68,14 +68,20 @@ public class QuestionsController {
         Answer ans = new Answer();
         ans.setBody("answer");
         ans.setIsCorrect(true);
+        ans.setQuestion(question);
+
         Answer ans1 = new Answer();
         ans1.setBody("answer");
         ans1.setIsCorrect(true);
+        ans1.setQuestion(question);
+
         Answer ans2 = new Answer();
         ans2.setBody("answer");
         ans2.setIsCorrect(false);
+        ans2.setQuestion(question);
 
-        List<Answer> answers = new ArrayList();
+
+        List<Answer> answers = new ArrayList<>();
         answers.add(ans);
         answers.add(ans1);
         answers.add(ans2);
