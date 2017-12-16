@@ -7,5 +7,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public interface DomainRepository extends JpaRepository<Domain, Long> {
+public interface IDomainRepository extends JpaRepository<Domain, Long> {
 }

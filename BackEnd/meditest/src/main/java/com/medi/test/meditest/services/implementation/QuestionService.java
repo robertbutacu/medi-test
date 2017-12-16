@@ -1,7 +1,7 @@
 package com.medi.test.meditest.services.implementation;
 
 import com.medi.test.meditest.entities.Question;
-import com.medi.test.meditest.repositories.QuestionRepository;
+import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public class QuestionServiceImplementation implements IQuestionService {
+public class QuestionService implements IQuestionService {
 
     @Autowired
-    private QuestionRepository questionsRepository;
+    private IQuestionRepository questionsRepository;
 
     @Override
     public void save(Question entity) {

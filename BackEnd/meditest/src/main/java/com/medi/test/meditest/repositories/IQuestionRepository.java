@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface QuestionRepository extends JpaRepository<Question, Long> {
+public interface IQuestionRepository extends JpaRepository<Question, Long> {
     List<Question> findByDifficulty(String difficulty);
 }
