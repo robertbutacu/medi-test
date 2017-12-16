@@ -25,15 +25,9 @@ public class Domain {
             mappedBy = "domain",
             cascade = CascadeType.ALL
     )
-    public List<Question> questions = new ArrayList<>();
+    private List<Question> questions = new ArrayList<>();
 
-    public Domain() {
-
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
+    public Domain() { }
 
     public List<Question> getQuestions() {
         return questions;
@@ -45,10 +39,6 @@ public class Domain {
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {

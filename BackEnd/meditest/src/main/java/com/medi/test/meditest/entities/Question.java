@@ -10,29 +10,31 @@ import java.util.List;
 @Entity(name = "Question")
 @Table(name = "questions")
 public class Question {
-    public Question() {
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public long id;
+    private long id;
 
     @NotNull
     @Column(name = "body")
     @Length(max = 500)
-    public String body;
+    private String body;
 
     @NotNull
     @Column(name = "difficulty")
     @Length(max = 30)
-    public String difficulty;
+    private String difficulty;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "domain_id")
-    public Domain domain;
+    private Domain domain;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     public List<Answer> answers = new ArrayList<>();
+
+    @Column(name = "question_type")
+    public QuestionType questionType;
+
+    public Question() { }
 
     public List<Answer> getAnswers() {
         return answers;
@@ -44,10 +46,6 @@ public class Question {
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getBody() {
@@ -73,6 +71,4 @@ public class Question {
     public void setDomain(Domain domain) {
         this.domain = domain;
     }
-
-
 }
