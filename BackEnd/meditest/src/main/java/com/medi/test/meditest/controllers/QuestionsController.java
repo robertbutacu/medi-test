@@ -72,7 +72,59 @@ public class QuestionsController {
     }
 
     private void generateSingleMatchQuestions(Domain domain){
+        Question question1 = new Question();
+        question1.setBody("Java code, generally, ");
+        question1.setDifficulty(Difficulty.Hard);
+        question1.setQuestionType(QuestionType.SingleMatch);
 
+        Answer ans = new Answer();
+        ans.setBody("is verbose");
+        ans.setIsCorrect(true);
+        ans.setQuestion(question1);
+
+        List<Answer> answers1 = new ArrayList<>();
+        answers1.add(ans);
+        question1.setAnswers(answers1);
+
+        Question question2 = new Question();
+        question2.setBody("Scala code, generally, ");
+        question2.setDifficulty(Difficulty.Hard);
+        question2.setQuestionType(QuestionType.SingleMatch);
+
+        Answer ans3 = new Answer();
+        ans3.setBody(" is concise");
+        ans3.setIsCorrect(true);
+        ans3.setQuestion(question2);
+
+        List<Answer> answers2 = new ArrayList<>();
+        answers2.add(ans3);
+        question2.setAnswers(answers2);
+
+
+        Question question3 = new Question();
+        question3.setBody("Cobol shoulnt");
+        question3.setDifficulty(Difficulty.Hard);
+        question3.setQuestionType(QuestionType.SingleMatch);
+
+        Answer ans6 = new Answer();
+        ans6.setBody("exist");
+        ans6.setIsCorrect(true);
+        ans6.setQuestion(question3);
+
+        List<Answer> answers3 = new ArrayList<>();
+        answers3.add(ans6);
+        question3.setAnswers(answers3);
+
+
+        List<Question> questions = new ArrayList<>();
+        questions.add(question1);
+        questions.add(question2);
+        questions.add(question3);
+
+        domain.setQuestions(questions);
+        questions.forEach(q -> q.setDomain(domain));
+
+        domainService.save(domain);
     }
 
     private void generateMultipleChoiceQuestions(Domain domain){
