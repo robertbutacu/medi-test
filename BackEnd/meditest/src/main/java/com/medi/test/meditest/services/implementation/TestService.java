@@ -33,6 +33,9 @@ public class TestService implements ITestService{
                 .filter(q -> q.getDomain() == domainDto)
                 .collect(Collectors.toList());
 
+        if (possibleQuestions.size() < numberOfQuestions)
+            return Optional.empty();
+
         TestDto test = new TestDto();
 
         test.setDifficulty(difficulty.toString());
@@ -42,7 +45,6 @@ public class TestService implements ITestService{
 
         while(numberOfQuestions > 0){
             QuestionDto nextQuestion = possibleQuestions.get(randomQuestion.nextInt(possibleQuestions.size()));
-
 
             numberOfQuestions = numberOfQuestions - 1 ;
         }
