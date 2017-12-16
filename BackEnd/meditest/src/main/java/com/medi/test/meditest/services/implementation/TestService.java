@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,8 +38,12 @@ public class TestService implements ITestService{
         test.setDifficulty(difficulty.toString());
         test.setDomain(domainDto);
 
+        Random randomQuestion = new Random();
 
         while(numberOfQuestions > 0){
+            QuestionDto nextQuestion = possibleQuestions.get(randomQuestion.nextInt(possibleQuestions.size()));
+
+
             numberOfQuestions = numberOfQuestions - 1 ;
         }
 

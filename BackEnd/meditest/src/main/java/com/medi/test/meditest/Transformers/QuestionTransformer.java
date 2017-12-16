@@ -22,6 +22,8 @@ public class QuestionTransformer {
         questionDto.setAnswers(answers);
         questionDto.setDifficulty(question.getDifficulty());
         questionDto.setDomain(DomainTransformer.toDto(question.getDomain()));
+        questionDto.setType(question.getQuestionType());
+
         return questionDto;
     }
 
