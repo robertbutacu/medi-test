@@ -19,10 +19,10 @@ public class TestsController {
     @Autowired
     private TestService testService;
 
-    @RequestMapping(value = "/{domain}/{difficulty}/{numberOfQuestions}", method = RequestMethod.GET)
-    public ResponseEntity getTest(@PathVariable("domain") DomainDto domain,
-                                  @PathVariable("difficulty") Difficulty difficulty,
-                                  @PathVariable("numberOfQuestions") int numberOfQuestions) {
+    @RequestMapping(value = "/generate", method = RequestMethod.GET)
+    public ResponseEntity getTest(@RequestParam("domain") DomainDto domain,
+                                  @RequestParam("difficulty") Difficulty difficulty,
+                                  @RequestParam("numberOfQuestions") int numberOfQuestions) {
 
         TestDto generatedTest = testService.getTest(domain, difficulty, numberOfQuestions);
 
