@@ -31,11 +31,7 @@ public class TestService implements ITestService {
         if (numberOfQuestions < 5)
             return null;
 
-        List<QuestionDto> possibleQuestions = questionsRepository.findByDifficulty(difficulty)
-                .stream()
-                .map(QuestionTransformer::toDto)
-                .filter(q -> q.getDomain() == domainDto)
-                .collect(Collectors.toList());
+        List<QuestionDto> possibleQuestions = getAllQuestionsByDifficultyAndDomain(difficulty, domainDto);
 
         if (possibleQuestions.size() < numberOfQuestions)
             return null;
@@ -64,12 +60,7 @@ public class TestService implements ITestService {
                             .map(QuestionTransformer::toSingleMatchDto)
                             .collect(Collectors.toList());
 
-                    for (int i = 0; i < transformed.size(); i++) {
-                        Pair<SingleMatchQuestionDto, SingleMatchAnswerDto> curr = transformed.get(i);
-
-                        curr.getValue().setMatchQuestionId(i);
-                        curr.getKey().setMatchAnswerId(i);
-                    }
+                    indexSingleMatchQuestion(transformed);
 
                     test.addQuestion(QuestionType.SingleMatch, new ComplexTestQuestionDto(transformed));
                     possibleQuestions.removeAll(picked.getValue());
@@ -78,6 +69,23 @@ public class TestService implements ITestService {
         }
 
         return test;
+    }
+
+    private void indexSingleMatchQuestion(List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> questions) {
+        for (int i = 0; i < questions.size(); i++) {
+            Pair<SingleMatchQuestionDto, SingleMatchAnswerDto> curr = questions.get(i);
+
+            curr.getValue().setMatchQuestionId(i);
+            curr.getKey().setMatchAnswerId(i);
+        }
+    }
+
+    private List<QuestionDto> getAllQuestionsByDifficultyAndDomain(Difficulty difficulty, DomainDto domainDto) {
+        return questionsRepository.findByDifficulty(difficulty)
+                .stream()
+                .map(QuestionTransformer::toDto)
+                .filter(q -> q.getDomain() == domainDto)
+                .collect(Collectors.toList());
     }
 
     private Pair<Integer, List<QuestionDto>> createSingleMatchQuestion(List<QuestionDto> questions) {
