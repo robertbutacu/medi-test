@@ -17,9 +17,9 @@ public class QuestionTransformer {
             answers.add(AnswerTransformer.toDto(answer));
         }
 
-        questionDto.setBody(question.body);
+        questionDto.setBody(question.getBody());
         questionDto.setAnswers(answers);
-        questionDto.setDifficulty(question.difficulty);
+        questionDto.setDifficulty(question.getDifficulty());
         return questionDto;
     }
 
@@ -31,7 +31,7 @@ public class QuestionTransformer {
             answers.add(AnswerTransformer.toEntity(answer));
         }
 
-        question.setBody(question.body);
+        question.setBody(question.getBody());
         question.setAnswers(answers);
         question.setDifficulty(questionDto.getDifficulty());
         return question;

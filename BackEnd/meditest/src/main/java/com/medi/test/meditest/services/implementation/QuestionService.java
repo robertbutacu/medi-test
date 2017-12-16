@@ -41,15 +41,15 @@ public class QuestionService implements IQuestionService {
 
     @Override
     public List<Question> GetQuestions(int number, String difficulty) {
-        List<Question> questions = new ArrayList<>();
+        List<Question> selectedQuestions = new ArrayList<>();
         List<Question> foundQuestions = questionsRepository.findByDifficulty(difficulty);
         for(int i = 0; i < number && !foundQuestions.isEmpty(); i++){
             Random randomGenerator = new Random();
             int randomInt = randomGenerator.nextInt(foundQuestions.size());
             Question question = foundQuestions.get(randomInt);
-            questions.add(question);
+            selectedQuestions.add(question);
             foundQuestions.remove(question);
         }
-        return questions;
+        return selectedQuestions;
     }
 }

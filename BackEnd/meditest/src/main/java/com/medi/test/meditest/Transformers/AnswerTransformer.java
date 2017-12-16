@@ -6,8 +6,8 @@ import com.medi.test.meditest.entities.Answer;
 public class AnswerTransformer {
     public static AnswerDto toDto(Answer answer){
         AnswerDto answerDto = new AnswerDto();
-        answerDto.setBody(answer.body);
-        answerDto.setIsCorrect(answer.isCorrect);
+        answerDto.setBody(answer.getBody());
+        answerDto.setIsCorrect(answer.getIsCorrect());
         return answerDto;
     }
 

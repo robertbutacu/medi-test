@@ -10,6 +10,8 @@ import java.util.List;
 @Entity(name = "Question")
 @Table(name = "questions")
 public class Question {
+    private static final long serialVersionUID = 4885215557937431660L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -32,9 +34,13 @@ public class Question {
     public List<Answer> answers = new ArrayList<>();
 
     @Column(name = "question_type")
-    public QuestionType questionType;
+    private QuestionType questionType;
 
     public Question() { }
+
+    public QuestionType getQuestionType(){ return this.questionType; }
+
+    public void setQuestionType(QuestionType questionType) { this.questionType = questionType; }
 
     public List<Answer> getAnswers() {
         return answers;
@@ -47,6 +53,8 @@ public class Question {
     public long getId() {
         return id;
     }
+
+    public void setId(long id) { this.id = id; }
 
     public String getBody() {
         return body;

@@ -5,6 +5,7 @@ import com.medi.test.meditest.dtos.QuestionDto;
 import com.medi.test.meditest.entities.Answer;
 import com.medi.test.meditest.entities.Domain;
 import com.medi.test.meditest.entities.Question;
+import com.medi.test.meditest.entities.QuestionType;
 import com.medi.test.meditest.services.contracts.IDomainService;
 import com.medi.test.meditest.services.contracts.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class QuestionsController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<List<QuestionDto>> getAllQuestions() {
-        initializeDomain();
+        initializeDomain();// - it's buggy
         List<Question> questions = questionService.getAll();
         List<QuestionDto> questionDtos = new ArrayList<>();
         for (Question question :
@@ -62,6 +63,7 @@ public class QuestionsController {
         Question question = new Question();
         question.setBody("question");
         question.setDifficulty("hard");
+        question.setQuestionType(QuestionType.MultipleChoice);
 
         Answer ans = new Answer();
         ans.setBody("answer");
