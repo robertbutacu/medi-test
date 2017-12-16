@@ -64,7 +64,7 @@ public class QuestionsController {
         Question question = new Question();
         question.setBody("question");
         question.setDifficulty(Difficulty.Hard);
-        question.setQuestionType(QuestionType.MultipleChoice);
+        question.setQuestionType(QuestionType.SingleMatch);
 
         Answer ans = new Answer();
         ans.setBody("answer");

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestDto {
-    private DomainDto domain;
+    private String domain;
 
     private String difficulty;
 
@@ -19,12 +19,12 @@ public class TestDto {
     }
 
     public TestDto(DomainDto domain, String difficulty, List<Pair<QuestionType, ITestQuestion>> questions){
-        this.domain = domain;
+        this.domain = domain.getDomain();
         this.difficulty = difficulty;
         this.questions = questions;
     }
 
-    public DomainDto getDomain() {
+    public String getDomain() {
         return domain;
     }
 
@@ -42,7 +42,7 @@ public class TestDto {
 
     public void setDomain(DomainDto domain) {
 
-        this.domain = domain;
+        this.domain = domain.getDomain();
     }
 
     public void setDifficulty(String difficulty) {

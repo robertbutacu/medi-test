@@ -52,11 +52,11 @@ public class TestService implements ITestService {
                 possibleQuestions.remove(nextQuestion);
                 numberOfQuestions -= 1;
             } else {
-                Pair<Integer, List<QuestionDto>> picked = createSingleMatchQuestion(possibleQuestions);
+                List<QuestionDto> picked = createSingleMatchQuestion(possibleQuestions);
                 if (picked != null) {
-                    numberOfQuestions -= picked.getKey();
+                    numberOfQuestions -= 1;
 
-                    List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> transformed = picked.getValue()
+                    List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> transformed = picked
                             .stream()
                             .map(QuestionTransformer::toSingleMatchDto)
                             .collect(Collectors.toList());
@@ -64,7 +64,7 @@ public class TestService implements ITestService {
                     indexSingleMatchQuestion(transformed);
 
                     test.addQuestion(QuestionType.SingleMatch, new ComplexTestQuestionDto(transformed));
-                    possibleQuestions.removeAll(picked.getValue());
+                    possibleQuestions.removeAll(picked);
                 }
             }
         }
@@ -89,7 +89,7 @@ public class TestService implements ITestService {
                 .collect(Collectors.toList());
     }
 
-    private Pair<Integer, List<QuestionDto>> createSingleMatchQuestion(List<QuestionDto> questions) {
+    private List<QuestionDto> createSingleMatchQuestion(List<QuestionDto> questions) {
         List<QuestionDto> matches = questions.stream()
                 .filter(q -> q.getType() == QuestionType.SingleMatch)
                 .collect(Collectors.toList());
@@ -108,6 +108,6 @@ public class TestService implements ITestService {
             questionsPickedIndexes.add(next);
         }
 
-        return new Pair<>(questionsPickedIndexes.size(), questionsPicked);
+        return questionsPicked;
     }
 }
