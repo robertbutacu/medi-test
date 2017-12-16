@@ -97,15 +97,14 @@ public class TestService implements ITestService {
         if (matches.size() < 3)
             return null;
 
-        List<Integer> questionsPickedIndexes = new ArrayList<>();
         List<QuestionDto> questionsPicked = new ArrayList<>();
         Random r = new Random();
 
-        while (questionsPickedIndexes.size() < 3) {
+        while (questionsPicked.size() < 3) {
             int next = r.nextInt(matches.size());
 
             questionsPicked.add(matches.get(next));
-            questionsPickedIndexes.add(next);
+            matches.remove(next);
         }
 
         return questionsPicked;
