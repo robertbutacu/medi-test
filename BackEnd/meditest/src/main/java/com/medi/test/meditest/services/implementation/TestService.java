@@ -37,10 +37,7 @@ public class TestService implements ITestService {
         if (possibleQuestions.size() < numberOfQuestions)
             return null;
 
-        TestDto test = new TestDto();
-
-        test.setDifficulty(difficulty.toString());
-        test.setDomain(domainDto);
+        TestDto test = new TestDto(domainDto, difficulty);
 
         Random randomQuestion = new Random();
 
@@ -56,10 +53,7 @@ public class TestService implements ITestService {
                 if (picked != null) {
                     numberOfQuestions -= 1;
 
-                    List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> transformed = picked
-                            .stream()
-                            .map(QuestionTransformer::toSingleMatchDto)
-                            .collect(Collectors.toList());
+                    List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> transformed = transform(picked);
 
                     indexSingleMatchQuestion(transformed);
 
@@ -70,6 +64,13 @@ public class TestService implements ITestService {
         }
 
         return test;
+    }
+
+    private List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> transform(List<QuestionDto> picked) {
+        return picked
+                .stream()
+                .map(QuestionTransformer::toSingleMatchDto)
+                .collect(Collectors.toList());
     }
 
     private void indexSingleMatchQuestion(List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> questions) {
