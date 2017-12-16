@@ -2,6 +2,7 @@ package com.medi.test.meditest.Transformers;
 
 import com.medi.test.meditest.dtos.AnswerDto;
 import com.medi.test.meditest.dtos.QuestionDto;
+import com.medi.test.meditest.dtos.test.simple.test.dto.SimpleTestQuestionDto;
 import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchAnswerDto;
 import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchQuestionDto;
 import com.medi.test.meditest.entities.Answer;
@@ -44,7 +45,7 @@ public class QuestionTransformer {
         return question;
     }
 
-    public static Pair<SingleMatchAnswerDto, SingleMatchQuestionDto> toSingleMatchDto(Question question) {
+    public static Pair<SingleMatchQuestionDto, SingleMatchAnswerDto> toSingleMatchDto(QuestionDto question) {
         SingleMatchAnswerDto smad = new SingleMatchAnswerDto();
         SingleMatchQuestionDto smqd = new SingleMatchQuestionDto();
 
@@ -52,6 +53,10 @@ public class QuestionTransformer {
 
         smqd.setBody(question.getBody());
 
-        return new Pair<>(smad, smqd);
+        return new Pair<>(smqd, smad);
+    }
+
+    public static SimpleTestQuestionDto toSimpleQuestionDto(QuestionDto questionDto){
+        return new SimpleTestQuestionDto(questionDto);
     }
 }

@@ -4,23 +4,28 @@ import com.medi.test.meditest.Transformers.QuestionTransformer;
 import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.dtos.QuestionDto;
 import com.medi.test.meditest.dtos.test.TestDto;
+import com.medi.test.meditest.dtos.test.simple.test.dto.SimpleTestQuestionDto;
+import com.medi.test.meditest.dtos.test.single.match.dto.ComplexTestQuestionDto;
+import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchAnswerDto;
+import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchQuestionDto;
 import com.medi.test.meditest.entities.enums.QuestionDifficulty;
 import com.medi.test.meditest.entities.enums.QuestionType;
 import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.ITestService;
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
-public class TestService implements ITestService{
+public class TestService implements ITestService {
     @Autowired
     private IQuestionRepository questionsRepository;
-
 
     @Override
     public Optional<TestDto> getTest(DomainDto domainDto, QuestionDifficulty difficulty, int numberOfQuestions) {
@@ -43,14 +48,58 @@ public class TestService implements ITestService{
 
         Random randomQuestion = new Random();
 
-        while(numberOfQuestions > 0){
+        while (numberOfQuestions > 0) {
             QuestionDto nextQuestion = possibleQuestions.get(randomQuestion.nextInt(possibleQuestions.size()));
 
+            if (nextQuestion.getType() != QuestionType.SingleMatch) {
+                test.addQuestion(nextQuestion.getType(), new SimpleTestQuestionDto(nextQuestion));
+                possibleQuestions.remove(nextQuestion);
+                numberOfQuestions -= 1;
+            } else {
+                Pair<Integer, List<QuestionDto>> picked = createSingleMatchQuestion(possibleQuestions);
+                if (picked != null) {
+                    numberOfQuestions -= picked.getKey();
 
+                    List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> transformed = picked.getValue()
+                            .stream()
+                            .map(QuestionTransformer::toSingleMatchDto)
+                            .collect(Collectors.toList());
 
-            numberOfQuestions = numberOfQuestions - 1 ;
+                    for (int i = 0; i < transformed.size(); i++) {
+                        Pair<SingleMatchQuestionDto, SingleMatchAnswerDto> curr = transformed.get(i);
+
+                        curr.getValue().setMatchQuestionId(i);
+                        curr.getKey().setMatchAnswerId(i);
+                    }
+
+                    test.addQuestion(QuestionType.SingleMatch, new ComplexTestQuestionDto(transformed));
+                    possibleQuestions.removeAll(picked.getValue());
+                }
+            }
         }
 
         return Optional.of(test);
+    }
+
+    private Pair<Integer, List<QuestionDto>> createSingleMatchQuestion(List<QuestionDto> questions) {
+        List<QuestionDto> matches = questions.stream()
+                .filter(q -> q.getType() == QuestionType.SingleMatch)
+                .collect(Collectors.toList());
+
+        if (matches.size() < 3)
+            return null;
+
+        List<Integer> questionsPickedIndexes = new ArrayList<>();
+        List<QuestionDto> questionsPicked = new ArrayList<>();
+        Random r = new Random();
+
+        while (questionsPickedIndexes.size() < 3) {
+            int next = r.nextInt(matches.size());
+
+            questionsPicked.add(matches.get(next));
+            questionsPickedIndexes.add(next);
+        }
+
+        return new Pair<>(questionsPickedIndexes.size(), questionsPicked);
     }
 }
