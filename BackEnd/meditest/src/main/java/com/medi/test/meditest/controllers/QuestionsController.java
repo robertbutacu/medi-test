@@ -380,7 +380,9 @@ public class QuestionsController {
         questions.add(question3);
 
         domain.setQuestions(questions);
+
         questions.forEach(q -> q.setDomain(domain));
+        question.setDomain(domain);
 
         domainService.save(domain);
     }
