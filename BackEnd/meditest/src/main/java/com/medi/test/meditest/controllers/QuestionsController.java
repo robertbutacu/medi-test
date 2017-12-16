@@ -24,10 +24,10 @@ import java.util.List;
 public class QuestionsController {
 
     @Autowired
-    IQuestionService questionService;
+    private IQuestionService questionService;
 
     @Autowired
-    IDomainService domainService;
+    private IDomainService domainService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<List<QuestionDto>> getAllQuestions() {
