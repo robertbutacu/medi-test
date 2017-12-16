@@ -1,6 +1,6 @@
 package com.medi.test.meditest.entities;
 
-import com.medi.test.meditest.entities.enums.QuestionDifficulty;
+import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.entities.enums.QuestionType;
 import org.hibernate.validator.constraints.Length;
 
@@ -23,7 +23,7 @@ public class Question {
 
     @NotNull
     @Column(name = "difficulty")
-    private QuestionDifficulty difficulty;
+    private Difficulty difficulty;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "domain_id")
@@ -63,11 +63,11 @@ public class Question {
         this.body = body;
     }
 
-    public QuestionDifficulty getDifficulty() {
+    public Difficulty getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(QuestionDifficulty difficulty) {
+    public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
 
