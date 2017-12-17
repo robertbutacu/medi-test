@@ -8,11 +8,17 @@ import java.util.List;
 public class ComplexTestQuestionDto implements ITestQuestion{
     private List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> matches;
 
+    private boolean answered ;
+
     public ComplexTestQuestionDto(List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> matches){
         this.matches = matches;
     }
 
     public List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> getMatches() {
         return matches;
+    }
+
+    public boolean isAnswered() {
+        return answered;
     }
 }

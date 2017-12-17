@@ -230,20 +230,8 @@ public class QuestionsController {
         ans.setIsCorrect(true);
         ans.setQuestion(question1);
 
-        Answer ans1 = new Answer();
-        ans1.setBody("An island");
-        ans1.setIsCorrect(false);
-        ans1.setQuestion(question1);
-
-        Answer ans2 = new Answer();
-        ans2.setBody("an animal");
-        ans2.setIsCorrect(false);
-        ans2.setQuestion(question1);
-
         List<Answer> answers1 = new ArrayList<>();
         answers1.add(ans);
-        answers1.add(ans1);
-        answers1.add(ans2);
         question1.setAnswers(answers1);
 
         Question question2 = new Question();
@@ -256,20 +244,8 @@ public class QuestionsController {
         ans3.setIsCorrect(true);
         ans3.setQuestion(question2);
 
-        Answer ans4 = new Answer();
-        ans4.setBody("A tasty beverage");
-        ans4.setIsCorrect(false);
-        ans4.setQuestion(question2);
-
-        Answer ans5 = new Answer();
-        ans5.setBody("A framework");
-        ans5.setIsCorrect(false);
-        ans5.setQuestion(question2);
-
         List<Answer> answers2 = new ArrayList<>();
         answers2.add(ans3);
-        answers2.add(ans4);
-        answers2.add(ans5);
         question2.setAnswers(answers2);
 
 
@@ -283,20 +259,8 @@ public class QuestionsController {
         ans6.setIsCorrect(true);
         ans6.setQuestion(question3);
 
-        Answer ans7 = new Answer();
-        ans7.setBody("A rat");
-        ans7.setIsCorrect(false);
-        ans7.setQuestion(question3);
-
-        Answer ans8 = new Answer();
-        ans8.setBody("a mistake");
-        ans8.setIsCorrect(false);
-        ans8.setQuestion(question3);
-
         List<Answer> answers3 = new ArrayList<>();
         answers3.add(ans6);
-        answers3.add(ans7);
-        answers3.add(ans8);
         question3.setAnswers(answers3);
 
 
