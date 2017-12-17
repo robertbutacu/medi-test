@@ -57,13 +57,42 @@ public class TestService implements ITestService {
 
                     indexSingleMatchQuestion(transformed);
 
-                    test.addQuestion(QuestionType.SingleMatch, new ComplexTestQuestionDto(transformed));
+                    test.addQuestion(QuestionType.SingleMatch, new ComplexTestQuestionDto(shuffle(transformed)));
                     possibleQuestions.removeAll(picked);
                 }
             }
         }
 
         return test;
+    }
+
+    private List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> shuffle(
+            List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> singleMatchQuestion) {
+        List<Integer> pickedAnswersIndexes = new ArrayList<>();
+        List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> shuffle = new ArrayList<>();
+        Pair<SingleMatchQuestionDto, SingleMatchAnswerDto> curr;
+        SingleMatchAnswerDto randomAnswer;
+
+        Random r = new Random();
+
+        for (Pair<SingleMatchQuestionDto, SingleMatchAnswerDto> aSingleMatchQuestion : singleMatchQuestion) {
+            curr = aSingleMatchQuestion;
+
+            int random = r.nextInt(singleMatchQuestion.size());
+            while (pickedAnswersIndexes.contains(random)) {
+                random = r.nextInt(singleMatchQuestion.size());
+            }
+
+            pickedAnswersIndexes.add(random);
+
+            randomAnswer = singleMatchQuestion.get(random).getValue();
+
+            System.out.println(curr.getKey().getBody());
+            System.out.println(randomAnswer.getBody());
+            shuffle.add(new Pair<>(curr.getKey(), randomAnswer));
+        }
+
+        return shuffle;
     }
 
     private List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> transform(List<QuestionDto> picked) {
