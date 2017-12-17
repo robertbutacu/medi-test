@@ -87,8 +87,6 @@ public class TestService implements ITestService {
 
             randomAnswer = singleMatchQuestion.get(random).getValue();
 
-            System.out.println(curr.getKey().getBody());
-            System.out.println(randomAnswer.getBody());
             shuffle.add(new Pair<>(curr.getKey(), randomAnswer));
         }
 
