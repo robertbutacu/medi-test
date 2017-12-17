@@ -12,6 +12,7 @@ import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.entities.enums.QuestionType;
 import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.ITestService;
+import com.sun.java.browser.plugin2.DOM;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,31 @@ public class TestService implements ITestService {
     @Autowired
     private IQuestionRepository questionsRepository;
 
+
     @Override
-    public TestDto getTest(DomainDto domainDto, Difficulty difficulty, int numberOfQuestions) {
+    public TestDto generateTest(DomainDto domain, Difficulty difficulty, Integer numberOfQuestions, Integer duration) {
+        if ( difficulty != null && numberOfQuestions != null)
+            return null;
+
+        return getTest(domain, difficulty, numberOfQuestions);
+    }
+
+    private TestDto generateByDifficultyAndNumberOfQuestions(DomainDto domain, Difficulty difficulty,
+                                                             int numberOfQuestions){
+        return null;
+    }
+
+    private TestDto generateByDifficultyAndDuration(DomainDto domain, Difficulty difficulty,
+                                                    int duration){
+        return null;
+    }
+
+    private TestDto generateByNumberOfQuestionsAndDuration(DomainDto domain, Difficulty difficulty, int duration){
+        return null;
+    }
+
+
+    private TestDto getTest(DomainDto domainDto, Difficulty difficulty, int numberOfQuestions) {
         if (numberOfQuestions < 5)
             return null;
 
