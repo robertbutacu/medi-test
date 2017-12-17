@@ -20,6 +20,7 @@ public class TestDto {
     }
 
     public TestDto(DomainDto domain, Difficulty difficulty) {
+        this.questions = new ArrayList<>();
         this.domain = domain.getDomain();
         this.difficulty = difficulty.toString();
     }
