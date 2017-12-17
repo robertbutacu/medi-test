@@ -73,7 +73,37 @@ public class TestService implements ITestService {
 
     private TestDto generateByDifficultyAndDuration(DomainDto domain, Difficulty difficulty,
                                                     int duration) {
-        return null;
+        TestDto test;
+        int numberOfQuestions;
+
+        switch (difficulty) {
+            case Easy:
+                numberOfQuestions = duration / 3;
+
+                test = getTest(domain, difficulty, numberOfQuestions);
+                if (test != null)
+                    test.setDuration(3 * numberOfQuestions);
+                return test;
+
+            case Medium:
+                numberOfQuestions = duration / 2;
+
+                test = getTest(domain, difficulty, numberOfQuestions);
+                if (test != null)
+                    test.setDuration(2 * numberOfQuestions);
+                return test;
+
+            case Hard:
+                numberOfQuestions = duration;
+
+                test = getTest(domain, difficulty, numberOfQuestions);
+                if (test != null)
+                    test.setDuration(numberOfQuestions);
+                return test;
+
+            default:
+                return null;
+        }
     }
 
     private TestDto generateByNumberOfQuestionsAndDuration(DomainDto domain, int numberOfQuestions, int duration) {
