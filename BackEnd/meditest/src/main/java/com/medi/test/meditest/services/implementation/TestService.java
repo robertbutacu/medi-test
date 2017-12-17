@@ -31,23 +31,52 @@ public class TestService implements ITestService {
 
     @Override
     public TestDto generateTest(DomainDto domain, Difficulty difficulty, Integer numberOfQuestions, Integer duration) {
-        if ( difficulty != null && numberOfQuestions != null)
-            return null;
+        if (difficulty != null && numberOfQuestions != null && duration == null)
+            return generateByDifficultyAndNumberOfQuestions(domain, difficulty, numberOfQuestions);
 
-        return getTest(domain, difficulty, numberOfQuestions);
+        if (difficulty != null && numberOfQuestions == null && duration != null)
+            return generateByDifficultyAndDuration(domain, difficulty, duration);
+
+        if (difficulty == null && numberOfQuestions != null && duration != null)
+            return generateByNumberOfQuestionsAndDuration(domain, numberOfQuestions, duration);
+
+        return null;
     }
 
     private TestDto generateByDifficultyAndNumberOfQuestions(DomainDto domain, Difficulty difficulty,
-                                                             int numberOfQuestions){
-        return null;
+                                                             int numberOfQuestions) {
+        TestDto test;
+
+        switch (difficulty) {
+            case Easy:
+                test = getTest(domain, difficulty, numberOfQuestions);
+                if (test != null)
+                    test.setDuration(3 * numberOfQuestions);
+                return test;
+
+            case Medium:
+                test = getTest(domain, difficulty, numberOfQuestions);
+                if (test != null)
+                    test.setDuration(2 * numberOfQuestions);
+                return test;
+
+            case Hard:
+                test = getTest(domain, difficulty, numberOfQuestions);
+                if (test != null)
+                    test.setDuration(numberOfQuestions);
+                return test;
+
+            default:
+                return null;
+        }
     }
 
     private TestDto generateByDifficultyAndDuration(DomainDto domain, Difficulty difficulty,
-                                                    int duration){
+                                                    int duration) {
         return null;
     }
 
-    private TestDto generateByNumberOfQuestionsAndDuration(DomainDto domain, Difficulty difficulty, int duration){
+    private TestDto generateByNumberOfQuestionsAndDuration(DomainDto domain, int numberOfQuestions, int duration) {
         return null;
     }
 
