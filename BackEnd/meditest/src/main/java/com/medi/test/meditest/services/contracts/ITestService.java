@@ -5,5 +5,6 @@ import com.medi.test.meditest.dtos.test.TestDto;
 import com.medi.test.meditest.entities.enums.Difficulty;
 
 public interface ITestService {
-    TestDto getTest(DomainDto domainDto, Difficulty difficulty, int numberOfQuestions);
+    TestDto generateTest(DomainDto domain, Difficulty difficulty, Integer numberOfQuestions,
+                         Integer duration);
 }

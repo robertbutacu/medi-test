@@ -21,10 +21,11 @@ public class TestsController {
 
     @RequestMapping(value = "/generate", method = RequestMethod.GET)
     public ResponseEntity getTest(@RequestParam("domain") DomainDto domain,
-                                  @RequestParam("difficulty") Difficulty difficulty,
-                                  @RequestParam("numberOfQuestions") int numberOfQuestions) {
+                                  @RequestParam(value = "difficulty", required = false) Difficulty difficulty,
+                                  @RequestParam(value = "numberOfQuestions", required = false) Integer numberOfQuestions,
+                                  @RequestParam(value = "duration", required = false) Integer duration) {
 
-        TestDto generatedTest = testService.getTest(domain, difficulty, numberOfQuestions);
+        TestDto generatedTest = testService.generateTest(domain, difficulty, numberOfQuestions, duration);
 
         if (generatedTest == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
