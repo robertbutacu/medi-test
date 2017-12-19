@@ -9,6 +9,11 @@ import {TestService} from '../../test.service';
 export class TestGeneratorComponent implements OnInit {
   public opValue: string;
 
+  fields = [
+    {value: 'field-0', viewValue: 'A'},
+    {value: 'field-1', viewValue: 'B'},
+    {value: 'field-2', viewValue: 'C'}
+  ];
 
   options = [
     {value: 'level-time-0', viewValue: 'Difficulty level and time'},
@@ -39,16 +44,25 @@ export class TestGeneratorComponent implements OnInit {
   ];
 
   questions = [
-    {value: '5-0', viewValue: '5 questions'},
-    {value: '10-0', viewValue: '10 questions'},
-    {value: '15-0', viewValue: '15 questions'},
-    {value: '20-0', viewValue: '20 questions'},
-    {value: '25-0', viewValue: '25 questions'},
-    {value: '30-0', viewValue: '30 questions'},
-    {value: '40-0', viewValue: '40 questions'},
-    {value: '50-0', viewValue: '50 questions'},
-    {value: '75-0', viewValue: '75 questions'},
-    {value: '100-0', viewValue: '100 questions'}
+    {value: '6', viewValue: '6 questions'},
+    {value: '7', viewValue: '7 questions'},
+    {value: '8', viewValue: '8 questions'},
+    {value: '9', viewValue: '9 questions'},
+    {value: '10', viewValue: '10 questions'},
+    {value: '11', viewValue: '11 questions'},
+    {value: '12', viewValue: '12 questions'},
+    {value: '13', viewValue: '13 questions'},
+    {value: '14', viewValue: '14 questions'},
+    {value: '15', viewValue: '15 questions'},
+    {value: '16', viewValue: '16 questions'},
+    {value: '17', viewValue: '17 questions'},
+    {value: '18', viewValue: '18 questions'},
+    {value: '19', viewValue: '19 questions'},
+    {value: '20', viewValue: '20 questions'},
+    {value: '21', viewValue: '21 questions'},
+    {value: '22', viewValue: '22 questions'},
+    {value: '23', viewValue: '23 questions'},
+    {value: '24', viewValue: '24 questions'}
   ];
 
   constructor(public testService: TestService) {

@@ -1,5 +1,14 @@
 <div>
   <form>
+    <br>
+    <label> Choose the domain field:</label>
+    <select>
+      <option *ngFor="let field of fields" [value]="field.value">
+        {{ field.viewValue }}
+      </option>
+    </select>
+
+    <br><br>
 
     <label> Choose option:</label>
     <select [(ngModel)]="opValue" [ngModelOptions]="{standalone: true}">
@@ -7,32 +16,37 @@
         {{ option.viewValue }}
       </option>
     </select>
-    <p>You selected: {{opValue}}</p>
+
     <br><br>
 
-    <div>
-    <label> Choose difficulty level:</label>
-    <select>
-      <option *ngFor="let level of levels" [value]="level.value">
-        {{ level.viewValue }}
-      </option>
-    </select>
+    <div *ngIf="opValue == 'level-time-0' || opValue == 'level-questions-1'">
+      <label> Choose difficulty level:</label>
+      <select>
+        <option *ngFor="let level of levels" [value]="level.value">
+          {{ level.viewValue }}
+        </option>
+      </select>
+      <br>
     </div>
-    <br>
-    <label> Choose time:</label>
-    <select>
-      <option *ngFor="let time of times" [value]="time.value">
-        {{ time.viewValue }}
-      </option>
-    </select>
 
-    <br>
+    <div *ngIf="opValue == 'level-time-0' || opValue == 'questions-time-2'">
+      <label> Choose time:</label>
+      <select>
+        <option *ngFor="let time of times" [value]="time.value">
+          {{ time.viewValue }}
+        </option>
+      </select>
+      <br>
+    </div>
+
+    <div *ngIf="opValue == 'level-questions-1' || opValue == 'questions-time-2'">
     <label> Choose number of questions:</label>
-    <select>
-      <option *ngFor="let question of questions" [value]="question.value">
-        {{ question.viewValue }}
-      </option>
-    </select>
+        <select>
+          <option *ngFor="let question of questions" [value]="question.value">
+            {{ question.viewValue }}
+          </option>
+        </select>
+    </div>
   </form>
 <div class="padding-top-15">
   Create the form for test generating here!
