@@ -7,10 +7,12 @@ import {TestService} from '../../test.service';
   styleUrls: ['./test-generator.component.scss']
 })
 export class TestGeneratorComponent implements OnInit {
+  public opValue: string;
+
 
   options = [
-    {value: 'level-time-0', viewValue: 'Level and time'},
-    {value: 'level-questions-1', viewValue: 'Level and number of questions'},
+    {value: 'level-time-0', viewValue: 'Difficulty level and time'},
+    {value: 'level-questions-1', viewValue: 'Difficulty level and number of questions'},
     {value: 'questions-time-2', viewValue: 'Number of questions and time'}
   ];
 
@@ -59,4 +61,10 @@ export class TestGeneratorComponent implements OnInit {
     // populate test list with information from backend
     this.testService.isGenerated = true;
   }
+
+  setValue(value: string): void {
+    console.log(value);
+    this.opValue = value;
+  }
+
 }

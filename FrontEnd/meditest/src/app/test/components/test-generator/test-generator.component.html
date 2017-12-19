@@ -2,27 +2,31 @@
   <form>
 
     <label> Choose option:</label>
-    <select>
+    <select [(ngModel)]="opValue" [ngModelOptions]="{standalone: true}">
       <option *ngFor="let option of options" [value]="option.value">
         {{ option.viewValue }}
       </option>
     </select>
-    <br> <br>
+    <p>You selected: {{opValue}}</p>
+    <br><br>
 
+    <div>
     <label> Choose difficulty level:</label>
     <select>
       <option *ngFor="let level of levels" [value]="level.value">
         {{ level.viewValue }}
       </option>
     </select>
-
+    </div>
     <br>
     <label> Choose time:</label>
     <select>
       <option *ngFor="let time of times" [value]="time.value">
         {{ time.viewValue }}
       </option>
-    </select><br>
+    </select>
+
+    <br>
     <label> Choose number of questions:</label>
     <select>
       <option *ngFor="let question of questions" [value]="question.value">
