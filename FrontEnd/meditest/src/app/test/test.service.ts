@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from '../shared/services/http.service';
-import {Question} from './components/question-list/question/question.model';
+import {Question} from './models/question.model';
 
 @Injectable()
 export class TestService {

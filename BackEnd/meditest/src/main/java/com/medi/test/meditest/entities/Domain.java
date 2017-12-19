@@ -10,8 +10,6 @@ import java.util.List;
 @Entity(name = "Domain")
 @Table(name = "domains")
 public class Domain {
-    private static final long serialVersionUID = 4885215557937431660L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -25,15 +23,9 @@ public class Domain {
             mappedBy = "domain",
             cascade = CascadeType.ALL
     )
-    public List<Question> questions = new ArrayList<>();
+    private List<Question> questions = new ArrayList<>();
 
-    public Domain() {
-
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
+    public Domain() { }
 
     public List<Question> getQuestions() {
         return questions;
@@ -47,9 +39,7 @@ public class Domain {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    public void setId(long id) { this.id = id; }
 
     public String getName() {
         return name;

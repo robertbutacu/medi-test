@@ -10,30 +10,27 @@ import javax.validation.constraints.NotNull;
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public long id;
+    private long id;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "question_id")
+    private Question question;
 
     @NotNull
     @Column(name = "body")
     @Length(max = 500)
-    public String body;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "question_id")
-    public Question question;
+    private String body;
 
     @NotNull
-    public boolean isCorrect;
+    private boolean isCorrect;
 
-    public Answer() {
-    }
+    public Answer() { }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    public void setId(long id) { this.id = id; }
 
     public String getBody() {
         return body;

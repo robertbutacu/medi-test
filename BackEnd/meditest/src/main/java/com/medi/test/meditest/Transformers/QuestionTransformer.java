@@ -2,8 +2,13 @@ package com.medi.test.meditest.Transformers;
 
 import com.medi.test.meditest.dtos.AnswerDto;
 import com.medi.test.meditest.dtos.QuestionDto;
+import com.medi.test.meditest.dtos.test.simple.test.dto.SimpleTestQuestionDto;
+import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchAnswerDto;
+import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchQuestionDto;
 import com.medi.test.meditest.entities.Answer;
 import com.medi.test.meditest.entities.Question;
+import com.sun.java.browser.plugin2.DOM;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +22,12 @@ public class QuestionTransformer {
             answers.add(AnswerTransformer.toDto(answer));
         }
 
-        questionDto.setBody(question.body);
+        questionDto.setBody(question.getBody());
         questionDto.setAnswers(answers);
-        questionDto.setDifficulty(question.difficulty);
+        questionDto.setDifficulty(question.getDifficulty());
+        questionDto.setDomain(DomainTransformer.toDto(question.getDomain()));
+        questionDto.setType(question.getQuestionType());
+
         return questionDto;
     }
 
@@ -31,9 +39,24 @@ public class QuestionTransformer {
             answers.add(AnswerTransformer.toEntity(answer));
         }
 
-        question.setBody(question.body);
+        question.setBody(question.getBody());
         question.setAnswers(answers);
         question.setDifficulty(questionDto.getDifficulty());
         return question;
+    }
+
+    public static Pair<SingleMatchQuestionDto, SingleMatchAnswerDto> toSingleMatchDto(QuestionDto question) {
+        SingleMatchAnswerDto smad = new SingleMatchAnswerDto();
+        SingleMatchQuestionDto smqd = new SingleMatchQuestionDto();
+
+        smad.setBody(question.answers.get(0).getBody());
+
+        smqd.setBody(question.getBody());
+
+        return new Pair<>(smqd, smad);
+    }
+
+    public static SimpleTestQuestionDto toSimpleQuestionDto(QuestionDto questionDto){
+        return new SimpleTestQuestionDto(questionDto);
     }
 }

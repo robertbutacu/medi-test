@@ -7,6 +7,7 @@ import { QuestionComponent } from './components/question-list/question/question.
 import { TestGeneratorComponent } from './components/test-generator/test-generator.component';
 import {TestService} from './test.service';
 import { FormsModule } from '@angular/forms';
+import {CountdownComponent} from "./components/countdown/countdown.component";
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms';
     QuestionListComponent,
     QuestionComponent,
     TestGeneratorComponent,
+    CountdownComponent
   ],
   providers: [
     TestService
