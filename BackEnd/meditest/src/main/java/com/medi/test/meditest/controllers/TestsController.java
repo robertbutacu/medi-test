@@ -38,7 +38,7 @@ public class TestsController {
     }
 
     @RequestMapping(value = "/score", method = RequestMethod.GET)
-    public Pair<Double, Double> getTestScore(@RequestParam("test") SolvedTestDto testToScore) {
+    public Pair<Double, Double> getTestScore(@RequestParam("solvedTest") SolvedTestDto testToScore) {
         return testScoringService.getScore(testToScore);
     }
 }
