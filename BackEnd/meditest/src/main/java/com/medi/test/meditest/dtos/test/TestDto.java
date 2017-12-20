@@ -17,7 +17,7 @@ public class TestDto {
 
     private List<Pair<QuestionType, ITestQuestion>> questions;
 
-    public TestDto(){
+    public TestDto() {
         this.questions = new ArrayList<>();
     }
 
@@ -27,7 +27,7 @@ public class TestDto {
         this.difficulty = difficulty.toString();
     }
 
-    public TestDto(DomainDto domain, String difficulty, List<Pair<QuestionType, ITestQuestion>> questions){
+    public TestDto(DomainDto domain, String difficulty, List<Pair<QuestionType, ITestQuestion>> questions) {
         this.domain = domain.getDomain();
         this.difficulty = difficulty;
         this.questions = questions;
@@ -68,7 +68,7 @@ public class TestDto {
 
     public void setDuration(int duration) {
         int roundedDuration = 0;
-        while ( roundedDuration < duration)
+        while (roundedDuration < duration)
             roundedDuration += 5;
         this.duration = roundedDuration;
     }

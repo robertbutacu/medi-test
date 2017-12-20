@@ -5,12 +5,12 @@ import javafx.util.Pair;
 
 import java.util.List;
 
-public class ComplexTestQuestionDto implements ITestQuestion{
+public class ComplexTestQuestionDto implements ITestQuestion {
     private List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> matches;
 
-    private boolean answered ;
+    private boolean answered;
 
-    public ComplexTestQuestionDto(List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> matches){
+    public ComplexTestQuestionDto(List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> matches) {
         this.matches = matches;
     }
 

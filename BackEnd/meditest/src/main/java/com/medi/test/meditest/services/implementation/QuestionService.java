@@ -34,7 +34,7 @@ public class QuestionService implements IQuestionService {
 
     @Override
     public void delete(Long id) throws Exception {
-        if(questionsRepository.getOne(id) == null) {
+        if (questionsRepository.getOne(id) == null) {
             throw new Exception("This question doesn't exists.");
         }
         questionsRepository.delete(id);
@@ -44,7 +44,7 @@ public class QuestionService implements IQuestionService {
     public List<Question> GetQuestions(int number, String difficulty) {
         List<Question> selectedQuestions = new ArrayList<>();
         List<Question> foundQuestions = questionsRepository.findByDifficulty(Difficulty.Easy);
-        for(int i = 0; i < number && !foundQuestions.isEmpty(); i++){
+        for (int i = 0; i < number && !foundQuestions.isEmpty(); i++) {
             Random randomGenerator = new Random();
             int randomInt = randomGenerator.nextInt(foundQuestions.size());
             Question question = foundQuestions.get(randomInt);

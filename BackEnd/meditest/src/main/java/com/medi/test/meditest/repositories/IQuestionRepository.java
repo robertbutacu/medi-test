@@ -1,5 +1,6 @@
 package com.medi.test.meditest.repositories;
 
+import com.medi.test.meditest.entities.Domain;
 import com.medi.test.meditest.entities.Question;
 import com.medi.test.meditest.entities.enums.Difficulty;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,4 +13,6 @@ import java.util.List;
 @Transactional
 public interface IQuestionRepository extends JpaRepository<Question, Long> {
     List<Question> findByDifficulty(Difficulty difficulty);
+
+    List<Question> findByDomain(Domain domain);
 }
