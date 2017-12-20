@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DomainService implements IDomainService{
+public class DomainService implements IDomainService {
 
     @Autowired
     private IDomainRepository domainRepository;
