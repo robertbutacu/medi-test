@@ -35,11 +35,16 @@ public class Question {
     @Column(name = "question_type")
     private QuestionType questionType;
 
-    public Question() {  }
+    public Question() {
+    }
 
-    public QuestionType getQuestionType(){ return this.questionType; }
+    public QuestionType getQuestionType() {
+        return this.questionType;
+    }
 
-    public void setQuestionType(QuestionType questionType) { this.questionType = questionType; }
+    public void setQuestionType(QuestionType questionType) {
+        this.questionType = questionType;
+    }
 
     public List<Answer> getAnswers() {
         return answers;
@@ -53,7 +58,8 @@ public class Question {
         return id;
     }
 
-    public void setId() { }
+    public void setId() {
+    }
 
     public String getBody() {
         return body;

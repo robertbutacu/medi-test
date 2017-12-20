@@ -14,7 +14,7 @@ public class SimpleTestQuestionDto implements ITestQuestion {
 
     private List<AnswerDto> answers;
 
-    public SimpleTestQuestionDto(QuestionDto question){
+    public SimpleTestQuestionDto(QuestionDto question) {
         this.body = question.getBody();
         this.answers = question.getAnswers();
     }

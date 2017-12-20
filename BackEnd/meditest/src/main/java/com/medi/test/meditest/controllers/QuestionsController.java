@@ -44,12 +44,12 @@ public class QuestionsController {
 
     @RequestMapping(value = "/questions", method = RequestMethod.GET)
     public ResponseEntity getAllQuestionsByNumberAndDifficulty(
-            @RequestParam(value="numberOfQuestions", required=false) int numberOfQestions,
-            @RequestParam(value="difficulty", required=false) String difficulty) {
+            @RequestParam(value = "numberOfQuestions", required = false) int numberOfQestions,
+            @RequestParam(value = "difficulty", required = false) String difficulty) {
         initializeDomain();
         List<Question> questions = questionService.GetQuestions(numberOfQestions, difficulty);
 
-        if(questions.size() != numberOfQestions) {
+        if (questions.size() != numberOfQestions) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
@@ -61,7 +61,7 @@ public class QuestionsController {
         return new ResponseEntity<>(questionDtos, HttpStatus.OK);
     }
 
-    private void initializeDomain(){
+    private void initializeDomain() {
         Domain domain = new Domain();
         domain.setName("programming");
 
@@ -71,7 +71,7 @@ public class QuestionsController {
         generateTrueOrFalseQuestions(domain);
     }
 
-    private void generateSingleMatchQuestions(Domain domain){
+    private void generateSingleMatchQuestions(Domain domain) {
         Question question1 = new Question();
         question1.setBody("Java code, generally, ");
         question1.setDifficulty(Difficulty.Hard);
@@ -127,7 +127,7 @@ public class QuestionsController {
         domainService.save(domain);
     }
 
-    private void generateMultipleChoiceQuestions(Domain domain){
+    private void generateMultipleChoiceQuestions(Domain domain) {
         Question question1 = new Question();
         question1.setBody("What is Java");
         question1.setDifficulty(Difficulty.Hard);
@@ -275,7 +275,7 @@ public class QuestionsController {
         domainService.save(domain);
     }
 
-    private void generateTrueOrFalseQuestions(Domain domain){
+    private void generateTrueOrFalseQuestions(Domain domain) {
         Question question1 = new Question();
         question1.setBody("Java 10 is out");
         question1.setDifficulty(Difficulty.Hard);

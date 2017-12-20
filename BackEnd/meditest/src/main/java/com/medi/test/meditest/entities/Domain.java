@@ -25,7 +25,8 @@ public class Domain {
     )
     private List<Question> questions = new ArrayList<>();
 
-    public Domain() { }
+    public Domain() {
+    }
 
     public List<Question> getQuestions() {
         return questions;
@@ -39,7 +40,9 @@ public class Domain {
         return id;
     }
 
-    public void setId(long id) { this.id = id; }
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
