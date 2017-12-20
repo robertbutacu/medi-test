@@ -25,13 +25,14 @@ public class DomainsController {
     private IDomainService domainService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity<List<DomainDto>> getAllDomains() {
+    public ResponseEntity getAllDomains() {
         List<Domain> domains = domainService.getAll();
         List<DomainDto> domainsDto = new ArrayList<>();
         for (Domain domain :
                 domains) {
             domainsDto.add(DomainTransformer.toDto(domain));
         }
-        return new ResponseEntity(domains, HttpStatus.OK);
+
+        return new ResponseEntity(domainsDto, HttpStatus.OK);
     }
 }
