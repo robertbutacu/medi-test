@@ -1,6 +1,6 @@
 package com.medi.test.meditest.services.implementation;
 
-import com.medi.test.meditest.transformers.QuestionTransformer;
+import com.medi.test.meditest.Transformers.QuestionTransformer;
 import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.dtos.QuestionDto;
 import com.medi.test.meditest.dtos.test.TestDto;
@@ -12,6 +12,7 @@ import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.entities.enums.QuestionType;
 import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.ITestService;
+import com.sun.java.browser.plugin2.DOM;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,115 @@ public class TestService implements ITestService {
     @Autowired
     private IQuestionRepository questionsRepository;
 
+
     @Override
-    public TestDto getTest(DomainDto domainDto, Difficulty difficulty, int numberOfQuestions) {
+    public TestDto generateTest(DomainDto domain, Difficulty difficulty, Integer numberOfQuestions, Integer duration) {
+        if (difficulty != null && numberOfQuestions != null && duration == null)
+            return generateByDifficultyAndNumberOfQuestions(domain, difficulty, numberOfQuestions);
+
+        if (difficulty != null && numberOfQuestions == null && duration != null)
+            return generateByDifficultyAndDuration(domain, difficulty, duration);
+
+        if (difficulty == null && numberOfQuestions != null && duration != null)
+            return generateByNumberOfQuestionsAndDuration(domain, numberOfQuestions, duration);
+
+        return null;
+    }
+
+    private TestDto generateByDifficultyAndNumberOfQuestions(DomainDto domain, Difficulty difficulty,
+                                                             int numberOfQuestions) {
+        TestDto test;
+
+        switch (difficulty) {
+            case Easy:
+                test = getTest(domain, difficulty, numberOfQuestions);
+                if (test != null)
+                    test.setDuration(3 * numberOfQuestions);
+                return test;
+
+            case Medium:
+                test = getTest(domain, difficulty, numberOfQuestions);
+                if (test != null)
+                    test.setDuration(2 * numberOfQuestions);
+                return test;
+
+            case Hard:
+                test = getTest(domain, difficulty, numberOfQuestions);
+                if (test != null)
+                    test.setDuration(numberOfQuestions);
+                return test;
+
+            default:
+                return null;
+        }
+    }
+
+    private TestDto generateByDifficultyAndDuration(DomainDto domain, Difficulty difficulty,
+                                                    int duration) {
+        TestDto test;
+        int numberOfQuestions;
+
+        switch (difficulty) {
+            case Easy:
+                numberOfQuestions = duration / 3;
+
+                test = getTest(domain, difficulty, numberOfQuestions);
+                if (test != null)
+                    test.setDuration(3 * numberOfQuestions);
+                return test;
+
+            case Medium:
+                numberOfQuestions = duration / 2;
+
+                test = getTest(domain, difficulty, numberOfQuestions);
+                if (test != null)
+                    test.setDuration(2 * numberOfQuestions);
+                return test;
+
+            case Hard:
+                numberOfQuestions = duration;
+
+                test = getTest(domain, difficulty, numberOfQuestions);
+                if (test != null)
+                    test.setDuration(numberOfQuestions);
+                return test;
+
+            default:
+                return null;
+        }
+    }
+
+    private TestDto generateByNumberOfQuestionsAndDuration(DomainDto domain, int numberOfQuestions, int duration) {
+        Double ratio = (double) duration / (double) numberOfQuestions;
+
+        TestDto test;
+
+        if (ratio < 2) {
+            test = getTest(domain, Difficulty.Hard, numberOfQuestions);
+
+            if (test != null)
+                test.setDuration(duration);
+            return test;
+        }
+
+        if (ratio < 3) {
+            test = getTest(domain, Difficulty.Medium, numberOfQuestions);
+
+            if (test != null)
+                test.setDuration(duration);
+            return test;
+        }
+
+        test = getTest(domain, Difficulty.Easy, numberOfQuestions);
+
+        if (test != null)
+            test.setDuration(duration);
+
+        return test;
+    }
+
+
+    private TestDto getTest(DomainDto domainDto, Difficulty difficulty, int numberOfQuestions) {
         if (numberOfQuestions < 5)
             return null;
 

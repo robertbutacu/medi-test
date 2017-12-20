@@ -1,12 +1,9 @@
 package com.medi.test.meditest.services.implementation;
 
-import com.medi.test.meditest.dtos.QuestionDto;
 import com.medi.test.meditest.entities.Question;
 import com.medi.test.meditest.entities.enums.Difficulty;
-import com.medi.test.meditest.entities.enums.QuestionType;
 import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.IQuestionService;
-import com.medi.test.meditest.transformers.QuestionTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +16,6 @@ public class QuestionService implements IQuestionService {
 
     @Autowired
     private IQuestionRepository questionsRepository;
-
-    @Autowired
-    private QuestionTransformer questionTransformer;
 
     @Override
     public void save(Question entity) {
@@ -58,30 +52,5 @@ public class QuestionService implements IQuestionService {
             foundQuestions.remove(question);
         }
         return selectedQuestions;
-    }
-
-    @Override
-    public boolean createQuestion(QuestionDto questionDto) {
-
-//        switch (questionDto.getType()) {
-//            case FillIn:
-//                //only one answer is right
-//                return questionsRepository.save(questionTransformer.toEntity(questionDto)) != null;
-//            break;
-//            case MultipleChoice:
-//                //for one question there is only one answer is right
-//                return questionsRepository.save(questionTransformer.toEntity(questionDto)) != null;
-//            break;
-//            case TrueOrFalse:
-//                //only 2 answers of type true/false
-//                return questionsRepository.save(questionTransformer.toEntity(questionDto)) != null;
-//            break;
-//            case SingleMatch:
-//                //a question can have any number of answers but only one right
-//                return questionsRepository.save(questionTransformer.toEntity(questionDto)) != null;
-//            break;
-//
-//        }
-        return questionsRepository.save(questionTransformer.toEntity(questionDto)) != null;
     }
 }
