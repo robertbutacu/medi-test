@@ -1,12 +1,55 @@
-<div class="question">
-  <div class="title">
-    <i class="fa fa-question-circle" aria-hidden="true"></i> Ce este craniul?
-  </div>
-  <div class="answers">
-    <div *ngFor="let answer of answers">
-      <span>{{answer.letter}} </span>
-      <input type="checkbox" class="form-group"/>
-      <span>{{answer.answer}}</span>
+<div class="question" [class.heightSingle]="question.key == 'SingleMatch'"
+     [class.heightTrueOrFalse]="question.key == 'TrueOrFalse'"
+     [class.heightMultiple]="question.key == 'MultipleChoice'"
+     [class.heightFill]="question.key == 'FillIn'">
+  <!--<div class="title">-->
+  <!--<i class="fa fa-question-circle" aria-hidden="true"></i> Ce este craniul?-->
+  <!--</div>-->
+  <div class="col-sm-12" *ngIf="question.key == 'SingleMatch'">
+    <div class="col-sm-6">
+      <div *ngFor="let q of question.value.matches" class="padding-bottom-10">
+        <input type="text" class="form-control small">
+        {{q.key.body}} <br/>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div *ngFor="let q of question.value.matches; let index = index" class="padding-bottom-10 letters-height">
+        {{alphabets[index].letter}} {{q.value.body}} <br/>
+      </div>
     </div>
   </div>
+
+  <div class="col-sm-12" *ngIf="question.key == 'MultipleChoice'">
+    <div class="title">
+      <i class="fa fa-question-circle" aria-hidden="true"></i> {{question.value.body}}
+    </div>
+    <div class="trueanswers align-center" *ngFor="let answer of question.value.answers">
+      <input type="checkbox" value="{{answer.body}}">
+      {{answer.body}}
+    </div>
+  </div>
+
+  <div class="col-sm-12" *ngIf="question.key == 'TrueOrFalse'">
+    <div class="title">
+      <i class="fa fa-question-circle" aria-hidden="true"></i> {{question.value.body}}
+    </div>
+    <div class="trueanswers align-center" *ngFor="let answer of question.value.answers">
+      <input type="checkbox" value="{{answer.body}}">
+      {{answer.body}}
+    </div>
+  </div>
+
+  <div class="col-sm-12" *ngIf="question.key == 'FillIn'">
+    <div class="title">
+      <i class="fa fa-question-circle" aria-hidden="true"></i> {{question.value.body}}
+    </div>
+    <div class="trueanswers align-center">
+      <input type="text" class="form-control">
+    </div>
+  </div>
+  <!--<div *ngFor="let answer of answers">-->
+  <!--<span>{{answer.letter}} </span>-->
+  <!--<input type="checkbox" class="form-group"/>-->
+  <!--<span>{{answer.answer}}</span>-->
+  <!--</div>-->
 </div>

@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 @Injectable()
 export class HttpService {
 
-  private baseUrl= 'url';
+  private baseUrl= './';
 
   constructor(private http: HttpClient) { }
 

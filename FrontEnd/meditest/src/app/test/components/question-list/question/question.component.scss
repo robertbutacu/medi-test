@@ -1,8 +1,44 @@
 .question {
   margin: 0 auto;
   display: block;
-  width: 350px;
+  width: 70%;
   text-align: left;
   padding: 15px;
   border: 1px solid lightgray;
+}
+.small {
+  width: 40px;
+  display: inline-block;
+  height: 25px;
+  margin-right: 5px;
+}
+
+
+.heightSingle {
+  height: 120px;
+}
+
+.heightTrueOrFalse {
+  height: 100px;
+}
+
+.heightMultiple {
+  height: 120px;
+}
+
+.heightFill {
+  height: 100px;
+}
+
+.letters-height {
+  height: 36px;
+}
+
+.title {
+  font-size: 1.3em;
+  text-align: center;
+}
+
+.align-center {
+  text-align:center;
 }
