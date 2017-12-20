@@ -1,6 +1,6 @@
 package com.medi.test.meditest.controllers;
 
-import com.medi.test.meditest.Transformers.QuestionTransformer;
+import com.medi.test.meditest.transformers.QuestionTransformer;
 import com.medi.test.meditest.dtos.QuestionDto;
 import com.medi.test.meditest.entities.Answer;
 import com.medi.test.meditest.entities.Domain;
@@ -9,7 +9,6 @@ import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.entities.enums.QuestionType;
 import com.medi.test.meditest.services.contracts.IDomainService;
 import com.medi.test.meditest.services.contracts.IQuestionService;
-import com.sun.java.browser.plugin2.DOM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,14 +41,19 @@ public class QuestionsController {
         return new ResponseEntity<>(questionDtos, HttpStatus.OK);
     }
 
+    @RequestMapping(method = RequestMethod.POST)
+    public boolean createQuestion(@RequestBody QuestionDto questionDto) {
+        return questionService.createQuestion(questionDto);
+    }
+
     @RequestMapping(value = "/questions", method = RequestMethod.GET)
     public ResponseEntity getAllQuestionsByNumberAndDifficulty(
-            @RequestParam(value="numberOfQuestions", required=false) int numberOfQestions,
-            @RequestParam(value="difficulty", required=false) String difficulty) {
+            @RequestParam(value = "numberOfQuestions", required = false) int numberOfQestions,
+            @RequestParam(value = "difficulty", required = false) String difficulty) {
         initializeDomain();
         List<Question> questions = questionService.GetQuestions(numberOfQestions, difficulty);
 
-        if(questions.size() != numberOfQestions) {
+        if (questions.size() != numberOfQestions) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
@@ -61,7 +65,7 @@ public class QuestionsController {
         return new ResponseEntity<>(questionDtos, HttpStatus.OK);
     }
 
-    private void initializeDomain(){
+    private void initializeDomain() {
         Domain domain = new Domain();
         domain.setName("programming");
 
@@ -71,7 +75,7 @@ public class QuestionsController {
         generateTrueOrFalseQuestions(domain);
     }
 
-    private void generateSingleMatchQuestions(Domain domain){
+    private void generateSingleMatchQuestions(Domain domain) {
         Question question1 = new Question();
         question1.setBody("Java code, generally, ");
         question1.setDifficulty(Difficulty.Hard);
@@ -127,7 +131,7 @@ public class QuestionsController {
         domainService.save(domain);
     }
 
-    private void generateMultipleChoiceQuestions(Domain domain){
+    private void generateMultipleChoiceQuestions(Domain domain) {
         Question question1 = new Question();
         question1.setBody("What is Java");
         question1.setDifficulty(Difficulty.Hard);
@@ -230,8 +234,20 @@ public class QuestionsController {
         ans.setIsCorrect(true);
         ans.setQuestion(question1);
 
+        Answer ans1 = new Answer();
+        ans1.setBody("An island");
+        ans1.setIsCorrect(false);
+        ans1.setQuestion(question1);
+
+        Answer ans2 = new Answer();
+        ans2.setBody("an animal");
+        ans2.setIsCorrect(false);
+        ans2.setQuestion(question1);
+
         List<Answer> answers1 = new ArrayList<>();
         answers1.add(ans);
+        answers1.add(ans1);
+        answers1.add(ans2);
         question1.setAnswers(answers1);
 
         Question question2 = new Question();
@@ -244,8 +260,20 @@ public class QuestionsController {
         ans3.setIsCorrect(true);
         ans3.setQuestion(question2);
 
+        Answer ans4 = new Answer();
+        ans4.setBody("A tasty beverage");
+        ans4.setIsCorrect(false);
+        ans4.setQuestion(question2);
+
+        Answer ans5 = new Answer();
+        ans5.setBody("A framework");
+        ans5.setIsCorrect(false);
+        ans5.setQuestion(question2);
+
         List<Answer> answers2 = new ArrayList<>();
         answers2.add(ans3);
+        answers2.add(ans4);
+        answers2.add(ans5);
         question2.setAnswers(answers2);
 
 
@@ -259,8 +287,20 @@ public class QuestionsController {
         ans6.setIsCorrect(true);
         ans6.setQuestion(question3);
 
+        Answer ans7 = new Answer();
+        ans7.setBody("A rat");
+        ans7.setIsCorrect(false);
+        ans7.setQuestion(question3);
+
+        Answer ans8 = new Answer();
+        ans8.setBody("a mistake");
+        ans8.setIsCorrect(false);
+        ans8.setQuestion(question3);
+
         List<Answer> answers3 = new ArrayList<>();
         answers3.add(ans6);
+        answers3.add(ans7);
+        answers3.add(ans8);
         question3.setAnswers(answers3);
 
 
@@ -275,7 +315,7 @@ public class QuestionsController {
         domainService.save(domain);
     }
 
-    private void generateTrueOrFalseQuestions(Domain domain){
+    private void generateTrueOrFalseQuestions(Domain domain) {
         Question question1 = new Question();
         question1.setBody("Java 10 is out");
         question1.setDifficulty(Difficulty.Hard);

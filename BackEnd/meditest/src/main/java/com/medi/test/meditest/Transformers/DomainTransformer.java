@@ -1,4 +1,4 @@
-package com.medi.test.meditest.Transformers;
+package com.medi.test.meditest.transformers;
 
 import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.entities.Domain;

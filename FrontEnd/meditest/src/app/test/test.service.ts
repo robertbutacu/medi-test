@@ -12,12 +12,12 @@ export class TestService {
 
   public getTest(numberOfQuestions: number, difficulty: string) {
     if (!this.isGenerated) {
-      this.http.get('/questions?numberOfQuestions=' + numberOfQuestions + '&difficulty=' + difficulty)
+      this.http.get("/questions?numberOfQuestions=" + numberOfQuestions + "&difficulty=" + difficulty)
         .subscribe(
           (response) => response.map(question => {
             return {
               question: question.body
-            };
+            }
           }).forEach(question => this.questionList.push(question))
         )
       ;

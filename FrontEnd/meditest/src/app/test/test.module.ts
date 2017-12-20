@@ -6,14 +6,12 @@ import { QuestionListComponent } from './components/question-list/question-list.
 import { QuestionComponent } from './components/question-list/question/question.component';
 import { TestGeneratorComponent } from './components/test-generator/test-generator.component';
 import {TestService} from './test.service';
-import { FormsModule } from '@angular/forms';
 import {CountdownComponent} from "./components/countdown/countdown.component";
 
 @NgModule({
   imports: [
     CommonModule,
-    TestRoutingModule,
-    FormsModule
+    TestRoutingModule
   ],
   declarations: [
     TestComponent,

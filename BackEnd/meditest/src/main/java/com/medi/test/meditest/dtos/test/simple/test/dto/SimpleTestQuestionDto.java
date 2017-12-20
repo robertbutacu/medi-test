@@ -8,8 +8,6 @@ import com.medi.test.meditest.entities.Answer;
 import java.util.List;
 
 public class SimpleTestQuestionDto implements ITestQuestion {
-    private boolean answered;
-
     private String body;
 
     private List<AnswerDto> answers;
@@ -33,9 +31,5 @@ public class SimpleTestQuestionDto implements ITestQuestion {
 
     public void setAnswers(List<AnswerDto> answers) {
         this.answers = answers;
-    }
-
-    public boolean isAnswered() {
-        return answered;
     }
 }

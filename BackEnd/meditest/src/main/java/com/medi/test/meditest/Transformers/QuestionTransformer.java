@@ -1,4 +1,4 @@
-package com.medi.test.meditest.Transformers;
+package com.medi.test.meditest.transformers;
 
 import com.medi.test.meditest.dtos.AnswerDto;
 import com.medi.test.meditest.dtos.QuestionDto;
@@ -7,12 +7,13 @@ import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchAnswerDto;
 import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchQuestionDto;
 import com.medi.test.meditest.entities.Answer;
 import com.medi.test.meditest.entities.Question;
-import com.sun.java.browser.plugin2.DOM;
 import javafx.util.Pair;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class QuestionTransformer {
     public static QuestionDto toDto(Question question){
         QuestionDto questionDto = new QuestionDto();
@@ -42,6 +43,7 @@ public class QuestionTransformer {
         question.setBody(question.getBody());
         question.setAnswers(answers);
         question.setDifficulty(questionDto.getDifficulty());
+        question.setQuestionType(questionDto.getType());
         return question;
     }
 
