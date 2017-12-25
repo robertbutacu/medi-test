@@ -30,4 +30,8 @@ public class ComplexTestQuestionDto implements ITestQuestion {
     public int getExpectedSecsToAnswer() {
         return expectedSecsToAnswer;
     }
+
+    public void setExpectedSecsToAnswer(int expectedSecsToAnswer) {
+        this.expectedSecsToAnswer = expectedSecsToAnswer;
+    }
 }

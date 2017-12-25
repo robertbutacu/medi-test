@@ -27,6 +27,7 @@ public class QuestionTransformer {
         questionDto.setDifficulty(question.getDifficulty());
         questionDto.setDomain(DomainTransformer.toDto(question.getDomain()));
         questionDto.setType(question.getQuestionType());
+        questionDto.setExpectedSecsToAnswer(question.getExpectedSecsToAnswer());
 
         return questionDto;
     }
@@ -42,6 +43,7 @@ public class QuestionTransformer {
         question.setBody(question.getBody());
         question.setAnswers(answers);
         question.setDifficulty(questionDto.getDifficulty());
+        question.setExpectedSecsToAnswer(questionDto.getExpectedSecsToAnswer());
         return question;
     }
 
@@ -52,6 +54,7 @@ public class QuestionTransformer {
         smad.setBody(question.getAnswers().get(0).getBody());
 
         smqd.setBody(question.getBody());
+        smqd.setExpectedSecsToAnswer(question.getExpectedSecsToAnswer());
 
         return new Pair<>(smqd, smad);
     }

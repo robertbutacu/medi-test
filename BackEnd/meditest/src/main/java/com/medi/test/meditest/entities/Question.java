@@ -88,4 +88,12 @@ public class Question {
     public void setDomain(Domain domain) {
         this.domain = domain;
     }
+
+    public int getExpectedSecsToAnswer() {
+        return expectedSecsToAnswer;
+    }
+
+    public void setExpectedSecsToAnswer(int expectedSecsToAnswer) {
+        this.expectedSecsToAnswer = expectedSecsToAnswer;
+    }
 }

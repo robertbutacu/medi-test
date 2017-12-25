@@ -76,6 +76,8 @@ public class QuestionsController {
         question1.setBody("Java code, generally, ");
         question1.setDifficulty(Difficulty.Hard);
         question1.setQuestionType(QuestionType.SingleMatch);
+        question1.setExpectedSecsToAnswer(20);
+
 
         Answer ans = new Answer();
         ans.setBody("is verbose");
@@ -90,6 +92,8 @@ public class QuestionsController {
         question2.setBody("Scala code, generally, ");
         question2.setDifficulty(Difficulty.Hard);
         question2.setQuestionType(QuestionType.SingleMatch);
+        question2.setExpectedSecsToAnswer(20);
+
 
         Answer ans3 = new Answer();
         ans3.setBody(" is concise");
@@ -105,6 +109,8 @@ public class QuestionsController {
         question3.setBody("Cobol shoulnt");
         question3.setDifficulty(Difficulty.Hard);
         question3.setQuestionType(QuestionType.SingleMatch);
+        question3.setExpectedSecsToAnswer(20);
+
 
         Answer ans6 = new Answer();
         ans6.setBody("exist");
@@ -132,6 +138,7 @@ public class QuestionsController {
         question1.setBody("What is Java");
         question1.setDifficulty(Difficulty.Hard);
         question1.setQuestionType(QuestionType.MultipleChoice);
+        question1.setExpectedSecsToAnswer(20);
 
         Answer ans = new Answer();
         ans.setBody("A Programming Language");
@@ -158,6 +165,8 @@ public class QuestionsController {
         question2.setBody("What is Scala");
         question2.setDifficulty(Difficulty.Hard);
         question2.setQuestionType(QuestionType.MultipleChoice);
+        question2.setExpectedSecsToAnswer(20);
+
 
         Answer ans3 = new Answer();
         ans3.setBody("A Functional Programming Language");
@@ -185,6 +194,8 @@ public class QuestionsController {
         question3.setBody("What is Cobol");
         question3.setDifficulty(Difficulty.Hard);
         question3.setQuestionType(QuestionType.MultipleChoice);
+        question3.setExpectedSecsToAnswer(20);
+
 
         Answer ans6 = new Answer();
         ans6.setBody("An ancient Programming Language");
@@ -224,6 +235,8 @@ public class QuestionsController {
         question1.setBody("Java is");
         question1.setDifficulty(Difficulty.Hard);
         question1.setQuestionType(QuestionType.FillIn);
+        question1.setExpectedSecsToAnswer(20);
+
 
         Answer ans = new Answer();
         ans.setBody("A Programming Language");
@@ -238,6 +251,8 @@ public class QuestionsController {
         question2.setBody("Scala is...");
         question2.setDifficulty(Difficulty.Hard);
         question2.setQuestionType(QuestionType.FillIn);
+        question2.setExpectedSecsToAnswer(20);
+
 
         Answer ans3 = new Answer();
         ans3.setBody("A Functional Programming Language");
@@ -253,6 +268,8 @@ public class QuestionsController {
         question3.setBody("Cobol is...");
         question3.setDifficulty(Difficulty.Hard);
         question3.setQuestionType(QuestionType.FillIn);
+        question3.setExpectedSecsToAnswer(20);
+
 
         Answer ans6 = new Answer();
         ans6.setBody("An ancient Programming Language");
@@ -272,6 +289,8 @@ public class QuestionsController {
         domain.setQuestions(questions);
         questions.forEach(q -> q.setDomain(domain));
 
+        questions.forEach(q -> System.out.println(q.getExpectedSecsToAnswer()));
+
         domainService.save(domain);
     }
 
@@ -280,6 +299,8 @@ public class QuestionsController {
         question1.setBody("Java 10 is out");
         question1.setDifficulty(Difficulty.Hard);
         question1.setQuestionType(QuestionType.TrueOrFalse);
+        question1.setExpectedSecsToAnswer(20);
+
 
         Answer ans = new Answer();
         ans.setBody("false");
@@ -300,6 +321,8 @@ public class QuestionsController {
         question2.setBody("Scala 2.13 is out");
         question2.setDifficulty(Difficulty.Hard);
         question2.setQuestionType(QuestionType.TrueOrFalse);
+        question2.setExpectedSecsToAnswer(20);
+
 
         Answer ans3 = new Answer();
         ans3.setBody("false");
@@ -321,6 +344,8 @@ public class QuestionsController {
         question3.setBody("Cobol is a fresh language");
         question3.setDifficulty(Difficulty.Hard);
         question3.setQuestionType(QuestionType.TrueOrFalse);
+        question3.setExpectedSecsToAnswer(20);
+
 
         Answer ans6 = new Answer();
         ans6.setBody("false");
