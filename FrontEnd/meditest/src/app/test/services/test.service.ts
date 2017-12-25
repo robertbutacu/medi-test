@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from '../shared/services/http.service';
-import {Question} from './models/question.model';
+import {HttpService} from '../../shared/services/http.service';
+import {Question} from '../models/question.model';
 
 @Injectable()
 export class TestService {
@@ -24,5 +24,10 @@ export class TestService {
     }
     this.isGenerated = true;
     return this.questionList;
+  }
+
+  public getTestJson() {
+    return this.http.get('./assets/data/questiondata.json')
+      .map((response: Response) => <any>response);
   }
 }

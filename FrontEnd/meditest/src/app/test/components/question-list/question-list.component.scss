@@ -12,9 +12,29 @@ a {
 }
 
 .custom-margin {
-  margin-left: 18%;
+  margin-left: 10%;
 }
 
 .bordered {
   border: 1px solid lightgray;
+  height: 240px;
+}
+
+.boxes i {
+  padding-right: 5px;
+  padding-top:10px;
+  font-size: 1.6em;
+  cursor: pointer;
+}
+
+.boxes {
+  padding-top: 1.5%;
+}
+
+.green {
+  color: green;
+}
+
+.orange {
+  color: orange;
 }

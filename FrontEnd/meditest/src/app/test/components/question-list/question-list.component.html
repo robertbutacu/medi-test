@@ -3,7 +3,7 @@
   <!--<h4>Display questions here!</h4>-->
   <div class="container">
     <div class="col-sm-12">
-      <div class="col-sm-8 custom-margin">
+      <div class="col-sm-10 custom-margin">
         <div class="bordered padding-bottom-15">
           <h2>
             <a (click)="countQuestion(-1)" class="padding-right-15"><i class="fa fa-arrow-left"
@@ -13,7 +13,18 @@
                                                                       aria-hidden="true"></i></a>
           </h2>
 
-          <app-question></app-question>
+          <app-question [question]="questions[questionCount-1]"></app-question>
+
+          <div class="col-sm-12 boxes">
+            <span *ngFor="let question of questions; let index = index">
+              <i class="fa fa-pencil-square-o orange" aria-hidden="true" title="Intrebarea curenta"
+                 *ngIf="index == questionCount-1"></i>
+              <i class="fa fa-check-square-o green" aria-hidden="true" title="Sari la intrebarea {{index+1}}"
+                 *ngIf="question.value.answered && index != questionCount - 1" (click)="jumpTo(index)"></i>
+              <i class="fa fa-share-square-o" aria-hidden="true" title="Sari la intrebarea {{index+1}}"
+                 *ngIf="index != questionCount-1 && !question.value.answered" (click)="jumpTo(index)"></i>
+            </span>
+          </div>
         </div>
         <div class="col-sm-12 padding-top-15">
           <div class="col-sm-3 float-left">
