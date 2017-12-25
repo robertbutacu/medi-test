@@ -10,8 +10,13 @@ public class ComplexTestQuestionDto implements ITestQuestion {
 
     private boolean answered;
 
+    private int expectedSecsToAnswer;
+
     public ComplexTestQuestionDto(List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> matches) {
         this.matches = matches;
+        this.expectedSecsToAnswer = matches.stream()
+        .map(p -> p.getKey().getExpectedSecsToAnswer())
+        .reduce(0, Integer::sum);
     }
 
     public List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> getMatches() {
@@ -20,5 +25,9 @@ public class ComplexTestQuestionDto implements ITestQuestion {
 
     public boolean isAnswered() {
         return answered;
+    }
+
+    public int getExpectedSecsToAnswer() {
+        return expectedSecsToAnswer;
     }
 }

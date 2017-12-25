@@ -29,6 +29,10 @@ public class Question {
     @JoinColumn(name = "domain_id")
     private Domain domain;
 
+    @NotNull
+    @Column(name = "expectedSecsToAnswer")
+    private int expectedSecsToAnswer = 20;
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     public List<Answer> answers = new ArrayList<>();
 

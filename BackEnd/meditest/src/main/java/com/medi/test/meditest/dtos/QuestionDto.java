@@ -13,9 +13,11 @@ public class QuestionDto {
 
     private DomainDto domain;
 
-    public List<AnswerDto> answers;
+    private List<AnswerDto> answers;
 
     private QuestionType type;
+
+    private int expectedSecsToAnswer;
 
     public String getBody() {
         return body;
@@ -55,5 +57,9 @@ public class QuestionDto {
 
     public void setType(QuestionType type) {
         this.type = type;
+    }
+
+    public int getExpectedSecsToAnswer() {
+        return expectedSecsToAnswer;
     }
 }

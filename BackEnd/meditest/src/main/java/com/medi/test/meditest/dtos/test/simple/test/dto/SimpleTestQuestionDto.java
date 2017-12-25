@@ -14,9 +14,12 @@ public class SimpleTestQuestionDto implements ITestQuestion {
 
     private List<AnswerDto> answers;
 
+    private int expectedSecsToAnswer;
+
     public SimpleTestQuestionDto(QuestionDto question) {
         this.body = question.getBody();
         this.answers = question.getAnswers();
+        this.expectedSecsToAnswer = question.getExpectedSecsToAnswer();
     }
 
     public String getBody() {
@@ -37,5 +40,13 @@ public class SimpleTestQuestionDto implements ITestQuestion {
 
     public boolean isAnswered() {
         return answered;
+    }
+
+    public int getExpectedSecsToAnswer() {
+        return expectedSecsToAnswer;
+    }
+
+    public void setExpectedSecsToAnswer(int expectedSecsToAnswer) {
+        this.expectedSecsToAnswer = expectedSecsToAnswer;
     }
 }

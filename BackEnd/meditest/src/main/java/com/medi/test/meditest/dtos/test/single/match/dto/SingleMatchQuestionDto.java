@@ -7,6 +7,7 @@ public class SingleMatchQuestionDto {
 
     private String body;
 
+    private int expectedSecsToAnswer ;
 
     public int getMatchAnswerId() {
         return matchAnswerId;
@@ -22,5 +23,13 @@ public class SingleMatchQuestionDto {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public int getExpectedSecsToAnswer() {
+        return expectedSecsToAnswer;
+    }
+
+    public void setExpectedSecsToAnswer(int expectedSecsToAnswer) {
+        this.expectedSecsToAnswer = expectedSecsToAnswer;
     }
 }

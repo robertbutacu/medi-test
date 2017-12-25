@@ -35,7 +35,7 @@ public class QuestionTransformer {
         Question question = new Question();
         List<Answer> answers = new ArrayList<>();
 
-        for (AnswerDto answer : questionDto.answers) {
+        for (AnswerDto answer : questionDto.getAnswers()) {
             answers.add(AnswerTransformer.toEntity(answer));
         }
 
@@ -49,7 +49,7 @@ public class QuestionTransformer {
         SingleMatchAnswerDto smad = new SingleMatchAnswerDto();
         SingleMatchQuestionDto smqd = new SingleMatchQuestionDto();
 
-        smad.setBody(question.answers.get(0).getBody());
+        smad.setBody(question.getAnswers().get(0).getBody());
 
         smqd.setBody(question.getBody());
 
