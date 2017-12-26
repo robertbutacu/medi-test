@@ -3,6 +3,7 @@ package com.medi.test.meditest.controllers;
 import com.medi.test.meditest.Transformers.DomainTransformer;
 import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.entities.Domain;
+import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.services.contracts.IDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,5 +35,13 @@ public class DomainsController {
         }
 
         return new ResponseEntity(domains, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public ResponseEntity get(){
+        domainService.getDomainsByDifficulty(domainService.getById(1L), Difficulty.Hard)
+        .forEach(d -> System.out.println(d.getDomain()));
+
+        return null;
     }
 }

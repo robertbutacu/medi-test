@@ -3,6 +3,7 @@ package com.medi.test.meditest.services.implementation;
 import com.medi.test.meditest.Transformers.DomainTransformer;
 import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.entities.Domain;
+import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.repositories.IDomainRepository;
 import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.IDomainService;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,5 +52,47 @@ public class DomainService implements IDomainService {
                 .filter(d -> questionRepository.findByDomain(d).size() > 10)
                 .map(DomainTransformer::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Set<DomainDto> getDomainsByDifficulty(Domain domain, Difficulty difficulty) {
+        Set<Domain> all = new HashSet<>(this.getAll());
+
+        switch (difficulty) {
+            case Easy:
+                return transform(getRelatedDomains(domain, all, 1, new HashSet<>()));
+            case Medium:
+                return transform(getRelatedDomains(domain, all, 2, new HashSet<>()));
+            case Hard:
+                return transform(getRelatedDomains(domain, all, 3, new HashSet<>()));
+            default:
+                return null;
+        }
+    }
+
+    private Set<DomainDto> transform(Set<Domain> domains) {
+        return domains.stream()
+                .map(DomainTransformer::toDto)
+                .collect(Collectors.toSet());
+    }
+
+    private Set<Domain> getRelatedDomains(Domain curr, Set<Domain> all, int maxDepth, Set<Domain> visited) {
+        if (maxDepth == 0)
+            return new HashSet<>();
+
+        Set<Domain> allDomains = new HashSet<>();
+        
+        visited.add(curr);
+
+        allDomains.add(curr);
+        allDomains.addAll(curr.getRelatedDomains());
+
+        curr.getRelatedDomains()
+                .stream()
+                .filter(d -> !visited.contains(d))
+                .forEach(d -> allDomains
+                        .addAll(getRelatedDomains(d, all, maxDepth - 1, visited)));
+
+        return allDomains;
     }
 }
