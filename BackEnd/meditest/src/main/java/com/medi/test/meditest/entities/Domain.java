@@ -5,7 +5,9 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "Domain")
 @Table(name = "domains")
@@ -24,6 +26,16 @@ public class Domain {
             cascade = CascadeType.ALL
     )
     private List<Question> questions = new ArrayList<>();
+
+
+    @ManyToMany(cascade={CascadeType.ALL})
+    @JoinTable(name="domains_hierarchy",
+            joinColumns={@JoinColumn(name="current")},
+            inverseJoinColumns={@JoinColumn(name="subdomain")})
+    private Set<Domain> domains = new HashSet<>();
+
+    @ManyToMany(mappedBy="domains")
+    private Set<Domain> teammates = new HashSet<>();
 
     public Domain() {
     }
@@ -52,4 +64,19 @@ public class Domain {
         this.name = name;
     }
 
+    public Set<Domain> getDomains() {
+        return domains;
+    }
+
+    public void setDomains(Set<Domain> domains) {
+        this.domains = domains;
+    }
+
+    public Set<Domain> getTeammates() {
+        return teammates;
+    }
+
+    public void setTeammates(Set<Domain> teammates) {
+        this.teammates = teammates;
+    }
 }
