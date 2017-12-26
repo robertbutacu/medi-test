@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity(name = "Domain")
-@Table(name = "domains")
+@Table(name = "relatedDomains")
 public class Domain {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,14 +28,14 @@ public class Domain {
     private List<Question> questions = new ArrayList<>();
 
 
-    @ManyToMany(cascade={CascadeType.ALL})
-    @JoinTable(name="domains_hierarchy",
-            joinColumns={@JoinColumn(name="current")},
-            inverseJoinColumns={@JoinColumn(name="subdomain")})
-    private Set<Domain> domains = new HashSet<>();
-
-    @ManyToMany(mappedBy="domains")
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "domains_hierarchy",
+            joinColumns = {@JoinColumn(name = "current")},
+            inverseJoinColumns = {@JoinColumn(name = "subdomain")})
     private Set<Domain> relatedDomains = new HashSet<>();
+
+    @ManyToMany(mappedBy = "relatedDomains")
+    private Set<Domain> subdomains = new HashSet<>();
 
     public Domain() {
     }
@@ -64,19 +64,19 @@ public class Domain {
         this.name = name;
     }
 
-    public Set<Domain> getDomains() {
-        return domains;
-    }
-
-    public void setDomains(Set<Domain> domains) {
-        this.domains = domains;
-    }
-
     public Set<Domain> getRelatedDomains() {
         return relatedDomains;
     }
 
     public void setRelatedDomains(Set<Domain> relatedDomains) {
         this.relatedDomains = relatedDomains;
+    }
+
+    public Set<Domain> getSubdomains() {
+        return subdomains;
+    }
+
+    public void setSubdomains(Set<Domain> subdomains) {
+        this.subdomains = subdomains;
     }
 }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionTransformer {
-    public static QuestionDto toDto(Question question){
+    public static QuestionDto toDto(Question question) {
         QuestionDto questionDto = new QuestionDto();
         List<AnswerDto> answers = new ArrayList<>();
 
@@ -32,7 +32,7 @@ public class QuestionTransformer {
         return questionDto;
     }
 
-    public static Question toEntity(QuestionDto questionDto){
+    public static Question toEntity(QuestionDto questionDto) {
         Question question = new Question();
         List<Answer> answers = new ArrayList<>();
 
@@ -59,7 +59,7 @@ public class QuestionTransformer {
         return new Pair<>(smqd, smad);
     }
 
-    public static SimpleTestQuestionDto toSimpleQuestionDto(QuestionDto questionDto){
+    public static SimpleTestQuestionDto toSimpleQuestionDto(QuestionDto questionDto) {
         return new SimpleTestQuestionDto(questionDto);
     }
 }

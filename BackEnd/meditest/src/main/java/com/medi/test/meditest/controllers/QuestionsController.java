@@ -9,14 +9,15 @@ import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.entities.enums.QuestionType;
 import com.medi.test.meditest.services.contracts.IDomainService;
 import com.medi.test.meditest.services.contracts.IQuestionService;
-import com.sun.java.browser.plugin2.DOM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin
 @RestController
@@ -62,16 +63,37 @@ public class QuestionsController {
     }
 
     private void initializeDomain() {
-        Domain domain = new Domain();
-        domain.setName("programming");
+        Domain programming = new Domain();
+        programming.setName("programming");
+        Set<Domain> programmingSubdomains = new HashSet<>();
 
-        generateFillInQuestions(domain);
-        generateMultipleChoiceQuestions(domain);
-        generateSingleMatchQuestions(domain);
-        generateTrueOrFalseQuestions(domain);
+        Domain jdk = new Domain();
+        jdk.setName("jdk");
+
+        Domain scala = new Domain();
+        scala.setName("scala");
+
+        Domain java = new Domain();
+        java.setName("java");
+
+        programmingSubdomains.add(jdk);
+
+        programming.setRelatedDomains(programmingSubdomains);
+
+        Set<Domain> jdkSubdomains = new HashSet<>();
+        jdkSubdomains.add(java);
+        jdkSubdomains.add(scala);
+
+
+        jdk.setRelatedDomains(jdkSubdomains);
+
+        generateFillInQuestions(programming, jdk, scala, java);
+        generateMultipleChoiceQuestions(programming, jdk, scala, java);
+        generateSingleMatchQuestions(programming, jdk, scala, java);
+        generateTrueOrFalseQuestions(programming, jdk, scala, java);
     }
 
-    private void generateSingleMatchQuestions(Domain domain) {
+    private void generateSingleMatchQuestions(Domain programming, Domain jdk, Domain scala, Domain java) {
         Question question1 = new Question();
         question1.setBody("Java code, generally, ");
         question1.setDifficulty(Difficulty.Hard);
@@ -122,18 +144,30 @@ public class QuestionsController {
         question3.setAnswers(answers3);
 
 
-        List<Question> questions = new ArrayList<>();
-        questions.add(question1);
-        questions.add(question2);
-        questions.add(question3);
+        List<Question> programmingQuestions = new ArrayList<>();
+        programmingQuestions.add(question3);
 
-        domain.setQuestions(questions);
-        questions.forEach(q -> q.setDomain(domain));
+        programming.setQuestions(programmingQuestions);
+        programmingQuestions.forEach(q -> q.setDomain(programming));
 
-        domainService.save(domain);
+        List<Question> scalaQuestions = new ArrayList<>();
+        scalaQuestions.add(question2);
+
+        scala.setQuestions(scalaQuestions);
+        scalaQuestions.forEach(q -> q.setDomain(scala));
+
+        List<Question> javaQuestions = new ArrayList<>();
+        javaQuestions.add(question1);
+
+        java.setQuestions(javaQuestions);
+        javaQuestions.forEach(q -> q.setDomain(java));
+
+        domainService.save(programming);
+        domainService.save(scala);
+        domainService.save(java);
     }
 
-    private void generateMultipleChoiceQuestions(Domain domain) {
+    private void generateMultipleChoiceQuestions(Domain programming, Domain jdk, Domain scala, Domain java) {
         Question question1 = new Question();
         question1.setBody("What is Java");
         question1.setDifficulty(Difficulty.Hard);
@@ -218,19 +252,30 @@ public class QuestionsController {
         answers3.add(ans8);
         question3.setAnswers(answers3);
 
+        List<Question> programmingQuestions = new ArrayList<>();
+        programmingQuestions.add(question3);
 
-        List<Question> questions = new ArrayList<>();
-        questions.add(question1);
-        questions.add(question2);
-        questions.add(question3);
+        programming.setQuestions(programmingQuestions);
+        programmingQuestions.forEach(q -> q.setDomain(programming));
 
-        domain.setQuestions(questions);
-        questions.forEach(q -> q.setDomain(domain));
+        List<Question> scalaQuestions = new ArrayList<>();
+        scalaQuestions.add(question2);
 
-        domainService.save(domain);
+        scala.setQuestions(scalaQuestions);
+        scalaQuestions.forEach(q -> q.setDomain(scala));
+
+        List<Question> javaQuestions = new ArrayList<>();
+        javaQuestions.add(question1);
+
+        java.setQuestions(javaQuestions);
+        javaQuestions.forEach(q -> q.setDomain(java));
+
+        domainService.save(programming);
+        domainService.save(scala);
+        domainService.save(java);
     }
 
-    private void generateFillInQuestions(Domain domain) {
+    private void generateFillInQuestions(Domain programming, Domain jdk, Domain scala, Domain java) {
         Question question1 = new Question();
         question1.setBody("Java is");
         question1.setDifficulty(Difficulty.Hard);
@@ -281,20 +326,30 @@ public class QuestionsController {
         question3.setAnswers(answers3);
 
 
-        List<Question> questions = new ArrayList<>();
-        questions.add(question1);
-        questions.add(question2);
-        questions.add(question3);
+        List<Question> programmingQuestions = new ArrayList<>();
+        programmingQuestions.add(question3);
 
-        domain.setQuestions(questions);
-        questions.forEach(q -> q.setDomain(domain));
+        programming.setQuestions(programmingQuestions);
+        programmingQuestions.forEach(q -> q.setDomain(programming));
 
-        questions.forEach(q -> System.out.println(q.getExpectedSecsToAnswer()));
+        List<Question> scalaQuestions = new ArrayList<>();
+        scalaQuestions.add(question2);
 
-        domainService.save(domain);
+        scala.setQuestions(scalaQuestions);
+        scalaQuestions.forEach(q -> q.setDomain(scala));
+
+        List<Question> javaQuestions = new ArrayList<>();
+        javaQuestions.add(question1);
+
+        java.setQuestions(javaQuestions);
+        javaQuestions.forEach(q -> q.setDomain(java));
+
+        domainService.save(programming);
+        domainService.save(scala);
+        domainService.save(java);
     }
 
-    private void generateTrueOrFalseQuestions(Domain domain) {
+    private void generateTrueOrFalseQuestions(Domain programming, Domain jdk, Domain scala, Domain java) {
         Question question1 = new Question();
         question1.setBody("Java 10 is out");
         question1.setDifficulty(Difficulty.Hard);
@@ -363,14 +418,26 @@ public class QuestionsController {
         question3.setAnswers(answers3);
 
 
-        List<Question> questions = new ArrayList<>();
-        questions.add(question1);
-        questions.add(question2);
-        questions.add(question3);
+        List<Question> programmingQuestions = new ArrayList<>();
+        programmingQuestions.add(question3);
 
-        domain.setQuestions(questions);
-        questions.forEach(q -> q.setDomain(domain));
+        programming.setQuestions(programmingQuestions);
+        programmingQuestions.forEach(q -> q.setDomain(programming));
 
-        domainService.save(domain);
+        List<Question> scalaQuestions = new ArrayList<>();
+        scalaQuestions.add(question2);
+
+        scala.setQuestions(scalaQuestions);
+        scalaQuestions.forEach(q -> q.setDomain(scala));
+
+        List<Question> javaQuestions = new ArrayList<>();
+        javaQuestions.add(question1);
+
+        java.setQuestions(javaQuestions);
+        javaQuestions.forEach(q -> q.setDomain(java));
+
+        domainService.save(programming);
+        domainService.save(scala);
+        domainService.save(java);
     }
 }
