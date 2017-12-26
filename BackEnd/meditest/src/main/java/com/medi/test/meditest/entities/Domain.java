@@ -35,7 +35,7 @@ public class Domain {
     private Set<Domain> domains = new HashSet<>();
 
     @ManyToMany(mappedBy="domains")
-    private Set<Domain> teammates = new HashSet<>();
+    private Set<Domain> relatedDomains = new HashSet<>();
 
     public Domain() {
     }
@@ -72,11 +72,11 @@ public class Domain {
         this.domains = domains;
     }
 
-    public Set<Domain> getTeammates() {
-        return teammates;
+    public Set<Domain> getRelatedDomains() {
+        return relatedDomains;
     }
 
-    public void setTeammates(Set<Domain> teammates) {
-        this.teammates = teammates;
+    public void setRelatedDomains(Set<Domain> relatedDomains) {
+        this.relatedDomains = relatedDomains;
     }
 }
