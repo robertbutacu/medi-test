@@ -55,16 +55,26 @@ public class DomainService implements IDomainService {
     }
 
     @Override
-    public Set<DomainDto> getDomainsByDifficulty(Domain domain, Difficulty difficulty) {
+    public Set<DomainDto> getDomainsByDifficulty(DomainDto domain, Difficulty difficulty) {
         Set<Domain> all = new HashSet<>(this.getAll());
+
+        Domain toSearch = new Domain();
+        for (Domain d :
+                all) {
+            if (d.getName().equals(domain.getDomain()))
+                toSearch = d;
+        }
+
+        if (toSearch.getName() == null)
+            return null;
 
         switch (difficulty) {
             case Easy:
-                return transform(getRelatedDomains(domain, all, 1, new HashSet<>()));
+                return transform(getRelatedDomains(toSearch, all, 1, new HashSet<>()));
             case Medium:
-                return transform(getRelatedDomains(domain, all, 2, new HashSet<>()));
+                return transform(getRelatedDomains(toSearch, all, 2, new HashSet<>()));
             case Hard:
-                return transform(getRelatedDomains(domain, all, 3, new HashSet<>()));
+                return transform(getRelatedDomains(toSearch, all, 3, new HashSet<>()));
             default:
                 return null;
         }
@@ -81,7 +91,7 @@ public class DomainService implements IDomainService {
             return new HashSet<>();
 
         Set<Domain> allDomains = new HashSet<>();
-        
+
         visited.add(curr);
 
         allDomains.add(curr);

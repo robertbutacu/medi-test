@@ -36,12 +36,4 @@ public class DomainsController {
 
         return new ResponseEntity(domains, HttpStatus.OK);
     }
-
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public ResponseEntity get(){
-        domainService.getDomainsByDifficulty(domainService.getById(1L), Difficulty.Hard)
-        .forEach(d -> System.out.println(d.getDomain()));
-
-        return null;
-    }
 }
