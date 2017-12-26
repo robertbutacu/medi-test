@@ -10,23 +10,27 @@ import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchAnswerDto;
 import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchQuestionDto;
 import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.entities.enums.QuestionType;
+import com.medi.test.meditest.repositories.IDomainRepository;
 import com.medi.test.meditest.repositories.IQuestionRepository;
+import com.medi.test.meditest.services.contracts.IDomainService;
 import com.medi.test.meditest.services.contracts.ITestService;
-import com.sun.java.browser.plugin2.DOM;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class TestService implements ITestService {
     @Autowired
     private IQuestionRepository questionsRepository;
+
+    @Autowired
+    private IDomainService domainService;
 
 
     @Override
@@ -140,7 +144,9 @@ public class TestService implements ITestService {
         if (numberOfQuestions < 5)
             return null;
 
-        List<QuestionDto> possibleQuestions = getAllQuestionsByDifficultyAndDomain(difficulty, domainDto);
+        Set<DomainDto> possibleDomains = domainService.getDomainsByDifficulty(domainDto, difficulty);
+
+        List<QuestionDto> possibleQuestions = getAllQuestionsByDifficultyAndDomain(difficulty, possibleDomains);
 
         if (possibleQuestions.size() < numberOfQuestions)
             return null;
@@ -217,11 +223,11 @@ public class TestService implements ITestService {
         }
     }
 
-    private List<QuestionDto> getAllQuestionsByDifficultyAndDomain(Difficulty difficulty, DomainDto domainDto) {
+    private List<QuestionDto> getAllQuestionsByDifficultyAndDomain(Difficulty difficulty, Set<DomainDto> possibleDomains) {
         return questionsRepository.findByDifficulty(difficulty)
                 .stream()
                 .map(QuestionTransformer::toDto)
-                .filter(q -> Objects.equals(q.getDomain().getDomain(), domainDto.getDomain()))
+                .filter(q -> possibleDomains.contains(q.getDomain()))
                 .collect(Collectors.toList());
     }
 
