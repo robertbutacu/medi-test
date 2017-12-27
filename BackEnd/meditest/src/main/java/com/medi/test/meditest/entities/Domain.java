@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity(name = "Domain")
-@Table(name = "relatedDomains")
+@Table(name = "domains")
 public class Domain {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
