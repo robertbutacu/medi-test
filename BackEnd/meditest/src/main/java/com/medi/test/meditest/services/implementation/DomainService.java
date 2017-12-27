@@ -10,7 +10,6 @@ import com.medi.test.meditest.services.contracts.IDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,6 +24,7 @@ public class DomainService implements IDomainService {
     @Autowired
     private IQuestionRepository questionRepository;
 
+    private Set<Domain> all;
 
     @Override
     public void save(Domain entity) {
@@ -56,11 +56,12 @@ public class DomainService implements IDomainService {
 
     @Override
     public Set<DomainDto> getDomainsByDifficulty(DomainDto domain, Difficulty difficulty) {
-        Set<Domain> all = new HashSet<>(this.getAll());
+        if (this.all == null)
+            this.all = new HashSet<>(this.getAll());
 
         Domain toSearch = new Domain();
         for (Domain d :
-                all) {
+                this.all) {
             if (d.getName().equals(domain.getDomain()))
                 toSearch = d;
         }
@@ -70,11 +71,11 @@ public class DomainService implements IDomainService {
 
         switch (difficulty) {
             case Easy:
-                return transform(getRelatedDomains(toSearch, all, 1, new HashSet<>()));
+                return transform(getRelatedDomains(toSearch, 1, new HashSet<>()));
             case Medium:
-                return transform(getRelatedDomains(toSearch, all, 2, new HashSet<>()));
+                return transform(getRelatedDomains(toSearch, 2, new HashSet<>()));
             case Hard:
-                return transform(getRelatedDomains(toSearch, all, 3, new HashSet<>()));
+                return transform(getRelatedDomains(toSearch, 3, new HashSet<>()));
             default:
                 return null;
         }
@@ -86,7 +87,7 @@ public class DomainService implements IDomainService {
                 .collect(Collectors.toSet());
     }
 
-    private Set<Domain> getRelatedDomains(Domain curr, Set<Domain> all, int maxDepth, Set<Domain> visited) {
+    private Set<Domain> getRelatedDomains(Domain curr, int maxDepth, Set<Domain> visited) {
         if (maxDepth == 0)
             return new HashSet<>();
 
@@ -101,7 +102,7 @@ public class DomainService implements IDomainService {
                 .stream()
                 .filter(d -> !visited.contains(d))
                 .forEach(d -> allDomains
-                        .addAll(getRelatedDomains(d, all, maxDepth - 1, visited)));
+                        .addAll(getRelatedDomains(d, maxDepth - 1, visited)));
 
         return allDomains;
     }
