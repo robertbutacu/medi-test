@@ -23,6 +23,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.medi.test.meditest.services.implementation.test.implementation.TestServiceUtils.transform;
+
 @Service
 public class TestService implements ITestService {
     @Autowired
@@ -45,6 +47,7 @@ public class TestService implements ITestService {
 
         return null;
     }
+
 
     private TestDto generateByDifficultyAndNumberOfQuestions(DomainDto domain, Difficulty difficulty,
                                                              int numberOfQuestions) {
@@ -73,6 +76,7 @@ public class TestService implements ITestService {
                 return null;
         }
     }
+
 
     private TestDto generateByDifficultyAndDuration(DomainDto domain, Difficulty difficulty,
                                                     int duration) {
@@ -108,6 +112,7 @@ public class TestService implements ITestService {
                 return null;
         }
     }
+
 
     private TestDto generateByNumberOfQuestionsAndDuration(DomainDto domain, int numberOfQuestions, int duration) {
         Double ratio = (double) duration / (double) numberOfQuestions;
@@ -162,13 +167,13 @@ public class TestService implements ITestService {
                 possibleQuestions.remove(nextQuestion);
                 numberOfQuestions -= 1;
             } else {
-                List<QuestionDto> picked = createSingleMatchQuestion(possibleQuestions);
+                List<QuestionDto> picked = TestServiceUtils.createSingleMatchQuestion(possibleQuestions);
                 if (picked != null) {
                     numberOfQuestions -= 1;
 
                     List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> transformed = transform(picked);
 
-                    indexSingleMatchQuestion(transformed);
+                    TestServiceUtils.indexSingleMatchQuestion(transformed);
 
                     test.addQuestion(QuestionType.SingleMatch, new ComplexTestQuestionDto(shuffle(transformed)));
                     possibleQuestions.removeAll(picked);
@@ -206,21 +211,6 @@ public class TestService implements ITestService {
         return shuffle;
     }
 
-    private List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> transform(List<QuestionDto> picked) {
-        return picked
-                .stream()
-                .map(QuestionTransformer::toSingleMatchDto)
-                .collect(Collectors.toList());
-    }
-
-    private void indexSingleMatchQuestion(List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> questions) {
-        for (int i = 0; i < questions.size(); i++) {
-            Pair<SingleMatchQuestionDto, SingleMatchAnswerDto> curr = questions.get(i);
-
-            curr.getValue().setMatchQuestionId(i);
-            curr.getKey().setMatchAnswerId(i);
-        }
-    }
 
     private List<QuestionDto> getAllQuestionsByDifficultyAndDomain(Difficulty difficulty, Set<DomainDto> possibleDomains) {
         return questionsRepository.findByDifficulty(difficulty)
@@ -228,26 +218,5 @@ public class TestService implements ITestService {
                 .map(QuestionTransformer::toDto)
                 .filter(q -> possibleDomains.contains(q.getDomain()))
                 .collect(Collectors.toList());
-    }
-
-    private List<QuestionDto> createSingleMatchQuestion(List<QuestionDto> questions) {
-        List<QuestionDto> matches = questions.stream()
-                .filter(q -> q.getType() == QuestionType.SingleMatch)
-                .collect(Collectors.toList());
-
-        if (matches.size() < 3)
-            return null;
-
-        List<QuestionDto> questionsPicked = new ArrayList<>();
-        Random r = new Random();
-
-        while (questionsPicked.size() < 3) {
-            int next = r.nextInt(matches.size());
-
-            questionsPicked.add(matches.get(next));
-            matches.remove(next);
-        }
-
-        return questionsPicked;
     }
 }
