@@ -1,0 +1,29 @@
+The user can select only 2 out of 3 criteria representative of a test:
+    1. duration
+    2. number of questions
+    3. test difficulty
+
+For duration and number of questions:
+    Divide the duration by the number of questions and obtain an average.
+        For example: duration : 10 min, number of questions : 10
+        That would be approximately 1 minute per question.
+        Now, look into the database for questions around the 1 minute mark. The test difficulty will be given by that
+          - the highest number of questions with a specific difficulty.
+
+        Look for questions while number of questions > 0 and duration > -4 ( max 4 minutes to overtime ).
+
+For duration and test difficulty:
+    Look for questions that fit the test difficulty criteria and get all the matching questions.
+    Also, provide a probability of around 30-40% where a question of different difficulty will be picked
+    Be careful to normalize that question to the test difficulty.
+        If the test is easy : for medium-hard questions, multiply by 1.5 - 2 respectively
+           the test is medium : divide by 0.75 for easy, and 1.5 for hard.
+           the test is hard : divide by 0.75 for medium, and 0.5 for medium.
+    Fetch questions while duration > 0.
+
+For number of questions and test difficulty:
+    Pick questions of test difficulty with a probability of 30-40% of questions to be from a lower/higher rank.
+    Also, the duration will be given by:
+        If the test is easy : for medium-hard questions, multiply by 1.5 - 2 respectively
+           the test is medium : divide by 0.75 for easy, and 1.5 for hard.
+           the test is hard : divide by 0.75 for medium, and 0.5 for medium.

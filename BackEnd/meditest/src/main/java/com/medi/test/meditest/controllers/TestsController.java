@@ -6,7 +6,7 @@ import com.medi.test.meditest.dtos.test.SolvedTestDto;
 import com.medi.test.meditest.dtos.test.TestDto;
 import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.services.implementation.TestScoringService;
-import com.medi.test.meditest.services.implementation.TestService;
+import com.medi.test.meditest.services.implementation.test.implementation.TestService;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
