@@ -24,21 +24,6 @@ class TestServiceUtils {
         return pickQuestions(new ArrayList<>(), matches, 3);
     }
 
-    private static List<QuestionDto> pickQuestions(List<QuestionDto> pickedQuestions,
-                                            List<QuestionDto> questions,
-                                            int picked){
-        if(picked == 0)
-            return pickedQuestions;
-
-        Random r = new Random();
-
-        int nextQuestion = r.nextInt(questions.size());
-        pickedQuestions.add(questions.get(nextQuestion));
-        questions.remove(nextQuestion);
-
-        return pickQuestions(pickedQuestions, questions, picked - 1);
-    }
-
     static void indexSingleMatchQuestion(List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> questions) {
         for (int i = 0; i < questions.size(); i++) {
             Pair<SingleMatchQuestionDto, SingleMatchAnswerDto> curr = questions.get(i);
@@ -53,5 +38,25 @@ class TestServiceUtils {
                 .stream()
                 .map(QuestionTransformer::toSingleMatchDto)
                 .collect(Collectors.toList());
+    }
+
+    private static List<QuestionDto> pickQuestions(List<QuestionDto> pickedQuestions,
+                                                   List<QuestionDto> questions,
+                                                   int picked){
+        if(picked == 0)
+            return pickedQuestions;
+
+        int nextQuestion = getRandomNumber(questions.size());
+
+        pickedQuestions.add(questions.get(nextQuestion));
+        questions.remove(nextQuestion);
+
+        return pickQuestions(pickedQuestions, questions, picked - 1);
+    }
+
+    private static int getRandomNumber(int boundary){
+        Random r = new Random();
+
+        return r.nextInt(boundary);
     }
 }
