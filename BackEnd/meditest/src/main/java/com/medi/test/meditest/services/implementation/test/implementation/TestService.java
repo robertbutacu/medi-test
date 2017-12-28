@@ -17,7 +17,6 @@ import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -38,13 +37,13 @@ public class TestService implements ITestService {
     @Override
     public TestDto generateTest(DomainDto domain, Difficulty difficulty, Integer numberOfQuestions, Integer duration) {
         if (difficulty != null && numberOfQuestions != null && duration == null)
-            return TestByDurationAndNoOfQuestions.generateTest(domain, difficulty, numberOfQuestions);
+            return new TestByNoOfQuestionsAndDifficulty().generateTest(domain, numberOfQuestions, difficulty);
 
         if (difficulty != null && numberOfQuestions == null && duration != null)
-            return TestByDurationAndDifficulty.generateTest(domain, difficulty, duration);
+            return new TestByDurationAndDifficulty().generateTest(domain, difficulty, duration);
 
         if (difficulty == null && numberOfQuestions != null && duration != null)
-            return TestByNoOfQuestionsAndDuration.generateTest(domain, numberOfQuestions, duration);
+            return new TestByDurationAndNoOfQuestions().generateTest(domain, duration, numberOfQuestions);
 
         return null;
     }
