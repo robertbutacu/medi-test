@@ -6,13 +6,15 @@ import com.medi.test.meditest.dtos.test.TestDto;
 import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.IDomainService;
+import com.medi.test.meditest.services.contracts.test.generator.ITestByDurationAndDifficulty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-class TestByDurationAndDifficulty {
+@Service
+class TestByDurationAndDifficulty implements ITestByDurationAndDifficulty{
     @Autowired
     private IQuestionRepository questionsRepository;
 
@@ -23,8 +25,11 @@ class TestByDurationAndDifficulty {
 
     }
 
-    TestDto generateTest(DomainDto domain, Difficulty difficulty, double duration) {
-        Set<DomainDto> domains = domainService.getDomainsByDifficulty(domain, difficulty);
+    @Override
+    public TestDto generateTest(DomainDto domain, Difficulty difficulty, double duration) {
+        Set<DomainDto> domains = domainService.getDomainsByDifficulty(domain, difficulty)
+                .stream().map(DomainTransformer::toDto)
+                .collect(Collectors.toSet());
 
         return null;
     }

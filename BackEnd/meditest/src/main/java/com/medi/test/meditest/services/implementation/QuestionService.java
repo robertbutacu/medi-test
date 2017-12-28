@@ -1,5 +1,9 @@
 package com.medi.test.meditest.services.implementation;
 
+import com.medi.test.meditest.Transformers.QuestionTransformer;
+import com.medi.test.meditest.dtos.DomainDto;
+import com.medi.test.meditest.dtos.QuestionDto;
+import com.medi.test.meditest.entities.Domain;
 import com.medi.test.meditest.entities.Question;
 import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.repositories.IQuestionRepository;
@@ -10,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionService implements IQuestionService {
@@ -52,5 +58,17 @@ public class QuestionService implements IQuestionService {
             foundQuestions.remove(question);
         }
         return selectedQuestions;
+    }
+
+    @Override
+    public List<QuestionDto> getQuestionsByDomains(Set<Domain> domains) {
+        List<Question> questions = new ArrayList<>();
+
+        domains.forEach(d -> questions.addAll(questionsRepository.findByDomain(d)));
+
+        return questions
+                .stream()
+                .map(QuestionTransformer::toDto)
+                .collect(Collectors.toList());
     }
 }

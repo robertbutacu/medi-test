@@ -2,23 +2,22 @@ package com.medi.test.meditest.services.implementation.test.implementation;
 
 import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.dtos.test.TestDto;
-import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.IDomainService;
+import com.medi.test.meditest.services.contracts.test.generator.ITestByDurationAndNoOfQuestions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-class TestByDurationAndNoOfQuestions {
+@Service
+class TestByDurationAndNoOfQuestions implements ITestByDurationAndNoOfQuestions{
     @Autowired
     private IQuestionRepository questionsRepository;
 
     @Autowired
     private IDomainService domainService;
 
-    TestByDurationAndNoOfQuestions(){
-
-    }
-
-    TestDto generateTest(DomainDto domain, double duration, int numberOfQuestions){
+    @Override
+    public TestDto generateTest(DomainDto domain, double duration, int numberOfQuestions){
         return null;
     }
 }

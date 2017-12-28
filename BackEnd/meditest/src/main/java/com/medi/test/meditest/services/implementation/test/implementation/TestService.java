@@ -1,5 +1,6 @@
 package com.medi.test.meditest.services.implementation.test.implementation;
 
+import com.medi.test.meditest.Transformers.DomainTransformer;
 import com.medi.test.meditest.Transformers.QuestionTransformer;
 import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.dtos.QuestionDto;
@@ -13,6 +14,9 @@ import com.medi.test.meditest.entities.enums.QuestionType;
 import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.IDomainService;
 import com.medi.test.meditest.services.contracts.ITestService;
+import com.medi.test.meditest.services.contracts.test.generator.ITestByDurationAndDifficulty;
+import com.medi.test.meditest.services.contracts.test.generator.ITestByDurationAndNoOfQuestions;
+import com.medi.test.meditest.services.contracts.test.generator.ITestByNoOfQuestionsAndDifficulty;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,17 +37,25 @@ public class TestService implements ITestService {
     @Autowired
     private IDomainService domainService;
 
+    @Autowired
+    private ITestByNoOfQuestionsAndDifficulty testByNoOfQuestionsAndDifficulty;
+
+    @Autowired
+    private ITestByDurationAndNoOfQuestions testByDurationAndNoOfQuestions;
+
+    @Autowired
+    private ITestByDurationAndDifficulty testByDurationAndDifficulty;
 
     @Override
     public TestDto generateTest(DomainDto domain, Difficulty difficulty, Integer numberOfQuestions, Integer duration) {
         if (difficulty != null && numberOfQuestions != null && duration == null)
-            return new TestByNoOfQuestionsAndDifficulty().generateTest(domain, numberOfQuestions, difficulty);
+            return testByNoOfQuestionsAndDifficulty.generateTest(domain, numberOfQuestions, difficulty);
 
         if (difficulty != null && numberOfQuestions == null && duration != null)
-            return new TestByDurationAndDifficulty().generateTest(domain, difficulty, duration);
+            return testByDurationAndDifficulty.generateTest(domain, difficulty, duration);
 
         if (difficulty == null && numberOfQuestions != null && duration != null)
-            return new TestByDurationAndNoOfQuestions().generateTest(domain, duration, numberOfQuestions);
+            return testByDurationAndNoOfQuestions.generateTest(domain, duration, numberOfQuestions);
 
         return null;
     }
@@ -52,7 +64,10 @@ public class TestService implements ITestService {
         if (numberOfQuestions < 5)
             return null;
 
-        Set<DomainDto> possibleDomains = domainService.getDomainsByDifficulty(domainDto, difficulty);
+        Set<DomainDto> possibleDomains = domainService.getDomainsByDifficulty(domainDto, difficulty)
+                .stream()
+                .map(DomainTransformer::toDto)
+                .collect(Collectors.toSet());
 
         List<QuestionDto> possibleQuestions = getAllQuestionsByDifficultyAndDomain(difficulty, possibleDomains);
 
