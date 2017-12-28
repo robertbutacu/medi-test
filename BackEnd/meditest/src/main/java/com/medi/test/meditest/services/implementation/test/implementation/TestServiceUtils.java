@@ -40,6 +40,33 @@ class TestServiceUtils {
                 .collect(Collectors.toList());
     }
 
+    static List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> shuffle(
+            List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> singleMatchQuestion) {
+        List<Integer> pickedAnswersIndexes = new ArrayList<>();
+        List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> shuffle = new ArrayList<>();
+        Pair<SingleMatchQuestionDto, SingleMatchAnswerDto> curr;
+        SingleMatchAnswerDto randomAnswer;
+
+        Random r = new Random();
+
+        for (Pair<SingleMatchQuestionDto, SingleMatchAnswerDto> aSingleMatchQuestion : singleMatchQuestion) {
+            curr = aSingleMatchQuestion;
+
+            int random = r.nextInt(singleMatchQuestion.size());
+            while (pickedAnswersIndexes.contains(random)) {
+                random = r.nextInt(singleMatchQuestion.size());
+            }
+
+            pickedAnswersIndexes.add(random);
+
+            randomAnswer = singleMatchQuestion.get(random).getValue();
+
+            shuffle.add(new Pair<>(curr.getKey(), randomAnswer));
+        }
+
+        return shuffle;
+    }
+
     private static List<QuestionDto> pickQuestions(List<QuestionDto> pickedQuestions,
                                                    List<QuestionDto> questions,
                                                    int picked){

@@ -23,6 +23,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.medi.test.meditest.services.implementation.test.implementation.TestServiceUtils.shuffle;
 import static com.medi.test.meditest.services.implementation.test.implementation.TestServiceUtils.transform;
 
 @Service
@@ -183,34 +184,6 @@ public class TestService implements ITestService {
 
         return test;
     }
-
-    private List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> shuffle(
-            List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> singleMatchQuestion) {
-        List<Integer> pickedAnswersIndexes = new ArrayList<>();
-        List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> shuffle = new ArrayList<>();
-        Pair<SingleMatchQuestionDto, SingleMatchAnswerDto> curr;
-        SingleMatchAnswerDto randomAnswer;
-
-        Random r = new Random();
-
-        for (Pair<SingleMatchQuestionDto, SingleMatchAnswerDto> aSingleMatchQuestion : singleMatchQuestion) {
-            curr = aSingleMatchQuestion;
-
-            int random = r.nextInt(singleMatchQuestion.size());
-            while (pickedAnswersIndexes.contains(random)) {
-                random = r.nextInt(singleMatchQuestion.size());
-            }
-
-            pickedAnswersIndexes.add(random);
-
-            randomAnswer = singleMatchQuestion.get(random).getValue();
-
-            shuffle.add(new Pair<>(curr.getKey(), randomAnswer));
-        }
-
-        return shuffle;
-    }
-
 
     private List<QuestionDto> getAllQuestionsByDifficultyAndDomain(Difficulty difficulty, Set<DomainDto> possibleDomains) {
         return questionsRepository.findByDifficulty(difficulty)
