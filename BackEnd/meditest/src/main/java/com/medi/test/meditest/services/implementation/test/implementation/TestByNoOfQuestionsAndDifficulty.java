@@ -61,45 +61,67 @@ class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficu
         TestDto test = new TestDto(domain, difficulty);
         Random r = new Random();
 
-        int differentDifficulty;
         int testDuration = 0;
 
         while (numberOfQuestions > 0) {
-            differentDifficulty = r.nextInt(10);
-            QuestionDto nextQuestion;
-
-            if (differentDifficulty >= 7 && questionWithDiffDifficulty.size() > 0)
-                nextQuestion = pickQuestion(questionWithDiffDifficulty);
-            else
-                nextQuestion = pickQuestion(questionsOfSameDifficulty);
-
+            QuestionDto nextQuestion = getNextQuestion(r.nextInt(10), questionWithDiffDifficulty,
+                    questionsOfSameDifficulty);
 
             if (nextQuestion.getType() != QuestionType.SingleMatch) {
-                test.addQuestion(nextQuestion.getType(), new SimpleTestQuestionDto(nextQuestion));
-                questionsOfSameDifficulty.remove(nextQuestion);
-                questionWithDiffDifficulty.remove(nextQuestion);
+                addQuestionToTest(nextQuestion, test, questionsOfSameDifficulty, questionWithDiffDifficulty);
 
                 testDuration += computeDuration(nextQuestion, difficulty);
             } else {
                 List<QuestionDto> picked = TestServiceUtils.createSingleMatchQuestion(possibleQuestions);
+
                 if (picked != null) {
-                    ComplexTestQuestionDto next = normalizeToSingleMatch(picked);
+                    ComplexTestQuestionDto next = addSingleMatchQuestionToTest(picked, test, questionsOfSameDifficulty,
+                            questionWithDiffDifficulty);
 
                     testDuration += computeDuration(next.getExpectedSecsToAnswer(),
                             nextQuestion.getDifficulty(), difficulty);
-
-                    test.addQuestion(QuestionType.SingleMatch, next);
-                    questionsOfSameDifficulty.removeAll(picked);
-                    questionWithDiffDifficulty.removeAll(picked);
                 }
             }
-
             numberOfQuestions -= 1;
         }
-
         test.setDuration(testDuration);
 
         return test;
+    }
+
+    private ComplexTestQuestionDto addSingleMatchQuestionToTest(List<QuestionDto> picked, TestDto test,
+                                                                List<QuestionDto> questionsOfSameDifficulty,
+                                                                List<QuestionDto> questionWithDiffDifficulty) {
+        ComplexTestQuestionDto next = normalizeToSingleMatch(picked);
+
+        test.addQuestion(QuestionType.SingleMatch, next);
+        questionsOfSameDifficulty.removeAll(picked);
+        questionWithDiffDifficulty.removeAll(picked);
+
+        return next;
+    }
+
+
+    private void addQuestionToTest(QuestionDto nextQuestion, TestDto test,
+                                   List<QuestionDto> questionsOfSameDifficulty,
+                                   List<QuestionDto> questionWithDiffDifficulty) {
+        test.addQuestion(nextQuestion.getType(), new SimpleTestQuestionDto(nextQuestion));
+        questionsOfSameDifficulty.remove(nextQuestion);
+        questionWithDiffDifficulty.remove(nextQuestion);
+    }
+
+
+    private QuestionDto getNextQuestion(int differentDifficulty,
+                                        List<QuestionDto> questionWithDiffDifficulty,
+                                        List<QuestionDto> questionsOfSameDifficulty) {
+        QuestionDto nextQuestion;
+
+        if (differentDifficulty >= 7 && questionWithDiffDifficulty.size() > 0)
+            nextQuestion = pickQuestion(questionWithDiffDifficulty);
+        else
+            nextQuestion = pickQuestion(questionsOfSameDifficulty);
+
+        return nextQuestion;
     }
 
     private List<QuestionDto> getQuestionsOfSameDifficulty(List<QuestionDto> possibleQuestions,
