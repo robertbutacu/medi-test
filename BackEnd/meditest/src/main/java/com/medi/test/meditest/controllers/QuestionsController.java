@@ -170,7 +170,7 @@ public class QuestionsController {
     private void generateMultipleChoiceQuestions(Domain programming, Domain jdk, Domain scala, Domain java) {
         Question question1 = new Question();
         question1.setBody("What is Java");
-        question1.setDifficulty(Difficulty.Hard);
+        question1.setDifficulty(Difficulty.Easy);
         question1.setQuestionType(QuestionType.MultipleChoice);
         question1.setExpectedSecsToAnswer(20);
 

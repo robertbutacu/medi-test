@@ -2,6 +2,7 @@ package com.medi.test.meditest.services.implementation.test.implementation;
 
 import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.dtos.QuestionDto;
+import com.medi.test.meditest.dtos.test.ITestQuestion;
 import com.medi.test.meditest.dtos.test.TestDto;
 import com.medi.test.meditest.dtos.test.simple.test.dto.SimpleTestQuestionDto;
 import com.medi.test.meditest.dtos.test.single.match.dto.ComplexTestQuestionDto;
@@ -80,11 +81,13 @@ class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficu
             else
                 nextQuestion = pickQuestion(questionsOfSameDifficulty);
 
-            testDuration += computeDuration(nextQuestion, difficulty);
 
             if (nextQuestion.getType() != QuestionType.SingleMatch) {
                 test.addQuestion(nextQuestion.getType(), new SimpleTestQuestionDto(nextQuestion));
-                possibleQuestions.remove(nextQuestion);
+                questionsOfSameDifficulty.remove(nextQuestion);
+                questionWithDifferentDifficulty.remove(nextQuestion);
+
+                testDuration += computeDuration(nextQuestion, difficulty);
             } else {
                 List<QuestionDto> picked = TestServiceUtils.createSingleMatchQuestion(possibleQuestions);
                 if (picked != null) {
@@ -92,8 +95,13 @@ class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficu
 
                     TestServiceUtils.indexSingleMatchQuestion(transformed);
 
-                    test.addQuestion(QuestionType.SingleMatch, new ComplexTestQuestionDto(shuffle(transformed)));
-                    possibleQuestions.removeAll(picked);
+                    ComplexTestQuestionDto next = new ComplexTestQuestionDto(shuffle(transformed));
+
+                    testDuration += computeDuration(next.getExpectedSecsToAnswer(), nextQuestion.getDifficulty(), difficulty);
+
+                    test.addQuestion(QuestionType.SingleMatch, next);
+                    questionsOfSameDifficulty.removeAll(picked);
+                    questionWithDifferentDifficulty.removeAll(picked);
                 }
             }
 
@@ -103,6 +111,12 @@ class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficu
         test.setDuration(testDuration);
 
         return test;
+    }
+
+    private int computeDuration(int questionDuration, Difficulty questionDifficulty, Difficulty testDifficulty){
+        double duration = Difficulty.normalizeDuration(questionDuration, questionDifficulty, testDifficulty);
+
+        return (int) Math.round(duration / 5) * 5;
     }
 
     private int computeDuration(QuestionDto nextQuestion, Difficulty difficulty) {
