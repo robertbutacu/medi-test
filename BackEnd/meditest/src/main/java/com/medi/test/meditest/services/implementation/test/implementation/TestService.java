@@ -38,112 +38,16 @@ public class TestService implements ITestService {
     @Override
     public TestDto generateTest(DomainDto domain, Difficulty difficulty, Integer numberOfQuestions, Integer duration) {
         if (difficulty != null && numberOfQuestions != null && duration == null)
-            return generateByDifficultyAndNumberOfQuestions(domain, difficulty, numberOfQuestions);
+            return TestByDurationAndNoOfQuestions.generateTest(domain, difficulty, numberOfQuestions);
 
         if (difficulty != null && numberOfQuestions == null && duration != null)
-            return generateByDifficultyAndDuration(domain, difficulty, duration);
+            return TestByDurationAndDifficulty.generateTest(domain, difficulty, duration);
 
         if (difficulty == null && numberOfQuestions != null && duration != null)
-            return generateByNumberOfQuestionsAndDuration(domain, numberOfQuestions, duration);
+            return TestByNoOfQuestionsAndDuration.generateTest(domain, numberOfQuestions, duration);
 
         return null;
     }
-
-
-    private TestDto generateByDifficultyAndNumberOfQuestions(DomainDto domain, Difficulty difficulty,
-                                                             int numberOfQuestions) {
-        TestDto test;
-
-        switch (difficulty) {
-            case Easy:
-                test = getTest(domain, difficulty, numberOfQuestions);
-                if (test != null)
-                    test.setDuration(3 * numberOfQuestions);
-                return test;
-
-            case Medium:
-                test = getTest(domain, difficulty, numberOfQuestions);
-                if (test != null)
-                    test.setDuration(2 * numberOfQuestions);
-                return test;
-
-            case Hard:
-                test = getTest(domain, difficulty, numberOfQuestions);
-                if (test != null)
-                    test.setDuration(numberOfQuestions);
-                return test;
-
-            default:
-                return null;
-        }
-    }
-
-
-    private TestDto generateByDifficultyAndDuration(DomainDto domain, Difficulty difficulty,
-                                                    int duration) {
-        TestDto test;
-        int numberOfQuestions;
-
-        switch (difficulty) {
-            case Easy:
-                numberOfQuestions = duration / 3;
-
-                test = getTest(domain, difficulty, numberOfQuestions);
-                if (test != null)
-                    test.setDuration(3 * numberOfQuestions);
-                return test;
-
-            case Medium:
-                numberOfQuestions = duration / 2;
-
-                test = getTest(domain, difficulty, numberOfQuestions);
-                if (test != null)
-                    test.setDuration(2 * numberOfQuestions);
-                return test;
-
-            case Hard:
-                numberOfQuestions = duration;
-
-                test = getTest(domain, difficulty, numberOfQuestions);
-                if (test != null)
-                    test.setDuration(numberOfQuestions);
-                return test;
-
-            default:
-                return null;
-        }
-    }
-
-
-    private TestDto generateByNumberOfQuestionsAndDuration(DomainDto domain, int numberOfQuestions, int duration) {
-        Double ratio = (double) duration / (double) numberOfQuestions;
-
-        TestDto test;
-
-        if (ratio < 2) {
-            test = getTest(domain, Difficulty.Hard, numberOfQuestions);
-
-            if (test != null)
-                test.setDuration(duration);
-            return test;
-        }
-
-        if (ratio < 3) {
-            test = getTest(domain, Difficulty.Medium, numberOfQuestions);
-
-            if (test != null)
-                test.setDuration(duration);
-            return test;
-        }
-
-        test = getTest(domain, Difficulty.Easy, numberOfQuestions);
-
-        if (test != null)
-            test.setDuration(duration);
-
-        return test;
-    }
-
 
     private TestDto getTest(DomainDto domainDto, Difficulty difficulty, int numberOfQuestions) {
         if (numberOfQuestions < 5)
