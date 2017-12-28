@@ -2,7 +2,6 @@ package com.medi.test.meditest.services.implementation.test.implementation;
 
 import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.dtos.QuestionDto;
-import com.medi.test.meditest.dtos.test.ITestQuestion;
 import com.medi.test.meditest.dtos.test.TestDto;
 import com.medi.test.meditest.dtos.test.simple.test.dto.SimpleTestQuestionDto;
 import com.medi.test.meditest.dtos.test.single.match.dto.ComplexTestQuestionDto;
@@ -28,7 +27,7 @@ import static com.medi.test.meditest.services.implementation.test.implementation
 import static com.medi.test.meditest.services.implementation.test.implementation.TestServiceUtils.transform;
 
 @Service
-class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficulty{
+class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficulty {
     @Autowired
     private IQuestionRepository questionsRepository;
 
@@ -53,31 +52,24 @@ class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficu
 
         List<QuestionDto> possibleQuestions = questionService.getQuestionsByDomains(domains);
 
-        List<QuestionDto> questionsOfSameDifficulty = possibleQuestions.stream()
-                .filter(q -> q.getDifficulty() == difficulty)
-                .collect(Collectors.toList());
-
-        List<QuestionDto> questionWithDifferentDifficulty = possibleQuestions.stream()
-                .filter(q -> q.getDifficulty() != difficulty)
-                .collect(Collectors.toList());
-
-        int differentDifficulty;
-
-        int testDuration = 0;
+        List<QuestionDto> questionsOfSameDifficulty = getQuestionsOfSameDifficulty(possibleQuestions, difficulty);
+        List<QuestionDto> questionWithDiffDifficulty = getQuestionsWithDiffDifficulty(possibleQuestions, difficulty);
 
         if (questionsOfSameDifficulty.size() < numberOfQuestions)
             return null;
 
         TestDto test = new TestDto(domain, difficulty);
-
         Random r = new Random();
+
+        int differentDifficulty;
+        int testDuration = 0;
 
         while (numberOfQuestions > 0) {
             differentDifficulty = r.nextInt(10);
             QuestionDto nextQuestion;
 
-            if (differentDifficulty >= 7 && questionWithDifferentDifficulty.size() > 0)
-                nextQuestion = pickQuestion(questionWithDifferentDifficulty);
+            if (differentDifficulty >= 7 && questionWithDiffDifficulty.size() > 0)
+                nextQuestion = pickQuestion(questionWithDiffDifficulty);
             else
                 nextQuestion = pickQuestion(questionsOfSameDifficulty);
 
@@ -85,23 +77,20 @@ class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficu
             if (nextQuestion.getType() != QuestionType.SingleMatch) {
                 test.addQuestion(nextQuestion.getType(), new SimpleTestQuestionDto(nextQuestion));
                 questionsOfSameDifficulty.remove(nextQuestion);
-                questionWithDifferentDifficulty.remove(nextQuestion);
+                questionWithDiffDifficulty.remove(nextQuestion);
 
                 testDuration += computeDuration(nextQuestion, difficulty);
             } else {
                 List<QuestionDto> picked = TestServiceUtils.createSingleMatchQuestion(possibleQuestions);
                 if (picked != null) {
-                    List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> transformed = transform(picked);
+                    ComplexTestQuestionDto next = normalizeToSingleMatch(picked);
 
-                    TestServiceUtils.indexSingleMatchQuestion(transformed);
-
-                    ComplexTestQuestionDto next = new ComplexTestQuestionDto(shuffle(transformed));
-
-                    testDuration += computeDuration(next.getExpectedSecsToAnswer(), nextQuestion.getDifficulty(), difficulty);
+                    testDuration += computeDuration(next.getExpectedSecsToAnswer(),
+                            nextQuestion.getDifficulty(), difficulty);
 
                     test.addQuestion(QuestionType.SingleMatch, next);
                     questionsOfSameDifficulty.removeAll(picked);
-                    questionWithDifferentDifficulty.removeAll(picked);
+                    questionWithDiffDifficulty.removeAll(picked);
                 }
             }
 
@@ -113,7 +102,29 @@ class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficu
         return test;
     }
 
-    private int computeDuration(int questionDuration, Difficulty questionDifficulty, Difficulty testDifficulty){
+    private List<QuestionDto> getQuestionsOfSameDifficulty(List<QuestionDto> possibleQuestions,
+                                                           Difficulty difficulty) {
+        return possibleQuestions.stream()
+                .filter(q -> q.getDifficulty() == difficulty)
+                .collect(Collectors.toList());
+    }
+
+    private List<QuestionDto> getQuestionsWithDiffDifficulty(List<QuestionDto> possibleQuestions,
+                                                             Difficulty difficulty) {
+        return possibleQuestions.stream()
+                .filter(q -> q.getDifficulty() != difficulty)
+                .collect(Collectors.toList());
+    }
+
+    private ComplexTestQuestionDto normalizeToSingleMatch(List<QuestionDto> picked) {
+        List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> transformed = transform(picked);
+
+        TestServiceUtils.indexSingleMatchQuestion(transformed);
+
+        return new ComplexTestQuestionDto(shuffle(transformed));
+    }
+
+    private int computeDuration(int questionDuration, Difficulty questionDifficulty, Difficulty testDifficulty) {
         double duration = Difficulty.normalizeDuration(questionDuration, questionDifficulty, testDifficulty);
 
         return (int) Math.round(duration / 5) * 5;
