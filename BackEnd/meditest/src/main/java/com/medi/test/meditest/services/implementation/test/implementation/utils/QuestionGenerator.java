@@ -7,6 +7,7 @@ import com.medi.test.meditest.dtos.test.single.match.dto.ComplexTestQuestionDto;
 import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchAnswerDto;
 import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchQuestionDto;
 import com.medi.test.meditest.entities.enums.QuestionType;
+import com.medi.test.meditest.services.contracts.test.generator.ITestGeneratorStopCriterion;
 import javafx.util.Pair;
 
 import java.util.List;
@@ -23,10 +24,10 @@ public class QuestionGenerator {
     public void addQuestionsToTest(TestDto test, List<QuestionDto> questionsOfSameDifficulty,
                                    List<QuestionDto> possibleQuestions,
                                    List<QuestionDto> questionWithDiffDifficulty,
-                                   int numberOfQuestions) {
+                                   ITestGeneratorStopCriterion stopCriterion) {
         Random r = new Random();
 
-        while (numberOfQuestions > 0) {
+        while (!stopCriterion.isDoneGenerating()) {
             QuestionDto nextQuestion = getNextQuestion(r.nextInt(10), questionWithDiffDifficulty,
                     questionsOfSameDifficulty);
 
@@ -41,7 +42,7 @@ public class QuestionGenerator {
                             questionWithDiffDifficulty);
                 }
             }
-            numberOfQuestions -= 1;
+            stopCriterion.decrement();
         }
     }
 
