@@ -73,7 +73,7 @@ public class TestDto {
         this.duration = roundedDuration;
     }
 
-    public void addToDuration(int duration){
+    public void addToDuration(int duration) {
         int roundedDuration = 0;
         while (roundedDuration < duration)
             roundedDuration += 5;

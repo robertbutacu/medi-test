@@ -9,5 +9,6 @@ import java.util.Set;
 
 public interface IDomainService extends ICrudService<Domain> {
     List<DomainDto> getAllDomains();
+
     Set<Domain> getDomainsByDifficulty(DomainDto domain, Difficulty difficulty);
 }

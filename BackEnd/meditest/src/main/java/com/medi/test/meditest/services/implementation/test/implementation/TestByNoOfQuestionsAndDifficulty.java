@@ -3,28 +3,18 @@ package com.medi.test.meditest.services.implementation.test.implementation;
 import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.dtos.QuestionDto;
 import com.medi.test.meditest.dtos.test.TestDto;
-import com.medi.test.meditest.dtos.test.simple.test.dto.SimpleTestQuestionDto;
-import com.medi.test.meditest.dtos.test.single.match.dto.ComplexTestQuestionDto;
-import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchAnswerDto;
-import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchQuestionDto;
 import com.medi.test.meditest.entities.Domain;
 import com.medi.test.meditest.entities.enums.Difficulty;
-import com.medi.test.meditest.entities.enums.QuestionType;
 import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.IDomainService;
 import com.medi.test.meditest.services.contracts.IQuestionService;
 import com.medi.test.meditest.services.contracts.test.generator.ITestByNoOfQuestionsAndDifficulty;
-import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static com.medi.test.meditest.services.implementation.test.implementation.TestServiceUtils.shuffle;
-import static com.medi.test.meditest.services.implementation.test.implementation.TestServiceUtils.transform;
 
 @Service
 class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficulty {
@@ -70,8 +60,6 @@ class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficu
 
         return test;
     }
-
-
 
     private List<QuestionDto> getQuestionsOfSameDifficulty(List<QuestionDto> possibleQuestions,
                                                            Difficulty difficulty) {

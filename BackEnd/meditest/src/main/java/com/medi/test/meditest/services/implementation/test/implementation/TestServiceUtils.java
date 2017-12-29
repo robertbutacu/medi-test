@@ -69,8 +69,8 @@ class TestServiceUtils {
 
     private static List<QuestionDto> pickQuestions(List<QuestionDto> pickedQuestions,
                                                    List<QuestionDto> questions,
-                                                   int picked){
-        if(picked == 0)
+                                                   int picked) {
+        if (picked == 0)
             return pickedQuestions;
 
         int nextQuestion = getRandomNumber(questions.size());
@@ -81,7 +81,7 @@ class TestServiceUtils {
         return pickQuestions(pickedQuestions, questions, picked - 1);
     }
 
-    private static int getRandomNumber(int boundary){
+    private static int getRandomNumber(int boundary) {
         Random r = new Random();
 
         return r.nextInt(boundary);

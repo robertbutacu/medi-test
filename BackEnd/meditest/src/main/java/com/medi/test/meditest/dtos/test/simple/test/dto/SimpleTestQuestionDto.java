@@ -3,7 +3,6 @@ package com.medi.test.meditest.dtos.test.simple.test.dto;
 import com.medi.test.meditest.dtos.AnswerDto;
 import com.medi.test.meditest.dtos.QuestionDto;
 import com.medi.test.meditest.dtos.test.ITestQuestion;
-import com.medi.test.meditest.entities.Answer;
 import com.medi.test.meditest.entities.enums.Difficulty;
 
 import java.util.List;

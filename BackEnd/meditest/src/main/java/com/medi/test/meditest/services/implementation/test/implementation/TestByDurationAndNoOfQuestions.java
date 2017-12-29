@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-class TestByDurationAndNoOfQuestions implements ITestByDurationAndNoOfQuestions{
+class TestByDurationAndNoOfQuestions implements ITestByDurationAndNoOfQuestions {
     @Autowired
     private IQuestionRepository questionsRepository;
 
@@ -17,7 +17,7 @@ class TestByDurationAndNoOfQuestions implements ITestByDurationAndNoOfQuestions{
     private IDomainService domainService;
 
     @Override
-    public TestDto generateTest(DomainDto domain, double duration, int numberOfQuestions){
+    public TestDto generateTest(DomainDto domain, double duration, int numberOfQuestions) {
         return null;
     }
 }

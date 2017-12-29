@@ -4,7 +4,6 @@ import com.medi.test.meditest.dtos.test.ITestQuestion;
 import com.medi.test.meditest.entities.enums.Difficulty;
 import javafx.util.Pair;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 

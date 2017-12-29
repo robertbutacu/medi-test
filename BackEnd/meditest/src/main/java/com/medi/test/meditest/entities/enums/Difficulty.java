@@ -38,7 +38,7 @@ public enum Difficulty {
         return question.getExpectedSecsToAnswer();
     }
 
-    public static double normalizeDuration(int duration, Difficulty questionDifficulty, Difficulty testDifficulty){
+    public static double normalizeDuration(int duration, Difficulty questionDifficulty, Difficulty testDifficulty) {
         switch (testDifficulty) {
             case Easy:
                 if (questionDifficulty == Medium)

@@ -14,14 +14,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-class TestByDurationAndDifficulty implements ITestByDurationAndDifficulty{
+class TestByDurationAndDifficulty implements ITestByDurationAndDifficulty {
     @Autowired
     private IQuestionRepository questionsRepository;
 
     @Autowired
     private IDomainService domainService;
 
-    TestByDurationAndDifficulty(){
+    TestByDurationAndDifficulty() {
 
     }
 

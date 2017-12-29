@@ -7,7 +7,7 @@ public class SingleMatchQuestionDto {
 
     private String body;
 
-    private int expectedSecsToAnswer ;
+    private int expectedSecsToAnswer;
 
     private Difficulty difficulty;
 

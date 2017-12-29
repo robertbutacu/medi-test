@@ -16,8 +16,7 @@ import static com.medi.test.meditest.services.implementation.test.implementation
 import static com.medi.test.meditest.services.implementation.test.implementation.TestServiceUtils.transform;
 
 class QuestionGenerator {
-    QuestionGenerator() {
-    }
+    QuestionGenerator() { }
 
     void addQuestionsToTest(TestDto test, List<QuestionDto> questionsOfSameDifficulty,
                                List<QuestionDto> possibleQuestions,
@@ -31,8 +30,8 @@ class QuestionGenerator {
 
             if (nextQuestion.getType() != QuestionType.SingleMatch) {
                 addQuestionToTest(nextQuestion, test, questionsOfSameDifficulty, questionWithDiffDifficulty);
-
             } else {
+                //TODO when time, change this so it picks from questionsOfSame/WithDiff(Difficulty)
                 List<QuestionDto> picked = TestServiceUtils.createSingleMatchQuestion(possibleQuestions);
 
                 if (picked != null) {

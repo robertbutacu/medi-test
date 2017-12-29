@@ -1,6 +1,5 @@
 package com.medi.test.meditest.services.contracts;
 
-import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.dtos.QuestionDto;
 import com.medi.test.meditest.entities.Domain;
 import com.medi.test.meditest.entities.Question;
