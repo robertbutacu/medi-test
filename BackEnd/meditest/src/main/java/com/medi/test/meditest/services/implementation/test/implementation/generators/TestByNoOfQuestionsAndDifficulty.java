@@ -60,7 +60,7 @@ public class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAnd
                 questionWithDiffDifficulty,
                 new TestByNoOfQuestsAndDiffStopCriterion(numberOfQuestions));
 
-        new DurationCalculator().computeDuration(test, difficulty);
+        new DurationCalculator().computeDuration(test);
 
         return test;
     }

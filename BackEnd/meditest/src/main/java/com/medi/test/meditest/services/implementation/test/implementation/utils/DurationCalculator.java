@@ -10,7 +10,7 @@ public class DurationCalculator {
     public DurationCalculator() {
     }
 
-    public void computeDuration(TestDto test, Difficulty difficulty) {
+    public void computeDuration(TestDto test) {
         for (Pair<QuestionType, ITestQuestion> q :
                 test.getQuestions()) {
             q.getValue()

@@ -63,7 +63,7 @@ public class TestByDurationAndDifficulty implements ITestByDurationAndDifficulty
                 questionWithDiffDifficulty,
                 new TestByDurationAndDiffStopCriterion(duration));
 
-        new DurationCalculator().computeDuration(test, difficulty);
+        new DurationCalculator().computeDuration(test);
 
         return test;
     }
