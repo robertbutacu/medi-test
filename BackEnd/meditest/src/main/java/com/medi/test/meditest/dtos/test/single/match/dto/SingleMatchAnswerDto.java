@@ -1,7 +1,5 @@
 package com.medi.test.meditest.dtos.test.single.match.dto;
 
-import com.medi.test.meditest.dtos.AnswerDto;
-
 public class SingleMatchAnswerDto {
     private String body;
 

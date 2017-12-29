@@ -7,7 +7,6 @@ import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchAnswerDto;
 import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchQuestionDto;
 import com.medi.test.meditest.entities.Answer;
 import com.medi.test.meditest.entities.Question;
-import com.sun.java.browser.plugin2.DOM;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -55,6 +54,7 @@ public class QuestionTransformer {
 
         smqd.setBody(question.getBody());
         smqd.setExpectedSecsToAnswer(question.getExpectedSecsToAnswer());
+        smqd.setDifficulty(question.getDifficulty());
 
         return new Pair<>(smqd, smad);
     }
