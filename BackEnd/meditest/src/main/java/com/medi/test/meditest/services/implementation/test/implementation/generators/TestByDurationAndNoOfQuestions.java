@@ -53,7 +53,8 @@ public class TestByDurationAndNoOfQuestions implements ITestByDurationAndNoOfQue
                 notFavorableQuestions,
                 new TestByDurAndNoOfQuestsStopCriterion(numberOfQuestions, duration));
 
-        test.setDifficulty(Difficulty.inferTestDifficulty(test.getQuestions()));
+        test.inferTestDifficulty();
+        
         return test;
     }
 

@@ -79,4 +79,34 @@ public class TestDto {
             roundedDuration += 5;
         this.duration += roundedDuration;
     }
+
+    public void inferTestDifficulty() {
+        int nrHardQuestions = 0;
+        int nrMediumQuestions = 0;
+        int nrEasyQuestions = 0;
+
+        for (Pair<QuestionType, ITestQuestion> q :
+                this.questions)
+            switch (q.getValue().questionDifficulty()) {
+                case Easy:
+                    nrEasyQuestions += 1;
+                    break;
+                case Medium:
+                    nrMediumQuestions += 1;
+                    break;
+                case Hard:
+                    nrHardQuestions += 1;
+                    break;
+                default:
+                    break;
+            }
+
+        if (nrHardQuestions >= nrMediumQuestions && nrHardQuestions >= nrEasyQuestions)
+            this.difficulty = Difficulty.Hard;
+
+        else if (nrMediumQuestions >= nrHardQuestions && nrMediumQuestions >= nrEasyQuestions)
+            this.difficulty = Difficulty.Medium;
+
+        else this.difficulty = Difficulty.Easy;
+    }
 }

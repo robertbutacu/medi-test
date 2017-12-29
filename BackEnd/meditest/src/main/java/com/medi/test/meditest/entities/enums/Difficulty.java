@@ -74,35 +74,4 @@ public enum Difficulty {
 
         return duration;
     }
-
-
-    public static Difficulty inferTestDifficulty(List<Pair<QuestionType, ITestQuestion>> testQuestions) {
-        int nrHardQuestions = 0;
-        int nrMediumQuestions = 0;
-        int nrEasyQuestions = 0;
-
-        for (Pair<QuestionType, ITestQuestion> q :
-                testQuestions)
-            switch (q.getValue().questionDifficulty()){
-                case Easy:
-                    nrEasyQuestions += 1;
-                    break;
-                case Medium:
-                    nrMediumQuestions += 1;
-                    break;
-                case Hard:
-                    nrHardQuestions += 1;
-                    break;
-                default:
-                    break;
-            }
-
-        if ( nrHardQuestions >= nrMediumQuestions && nrHardQuestions >= nrEasyQuestions)
-            return Difficulty.Hard;
-
-        if ( nrMediumQuestions >= nrHardQuestions && nrMediumQuestions >= nrEasyQuestions )
-            return Difficulty.Medium;
-
-        return Difficulty.Easy;
-    }
 }
