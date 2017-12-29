@@ -50,6 +50,11 @@ public class ComplexTestQuestionDto implements ITestQuestion {
         return Optional.of(computeDuration(this.expectedSecsToAnswer, this.difficulty, testDifficulty));
     }
 
+    @Override
+    public Difficulty questionDifficulty() {
+        return this.difficulty;
+    }
+
     private int computeDuration(int questionDuration, Difficulty questionDifficulty, Difficulty testDifficulty) {
         double duration = Difficulty.normalizeDuration(questionDuration, questionDifficulty, testDifficulty);
 

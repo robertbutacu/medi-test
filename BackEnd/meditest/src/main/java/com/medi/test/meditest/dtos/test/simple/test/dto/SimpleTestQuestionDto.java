@@ -34,6 +34,11 @@ public class SimpleTestQuestionDto implements ITestQuestion {
         return Optional.of(computeDuration(this.expectedSecsToAnswer, this.difficulty, testDifficulty));
     }
 
+    @Override
+    public Difficulty questionDifficulty() {
+        return this.difficulty;
+    }
+
     public String getBody() {
         return body;
     }

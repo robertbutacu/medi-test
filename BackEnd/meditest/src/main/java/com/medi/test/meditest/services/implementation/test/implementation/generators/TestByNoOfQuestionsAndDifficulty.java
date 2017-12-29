@@ -5,11 +5,9 @@ import com.medi.test.meditest.dtos.QuestionDto;
 import com.medi.test.meditest.dtos.test.TestDto;
 import com.medi.test.meditest.entities.Domain;
 import com.medi.test.meditest.entities.enums.Difficulty;
-import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.IDomainService;
 import com.medi.test.meditest.services.contracts.IQuestionService;
 import com.medi.test.meditest.services.contracts.test.generator.ITestByNoOfQuestionsAndDifficulty;
-import com.medi.test.meditest.services.contracts.test.generator.stop.criteria.ITestGeneratorStopCriterion;
 import com.medi.test.meditest.services.implementation.test.implementation.generators.stop.criteria.TestByNoOfQuestsAndDiffStopCriterion;
 import com.medi.test.meditest.services.implementation.test.implementation.utils.DurationCalculator;
 import com.medi.test.meditest.services.implementation.test.implementation.utils.QuestionGenerator;
@@ -22,9 +20,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficulty {
-    @Autowired
-    private IQuestionRepository questionsRepository;
-
     @Autowired
     private IDomainService domainService;
 

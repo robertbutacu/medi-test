@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface ITestQuestion {
     Optional<Integer> computeEstimatedDuration(Difficulty testDifficulty);
+
+    Difficulty questionDifficulty();
 }

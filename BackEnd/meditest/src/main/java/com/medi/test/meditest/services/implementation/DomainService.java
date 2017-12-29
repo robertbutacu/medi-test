@@ -59,9 +59,6 @@ public class DomainService implements IDomainService {
         if (this.all == null)
             this.all = new HashSet<>(this.getAll());
 
-        System.out.println("shalalala");
-        all.forEach(d -> System.out.println(d.getName()));
-
         Domain toSearch = new Domain();
         for (Domain d :
                 this.all) {

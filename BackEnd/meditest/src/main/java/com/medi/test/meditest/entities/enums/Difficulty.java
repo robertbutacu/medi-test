@@ -1,6 +1,10 @@
 package com.medi.test.meditest.entities.enums;
 
 import com.medi.test.meditest.dtos.QuestionDto;
+import com.medi.test.meditest.dtos.test.ITestQuestion;
+import javafx.util.Pair;
+
+import java.util.List;
 
 public enum Difficulty {
     Easy, Medium, Hard;
@@ -69,5 +73,36 @@ public enum Difficulty {
         }
 
         return duration;
+    }
+
+
+    public static Difficulty inferDifficulty(List<Pair<QuestionType, ITestQuestion>> testQuestions) {
+        int nrHardQuestions = 0;
+        int nrMediumQuestions = 0;
+        int nrEasyQuestions = 0;
+
+        for (Pair<QuestionType, ITestQuestion> q :
+                testQuestions)
+            switch (q.getValue().questionDifficulty()){
+                case Easy:
+                    nrEasyQuestions += 1;
+                    break;
+                case Medium:
+                    nrMediumQuestions += 1;
+                    break;
+                case Hard:
+                    nrHardQuestions += 1;
+                    break;
+                default:
+                    break;
+            }
+
+        if ( nrHardQuestions >= nrMediumQuestions && nrHardQuestions >= nrEasyQuestions)
+            return Difficulty.Hard;
+
+        if ( nrMediumQuestions >= nrHardQuestions && nrMediumQuestions >= nrEasyQuestions )
+            return Difficulty.Medium;
+
+        return Difficulty.Easy;
     }
 }
