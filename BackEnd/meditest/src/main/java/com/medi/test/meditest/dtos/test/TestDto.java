@@ -11,7 +11,7 @@ import java.util.List;
 public class TestDto {
     private String domain;
 
-    private String difficulty;
+    private Difficulty difficulty;
 
     private int duration;
 
@@ -24,10 +24,10 @@ public class TestDto {
     public TestDto(DomainDto domain, Difficulty difficulty) {
         this.questions = new ArrayList<>();
         this.domain = domain.getDomain();
-        this.difficulty = difficulty.toString();
+        this.difficulty = difficulty;
     }
 
-    public TestDto(DomainDto domain, String difficulty, List<Pair<QuestionType, ITestQuestion>> questions) {
+    public TestDto(DomainDto domain, Difficulty difficulty, List<Pair<QuestionType, ITestQuestion>> questions) {
         this.domain = domain.getDomain();
         this.difficulty = difficulty;
         this.questions = questions;
@@ -37,7 +37,7 @@ public class TestDto {
         return domain;
     }
 
-    public String getDifficulty() {
+    public Difficulty getDifficulty() {
         return difficulty;
     }
 
@@ -54,7 +54,7 @@ public class TestDto {
         this.domain = domain.getDomain();
     }
 
-    public void setDifficulty(String difficulty) {
+    public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -71,5 +71,12 @@ public class TestDto {
         while (roundedDuration < duration)
             roundedDuration += 5;
         this.duration = roundedDuration;
+    }
+
+    public void addToDuration(int duration){
+        int roundedDuration = 0;
+        while (roundedDuration < duration)
+            roundedDuration += 5;
+        this.duration += roundedDuration;
     }
 }

@@ -55,6 +55,7 @@ public class QuestionTransformer {
 
         smqd.setBody(question.getBody());
         smqd.setExpectedSecsToAnswer(question.getExpectedSecsToAnswer());
+        smqd.setDifficulty(question.getDifficulty());
 
         return new Pair<>(smqd, smad);
     }

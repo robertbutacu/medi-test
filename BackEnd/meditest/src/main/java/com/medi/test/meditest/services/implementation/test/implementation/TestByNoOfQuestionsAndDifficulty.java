@@ -59,70 +59,19 @@ class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficu
             return null;
 
         TestDto test = new TestDto(domain, difficulty);
-        Random r = new Random();
 
-        int testDuration = 0;
+        new QuestionGenerator().addQuestionsToTest(test,
+                possibleQuestions,
+                questionsOfSameDifficulty,
+                questionWithDiffDifficulty,
+                numberOfQuestions);
 
-        while (numberOfQuestions > 0) {
-            QuestionDto nextQuestion = getNextQuestion(r.nextInt(10), questionWithDiffDifficulty,
-                    questionsOfSameDifficulty);
-
-            if (nextQuestion.getType() != QuestionType.SingleMatch) {
-                addQuestionToTest(nextQuestion, test, questionsOfSameDifficulty, questionWithDiffDifficulty);
-
-                testDuration += computeDuration(nextQuestion, difficulty);
-            } else {
-                List<QuestionDto> picked = TestServiceUtils.createSingleMatchQuestion(possibleQuestions);
-
-                if (picked != null) {
-                    ComplexTestQuestionDto next = addSingleMatchQuestionToTest(picked, test, questionsOfSameDifficulty,
-                            questionWithDiffDifficulty);
-
-                    testDuration += computeDuration(next.getExpectedSecsToAnswer(),
-                            nextQuestion.getDifficulty(), difficulty);
-                }
-            }
-            numberOfQuestions -= 1;
-        }
-        test.setDuration(testDuration);
+        new DurationCalculator().computeDuration(test, difficulty);
 
         return test;
     }
 
-    private ComplexTestQuestionDto addSingleMatchQuestionToTest(List<QuestionDto> picked, TestDto test,
-                                                                List<QuestionDto> questionsOfSameDifficulty,
-                                                                List<QuestionDto> questionWithDiffDifficulty) {
-        ComplexTestQuestionDto next = normalizeToSingleMatch(picked);
 
-        test.addQuestion(QuestionType.SingleMatch, next);
-        questionsOfSameDifficulty.removeAll(picked);
-        questionWithDiffDifficulty.removeAll(picked);
-
-        return next;
-    }
-
-
-    private void addQuestionToTest(QuestionDto nextQuestion, TestDto test,
-                                   List<QuestionDto> questionsOfSameDifficulty,
-                                   List<QuestionDto> questionWithDiffDifficulty) {
-        test.addQuestion(nextQuestion.getType(), new SimpleTestQuestionDto(nextQuestion));
-        questionsOfSameDifficulty.remove(nextQuestion);
-        questionWithDiffDifficulty.remove(nextQuestion);
-    }
-
-
-    private QuestionDto getNextQuestion(int differentDifficulty,
-                                        List<QuestionDto> questionWithDiffDifficulty,
-                                        List<QuestionDto> questionsOfSameDifficulty) {
-        QuestionDto nextQuestion;
-
-        if (differentDifficulty >= 7 && questionWithDiffDifficulty.size() > 0)
-            nextQuestion = pickQuestion(questionWithDiffDifficulty);
-        else
-            nextQuestion = pickQuestion(questionsOfSameDifficulty);
-
-        return nextQuestion;
-    }
 
     private List<QuestionDto> getQuestionsOfSameDifficulty(List<QuestionDto> possibleQuestions,
                                                            Difficulty difficulty) {
@@ -136,31 +85,5 @@ class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficu
         return possibleQuestions.stream()
                 .filter(q -> q.getDifficulty() != difficulty)
                 .collect(Collectors.toList());
-    }
-
-    private ComplexTestQuestionDto normalizeToSingleMatch(List<QuestionDto> picked) {
-        List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> transformed = transform(picked);
-
-        TestServiceUtils.indexSingleMatchQuestion(transformed);
-
-        return new ComplexTestQuestionDto(shuffle(transformed));
-    }
-
-    private int computeDuration(int questionDuration, Difficulty questionDifficulty, Difficulty testDifficulty) {
-        double duration = Difficulty.normalizeDuration(questionDuration, questionDifficulty, testDifficulty);
-
-        return (int) Math.round(duration / 5) * 5;
-    }
-
-    private int computeDuration(QuestionDto nextQuestion, Difficulty difficulty) {
-        double duration = Difficulty.normalizeDuration(nextQuestion, difficulty);
-
-        return (int) Math.round(duration / 5) * 5;
-    }
-
-    private QuestionDto pickQuestion(List<QuestionDto> questions) {
-        Random r = new Random();
-
-        return questions.get(r.nextInt(questions.size()));
     }
 }
