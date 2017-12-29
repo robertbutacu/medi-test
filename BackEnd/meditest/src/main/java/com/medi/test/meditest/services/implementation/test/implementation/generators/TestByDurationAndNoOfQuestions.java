@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-class TestByDurationAndNoOfQuestions implements ITestByDurationAndNoOfQuestions {
+public class TestByDurationAndNoOfQuestions implements ITestByDurationAndNoOfQuestions {
     @Autowired
     private IQuestionRepository questionsRepository;
 
