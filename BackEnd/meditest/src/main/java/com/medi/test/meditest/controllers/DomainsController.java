@@ -1,9 +1,6 @@
 package com.medi.test.meditest.controllers;
 
-import com.medi.test.meditest.Transformers.DomainTransformer;
 import com.medi.test.meditest.dtos.DomainDto;
-import com.medi.test.meditest.entities.Domain;
-import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.services.contracts.IDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -30,7 +26,7 @@ public class DomainsController {
 
         List<DomainDto> domains = domainService.getAllDomains();
 
-        if(domains.size() == 0){
+        if (domains.size() == 0) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 

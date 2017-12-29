@@ -11,6 +11,7 @@ For duration and number of questions:
           - the highest number of questions with a specific difficulty.
 
         Look for questions while number of questions > 0 and duration > -4 ( max 4 minutes to overtime ).
+        - the hardest
 
 For duration and test difficulty:
     Look for questions that fit the test difficulty criteria and get all the matching questions.
@@ -19,7 +20,7 @@ For duration and test difficulty:
         If the test is easy : for medium-hard questions, multiply by 1.5 - 2 respectively
            the test is medium : divide by 0.75 for easy, and 1.5 for hard.
            the test is hard : divide by 0.75 for medium, and 0.5 for medium.
-    Fetch questions while duration > 0.
+    Fetch questions while duration > 0. - the second easiest
 
 For number of questions and test difficulty:
     Pick questions of test difficulty with a probability of 30-40% of questions to be from a lower/higher rank.
@@ -27,3 +28,4 @@ For number of questions and test difficulty:
         If the test is easy : for medium-hard questions, multiply by 1.5 - 2 respectively
            the test is medium : divide by 0.75 for easy, and 1.5 for hard.
            the test is hard : divide by 0.75 for medium, and 0.5 for medium.
+           -> the easiest, start with this.

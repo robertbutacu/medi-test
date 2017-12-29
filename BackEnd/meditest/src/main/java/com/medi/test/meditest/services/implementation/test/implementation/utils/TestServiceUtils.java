@@ -1,4 +1,4 @@
-package com.medi.test.meditest.services.implementation.test.implementation;
+package com.medi.test.meditest.services.implementation.test.implementation.utils;
 
 import com.medi.test.meditest.Transformers.QuestionTransformer;
 import com.medi.test.meditest.dtos.QuestionDto;
@@ -40,10 +40,37 @@ class TestServiceUtils {
                 .collect(Collectors.toList());
     }
 
+    static List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> shuffle(
+            List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> singleMatchQuestion) {
+        List<Integer> pickedAnswersIndexes = new ArrayList<>();
+        List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> shuffle = new ArrayList<>();
+        Pair<SingleMatchQuestionDto, SingleMatchAnswerDto> curr;
+        SingleMatchAnswerDto randomAnswer;
+
+        Random r = new Random();
+
+        for (Pair<SingleMatchQuestionDto, SingleMatchAnswerDto> aSingleMatchQuestion : singleMatchQuestion) {
+            curr = aSingleMatchQuestion;
+
+            int random = r.nextInt(singleMatchQuestion.size());
+            while (pickedAnswersIndexes.contains(random)) {
+                random = r.nextInt(singleMatchQuestion.size());
+            }
+
+            pickedAnswersIndexes.add(random);
+
+            randomAnswer = singleMatchQuestion.get(random).getValue();
+
+            shuffle.add(new Pair<>(curr.getKey(), randomAnswer));
+        }
+
+        return shuffle;
+    }
+
     private static List<QuestionDto> pickQuestions(List<QuestionDto> pickedQuestions,
                                                    List<QuestionDto> questions,
-                                                   int picked){
-        if(picked == 0)
+                                                   int picked) {
+        if (picked == 0)
             return pickedQuestions;
 
         int nextQuestion = getRandomNumber(questions.size());
@@ -54,7 +81,7 @@ class TestServiceUtils {
         return pickQuestions(pickedQuestions, questions, picked - 1);
     }
 
-    private static int getRandomNumber(int boundary){
+    private static int getRandomNumber(int boundary) {
         Random r = new Random();
 
         return r.nextInt(boundary);
