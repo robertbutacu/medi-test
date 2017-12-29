@@ -1,4 +1,4 @@
-package com.medi.test.meditest.services.implementation.test.implementation;
+package com.medi.test.meditest.services.implementation.test.implementation.utils;
 
 import com.medi.test.meditest.dtos.QuestionDto;
 import com.medi.test.meditest.dtos.test.TestDto;
@@ -12,16 +12,18 @@ import javafx.util.Pair;
 import java.util.List;
 import java.util.Random;
 
-import static com.medi.test.meditest.services.implementation.test.implementation.TestServiceUtils.shuffle;
-import static com.medi.test.meditest.services.implementation.test.implementation.TestServiceUtils.transform;
+import static com.medi.test.meditest.services.implementation.test.implementation.utils.TestServiceUtils.shuffle;
+import static com.medi.test.meditest.services.implementation.test.implementation.utils.TestServiceUtils.transform;
 
-class QuestionGenerator {
-    QuestionGenerator() { }
 
-    void addQuestionsToTest(TestDto test, List<QuestionDto> questionsOfSameDifficulty,
-                               List<QuestionDto> possibleQuestions,
-                               List<QuestionDto> questionWithDiffDifficulty,
-                               int numberOfQuestions) {
+public class QuestionGenerator {
+    public QuestionGenerator() {
+    }
+
+    public void addQuestionsToTest(TestDto test, List<QuestionDto> questionsOfSameDifficulty,
+                                   List<QuestionDto> possibleQuestions,
+                                   List<QuestionDto> questionWithDiffDifficulty,
+                                   int numberOfQuestions) {
         Random r = new Random();
 
         while (numberOfQuestions > 0) {
@@ -44,8 +46,8 @@ class QuestionGenerator {
     }
 
     private void addSingleMatchQuestionToTest(List<QuestionDto> picked, TestDto test,
-                                                                List<QuestionDto> questionsOfSameDifficulty,
-                                                                List<QuestionDto> questionWithDiffDifficulty) {
+                                              List<QuestionDto> questionsOfSameDifficulty,
+                                              List<QuestionDto> questionWithDiffDifficulty) {
         ComplexTestQuestionDto next = normalizeToSingleMatch(picked);
 
         test.addQuestion(QuestionType.SingleMatch, next);

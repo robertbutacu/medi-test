@@ -1,4 +1,4 @@
-package com.medi.test.meditest.services.implementation.test.implementation;
+package com.medi.test.meditest.services.implementation.test.implementation.generators;
 
 import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.dtos.test.TestDto;

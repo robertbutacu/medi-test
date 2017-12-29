@@ -1,4 +1,4 @@
-package com.medi.test.meditest.services.implementation.test.implementation;
+package com.medi.test.meditest.services.implementation.test.implementation.utils;
 
 import com.medi.test.meditest.Transformers.QuestionTransformer;
 import com.medi.test.meditest.dtos.QuestionDto;

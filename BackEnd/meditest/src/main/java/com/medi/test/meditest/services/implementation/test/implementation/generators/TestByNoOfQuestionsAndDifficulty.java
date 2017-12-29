@@ -1,4 +1,4 @@
-package com.medi.test.meditest.services.implementation.test.implementation;
+package com.medi.test.meditest.services.implementation.test.implementation.generators;
 
 import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.dtos.QuestionDto;
@@ -9,6 +9,8 @@ import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.IDomainService;
 import com.medi.test.meditest.services.contracts.IQuestionService;
 import com.medi.test.meditest.services.contracts.test.generator.ITestByNoOfQuestionsAndDifficulty;
+import com.medi.test.meditest.services.implementation.test.implementation.utils.DurationCalculator;
+import com.medi.test.meditest.services.implementation.test.implementation.utils.QuestionGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficulty {
+public class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAndDifficulty {
     @Autowired
     private IQuestionRepository questionsRepository;
 
