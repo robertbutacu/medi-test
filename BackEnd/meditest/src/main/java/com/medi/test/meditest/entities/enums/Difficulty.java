@@ -76,7 +76,7 @@ public enum Difficulty {
     }
 
 
-    public static Difficulty inferDifficulty(List<Pair<QuestionType, ITestQuestion>> testQuestions) {
+    public static Difficulty inferTestDifficulty(List<Pair<QuestionType, ITestQuestion>> testQuestions) {
         int nrHardQuestions = 0;
         int nrMediumQuestions = 0;
         int nrEasyQuestions = 0;

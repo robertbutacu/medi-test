@@ -2,17 +2,14 @@ package com.medi.test.meditest.services.implementation.test.implementation.gener
 
 import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.dtos.QuestionDto;
-import com.medi.test.meditest.dtos.test.ITestQuestion;
 import com.medi.test.meditest.dtos.test.TestDto;
 import com.medi.test.meditest.entities.Domain;
 import com.medi.test.meditest.entities.enums.Difficulty;
-import com.medi.test.meditest.entities.enums.QuestionType;
 import com.medi.test.meditest.services.contracts.IDomainService;
 import com.medi.test.meditest.services.contracts.IQuestionService;
 import com.medi.test.meditest.services.contracts.test.generator.ITestByDurationAndNoOfQuestions;
 import com.medi.test.meditest.services.implementation.test.implementation.generators.stop.criteria.TestByDurAndNoOfQuestsStopCriterion;
 import com.medi.test.meditest.services.implementation.test.implementation.utils.QuestionGenerator;
-import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +53,7 @@ public class TestByDurationAndNoOfQuestions implements ITestByDurationAndNoOfQue
                 notFavorableQuestions,
                 new TestByDurAndNoOfQuestsStopCriterion(numberOfQuestions, duration));
 
-        test.setDifficulty(Difficulty.inferDifficulty(test.getQuestions()));
+        test.setDifficulty(Difficulty.inferTestDifficulty(test.getQuestions()));
         return test;
     }
 
