@@ -1,15 +1,21 @@
 package com.medi.test.meditest.services.implementation.test.implementation.generators.stop.criteria;
 
-import com.medi.test.meditest.services.contracts.test.generator.ITestGeneratorStopCriterion;
+import com.medi.test.meditest.services.contracts.test.generator.stop.criteria.ITestGeneratorStopCriterion;
 
 public class TestByDurationAndDiffStopCriterion implements ITestGeneratorStopCriterion {
-    @Override
-    public void decrement() {
+    private double duration;
 
+    public TestByDurationAndDiffStopCriterion(double duration){
+        this.duration = duration;
     }
 
     @Override
-    public boolean isDoneGenerating() {
-        return true;
+    public void decrement(int currentQuestionDuration) {
+        this.duration -= currentQuestionDuration;
+    }
+
+    @Override
+    public boolean hasToGenerate() {
+        return this.duration > 0;
     }
 }

@@ -1,6 +1,6 @@
 package com.medi.test.meditest.services.implementation.test.implementation.generators.stop.criteria;
 
-import com.medi.test.meditest.services.contracts.test.generator.ITestGeneratorStopCriterion;
+import com.medi.test.meditest.services.contracts.test.generator.stop.criteria.ITestGeneratorStopCriterion;
 
 public class TestByNoOfQuestsAndDiffStopCriterion implements ITestGeneratorStopCriterion {
     private int numberOfQuestions;
@@ -10,12 +10,12 @@ public class TestByNoOfQuestsAndDiffStopCriterion implements ITestGeneratorStopC
     }
 
     @Override
-    public void decrement() {
+    public void decrement(int currentQuestionDuration) {
         this.numberOfQuestions -= 1;
     }
 
     @Override
-    public boolean isDoneGenerating() {
-        return this.numberOfQuestions == 0;
+    public boolean hasToGenerate() {
+        return this.numberOfQuestions > 0;
     }
 }

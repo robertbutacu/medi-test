@@ -7,10 +7,11 @@ import com.medi.test.meditest.dtos.test.single.match.dto.ComplexTestQuestionDto;
 import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchAnswerDto;
 import com.medi.test.meditest.dtos.test.single.match.dto.SingleMatchQuestionDto;
 import com.medi.test.meditest.entities.enums.QuestionType;
-import com.medi.test.meditest.services.contracts.test.generator.ITestGeneratorStopCriterion;
+import com.medi.test.meditest.services.contracts.test.generator.stop.criteria.ITestGeneratorStopCriterion;
 import javafx.util.Pair;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import static com.medi.test.meditest.services.implementation.test.implementation.utils.TestServiceUtils.shuffle;
@@ -26,27 +27,29 @@ public class QuestionGenerator {
                                    List<QuestionDto> questionWithDiffDifficulty,
                                    ITestGeneratorStopCriterion stopCriterion) {
         Random r = new Random();
+        Optional<Integer> currentQuestionDuration = Optional.empty();
 
-        while (!stopCriterion.isDoneGenerating()) {
+        while (stopCriterion.hasToGenerate()) {
             QuestionDto nextQuestion = getNextQuestion(r.nextInt(10), questionWithDiffDifficulty,
                     questionsOfSameDifficulty);
 
             if (nextQuestion.getType() != QuestionType.SingleMatch) {
-                addQuestionToTest(nextQuestion, test, questionsOfSameDifficulty, questionWithDiffDifficulty);
+                currentQuestionDuration = addQuestionToTest(nextQuestion, test,
+                        questionsOfSameDifficulty, questionWithDiffDifficulty);
             } else {
                 //TODO when time, change this so it picks from questionsOfSame/WithDiff(Difficulty)
                 List<QuestionDto> picked = TestServiceUtils.createSingleMatchQuestion(possibleQuestions);
 
                 if (picked != null) {
-                    addSingleMatchQuestionToTest(picked, test, questionsOfSameDifficulty,
+                    currentQuestionDuration = addSingleMatchQuestionToTest(picked, test, questionsOfSameDifficulty,
                             questionWithDiffDifficulty);
                 }
             }
-            stopCriterion.decrement();
+            stopCriterion.decrement(currentQuestionDuration.orElse(0));
         }
     }
 
-    private void addSingleMatchQuestionToTest(List<QuestionDto> picked, TestDto test,
+    private Optional<Integer> addSingleMatchQuestionToTest(List<QuestionDto> picked, TestDto test,
                                               List<QuestionDto> questionsOfSameDifficulty,
                                               List<QuestionDto> questionWithDiffDifficulty) {
         ComplexTestQuestionDto next = normalizeToSingleMatch(picked);
@@ -54,15 +57,20 @@ public class QuestionGenerator {
         test.addQuestion(QuestionType.SingleMatch, next);
         questionsOfSameDifficulty.removeAll(picked);
         questionWithDiffDifficulty.removeAll(picked);
+
+        return next.computeEstimatedDuration(test.getDifficulty());
     }
 
 
-    private void addQuestionToTest(QuestionDto nextQuestion, TestDto test,
-                                   List<QuestionDto> questionsOfSameDifficulty,
-                                   List<QuestionDto> questionWithDiffDifficulty) {
-        test.addQuestion(nextQuestion.getType(), new SimpleTestQuestionDto(nextQuestion));
+    private Optional<Integer> addQuestionToTest(QuestionDto nextQuestion, TestDto test,
+                                                List<QuestionDto> questionsOfSameDifficulty,
+                                                List<QuestionDto> questionWithDiffDifficulty) {
+        SimpleTestQuestionDto added = new SimpleTestQuestionDto(nextQuestion);
+        test.addQuestion(nextQuestion.getType(), added);
         questionsOfSameDifficulty.remove(nextQuestion);
         questionWithDiffDifficulty.remove(nextQuestion);
+
+        return added.computeEstimatedDuration(test.getDifficulty());
     }
 
     private ComplexTestQuestionDto normalizeToSingleMatch(List<QuestionDto> picked) {
