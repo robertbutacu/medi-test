@@ -6,7 +6,7 @@ public class TestByDurAndNoOfQuestsStopCriterion implements ITestGeneratorStopCr
     private int numberOfQuestions;
     private double duration;
 
-    public TestByDurAndNoOfQuestsStopCriterion(int numberOfQuestions, double duration){
+    public TestByDurAndNoOfQuestsStopCriterion(int numberOfQuestions, double duration) {
         this.numberOfQuestions = numberOfQuestions;
         this.duration = duration;
     }
@@ -19,6 +19,6 @@ public class TestByDurAndNoOfQuestsStopCriterion implements ITestGeneratorStopCr
 
     @Override
     public boolean hasToGenerate() {
-        return numberOfQuestions > 0 ;
+        return numberOfQuestions > 0;
     }
 }

@@ -24,9 +24,9 @@ public class QuestionGenerator {
     }
 
     public static void addQuestionsToTest(TestDto test, List<QuestionDto> questionsOfSameDifficulty,
-                                   List<QuestionDto> possibleQuestions,
-                                   List<QuestionDto> questionWithDiffDifficulty,
-                                   ITestGeneratorStopCriterion stopCriterion) {
+                                          List<QuestionDto> possibleQuestions,
+                                          List<QuestionDto> questionWithDiffDifficulty,
+                                          ITestGeneratorStopCriterion stopCriterion) {
         Random r = new Random();
         Optional<Integer> currentQuestionDuration = Optional.empty();
 
@@ -51,8 +51,8 @@ public class QuestionGenerator {
     }
 
     private static Optional<Integer> addSingleMatchQuestionToTest(List<QuestionDto> picked, TestDto test,
-                                              List<QuestionDto> questionsOfSameDifficulty,
-                                              List<QuestionDto> questionWithDiffDifficulty) {
+                                                                  List<QuestionDto> questionsOfSameDifficulty,
+                                                                  List<QuestionDto> questionWithDiffDifficulty) {
         ComplexTestQuestionDto next = normalizeToSingleMatch(picked);
 
         test.addQuestion(QuestionType.SingleMatch, next);
@@ -64,8 +64,8 @@ public class QuestionGenerator {
 
 
     private static Optional<Integer> addQuestionToTest(QuestionDto nextQuestion, TestDto test,
-                                                List<QuestionDto> questionsOfSameDifficulty,
-                                                List<QuestionDto> questionWithDiffDifficulty) {
+                                                       List<QuestionDto> questionsOfSameDifficulty,
+                                                       List<QuestionDto> questionWithDiffDifficulty) {
         SimpleTestQuestionDto added = new SimpleTestQuestionDto(nextQuestion);
         test.addQuestion(nextQuestion.getType(), added);
         questionsOfSameDifficulty.remove(nextQuestion);
@@ -83,8 +83,8 @@ public class QuestionGenerator {
     }
 
     private static QuestionDto getNextQuestion(int differentDifficulty,
-                                        List<QuestionDto> questionWithDiffDifficulty,
-                                        List<QuestionDto> questionsOfSameDifficulty) {
+                                               List<QuestionDto> questionWithDiffDifficulty,
+                                               List<QuestionDto> questionsOfSameDifficulty) {
         QuestionDto nextQuestion;
 
         if (differentDifficulty >= differentQuestionMinThreshold() && questionWithDiffDifficulty.size() > 0)

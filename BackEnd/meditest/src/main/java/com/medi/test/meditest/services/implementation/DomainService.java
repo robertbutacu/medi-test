@@ -95,8 +95,7 @@ public class DomainService implements IDomainService {
         curr.getRelatedDomains()
                 .stream()
                 .filter(d -> !visited.contains(d))
-                .forEach(d -> allDomains
-                        .addAll(getRelatedDomains(d, maxDepth - 1, visited)));
+                .forEach(d -> allDomains.addAll(getRelatedDomains(d, maxDepth - 1, visited)));
 
         return allDomains;
     }

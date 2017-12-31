@@ -5,7 +5,7 @@ import com.medi.test.meditest.services.contracts.test.generator.stop.criteria.IT
 public class TestByDurationAndDiffStopCriterion implements ITestGeneratorStopCriterion {
     private double duration;
 
-    public TestByDurationAndDiffStopCriterion(double duration){
+    public TestByDurationAndDiffStopCriterion(double duration) {
         this.duration = duration;
     }
 

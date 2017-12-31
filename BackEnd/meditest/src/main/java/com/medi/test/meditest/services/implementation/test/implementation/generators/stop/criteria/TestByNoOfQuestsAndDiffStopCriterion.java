@@ -5,7 +5,7 @@ import com.medi.test.meditest.services.contracts.test.generator.stop.criteria.IT
 public class TestByNoOfQuestsAndDiffStopCriterion implements ITestGeneratorStopCriterion {
     private int numberOfQuestions;
 
-    public TestByNoOfQuestsAndDiffStopCriterion(int numberOfQuestions){
+    public TestByNoOfQuestsAndDiffStopCriterion(int numberOfQuestions) {
         this.numberOfQuestions = numberOfQuestions;
     }
 

@@ -54,7 +54,7 @@ public class TestByDurationAndNoOfQuestions implements ITestByDurationAndNoOfQue
                 new TestByDurAndNoOfQuestsStopCriterion(numberOfQuestions, duration));
 
         test.inferTestDifficulty();
-        
+
         return test;
     }
 
