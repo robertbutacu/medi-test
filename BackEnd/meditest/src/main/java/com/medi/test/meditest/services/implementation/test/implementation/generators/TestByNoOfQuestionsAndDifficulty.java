@@ -9,7 +9,6 @@ import com.medi.test.meditest.services.contracts.IDomainService;
 import com.medi.test.meditest.services.contracts.IQuestionService;
 import com.medi.test.meditest.services.contracts.test.generator.ITestByNoOfQuestionsAndDifficulty;
 import com.medi.test.meditest.services.implementation.test.implementation.generators.stop.criteria.TestByNoOfQuestsAndDiffStopCriterion;
-import com.medi.test.meditest.services.implementation.test.implementation.utils.DurationCalculator;
 import com.medi.test.meditest.services.implementation.test.implementation.utils.QuestionGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,13 +48,13 @@ public class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAnd
 
         TestDto test = new TestDto(domain, difficulty);
 
-        new QuestionGenerator().addQuestionsToTest(test,
+        QuestionGenerator.addQuestionsToTest(test,
                 possibleQuestions,
                 questionsOfSameDifficulty,
                 questionWithDiffDifficulty,
                 new TestByNoOfQuestsAndDiffStopCriterion(numberOfQuestions));
 
-        new DurationCalculator().computeDuration(test);
+        test.computeDuration();
 
         return test;
     }

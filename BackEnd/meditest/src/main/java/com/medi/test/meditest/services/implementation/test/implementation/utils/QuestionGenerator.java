@@ -22,7 +22,7 @@ public class QuestionGenerator {
     public QuestionGenerator() {
     }
 
-    public void addQuestionsToTest(TestDto test, List<QuestionDto> questionsOfSameDifficulty,
+    public static void addQuestionsToTest(TestDto test, List<QuestionDto> questionsOfSameDifficulty,
                                    List<QuestionDto> possibleQuestions,
                                    List<QuestionDto> questionWithDiffDifficulty,
                                    ITestGeneratorStopCriterion stopCriterion) {
@@ -49,7 +49,7 @@ public class QuestionGenerator {
         }
     }
 
-    private Optional<Integer> addSingleMatchQuestionToTest(List<QuestionDto> picked, TestDto test,
+    private static Optional<Integer> addSingleMatchQuestionToTest(List<QuestionDto> picked, TestDto test,
                                               List<QuestionDto> questionsOfSameDifficulty,
                                               List<QuestionDto> questionWithDiffDifficulty) {
         ComplexTestQuestionDto next = normalizeToSingleMatch(picked);
@@ -62,7 +62,7 @@ public class QuestionGenerator {
     }
 
 
-    private Optional<Integer> addQuestionToTest(QuestionDto nextQuestion, TestDto test,
+    private static Optional<Integer> addQuestionToTest(QuestionDto nextQuestion, TestDto test,
                                                 List<QuestionDto> questionsOfSameDifficulty,
                                                 List<QuestionDto> questionWithDiffDifficulty) {
         SimpleTestQuestionDto added = new SimpleTestQuestionDto(nextQuestion);
@@ -73,7 +73,7 @@ public class QuestionGenerator {
         return added.computeEstimatedDuration(test.getDifficulty());
     }
 
-    private ComplexTestQuestionDto normalizeToSingleMatch(List<QuestionDto> picked) {
+    private static ComplexTestQuestionDto normalizeToSingleMatch(List<QuestionDto> picked) {
         List<Pair<SingleMatchQuestionDto, SingleMatchAnswerDto>> transformed = transform(picked);
 
         TestServiceUtils.indexSingleMatchQuestion(transformed);
@@ -81,7 +81,7 @@ public class QuestionGenerator {
         return new ComplexTestQuestionDto(shuffle(transformed));
     }
 
-    private QuestionDto getNextQuestion(int differentDifficulty,
+    private static QuestionDto getNextQuestion(int differentDifficulty,
                                         List<QuestionDto> questionWithDiffDifficulty,
                                         List<QuestionDto> questionsOfSameDifficulty) {
         QuestionDto nextQuestion;
@@ -94,7 +94,7 @@ public class QuestionGenerator {
         return nextQuestion;
     }
 
-    private QuestionDto pickQuestion(List<QuestionDto> questions) {
+    private static QuestionDto pickQuestion(List<QuestionDto> questions) {
         Random r = new Random();
 
         return questions.get(r.nextInt(questions.size()));

@@ -73,7 +73,7 @@ public class TestDto {
         this.duration = roundedDuration;
     }
 
-    public void addToDuration(int duration) {
+    private void addToDuration(int duration) {
         int roundedDuration = 0;
         while (roundedDuration < duration)
             roundedDuration += 5;
@@ -108,5 +108,14 @@ public class TestDto {
             this.difficulty = Difficulty.Medium;
 
         else this.difficulty = Difficulty.Easy;
+    }
+
+    public void computeDuration() {
+        for (Pair<QuestionType, ITestQuestion> q :
+                this.getQuestions()) {
+            q.getValue()
+                    .computeEstimatedDuration(this.getDifficulty())
+                    .ifPresent(this::addToDuration);
+        }
     }
 }

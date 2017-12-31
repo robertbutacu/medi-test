@@ -47,7 +47,7 @@ public class TestByDurationAndNoOfQuestions implements ITestByDurationAndNoOfQue
         test.setDomain(domain);
         test.setDuration((int) duration);
 
-        new QuestionGenerator().addQuestionsToTest(test,
+        QuestionGenerator.addQuestionsToTest(test,
                 possibleQuestions,
                 favorableQuestions,
                 notFavorableQuestions,

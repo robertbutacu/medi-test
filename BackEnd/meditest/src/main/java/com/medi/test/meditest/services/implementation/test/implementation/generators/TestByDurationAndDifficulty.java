@@ -1,6 +1,5 @@
 package com.medi.test.meditest.services.implementation.test.implementation.generators;
 
-import com.medi.test.meditest.Transformers.DomainTransformer;
 import com.medi.test.meditest.dtos.DomainDto;
 import com.medi.test.meditest.dtos.QuestionDto;
 import com.medi.test.meditest.dtos.test.TestDto;
@@ -11,8 +10,6 @@ import com.medi.test.meditest.services.contracts.IDomainService;
 import com.medi.test.meditest.services.contracts.IQuestionService;
 import com.medi.test.meditest.services.contracts.test.generator.ITestByDurationAndDifficulty;
 import com.medi.test.meditest.services.implementation.test.implementation.generators.stop.criteria.TestByDurationAndDiffStopCriterion;
-import com.medi.test.meditest.services.implementation.test.implementation.generators.stop.criteria.TestByNoOfQuestsAndDiffStopCriterion;
-import com.medi.test.meditest.services.implementation.test.implementation.utils.DurationCalculator;
 import com.medi.test.meditest.services.implementation.test.implementation.utils.QuestionGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,13 +54,13 @@ public class TestByDurationAndDifficulty implements ITestByDurationAndDifficulty
 
         TestDto test = new TestDto(domain, difficulty);
 
-        new QuestionGenerator().addQuestionsToTest(test,
+        QuestionGenerator.addQuestionsToTest(test,
                 possibleQuestions,
                 questionsOfSameDifficulty,
                 questionWithDiffDifficulty,
                 new TestByDurationAndDiffStopCriterion(duration));
 
-        new DurationCalculator().computeDuration(test);
+        test.computeDuration();
 
         return test;
     }
