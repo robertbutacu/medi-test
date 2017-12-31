@@ -12,8 +12,7 @@ import com.medi.test.meditest.services.contracts.test.generator.ITestByNoOfQuest
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static com.medi.test.meditest.services.implementation.test.implementation.utils.TestServiceConstants.minimumDurationPerTest;
-import static com.medi.test.meditest.services.implementation.test.implementation.utils.TestServiceConstants.minimumQuestionsPerTest;
+import static com.medi.test.meditest.services.implementation.test.implementation.utils.TestServiceConstants.*;
 
 @Service
 public class TestService implements ITestService {
@@ -50,9 +49,8 @@ public class TestService implements ITestService {
     }
 
     private Boolean areCriteriaInvalid(Integer numberOfQuestions, Integer duration) {
-        return (numberOfQuestions == null || numberOfQuestions <= minimumQuestionsPerTest())
+        return (numberOfQuestions == null || numberOfQuestions <=  MIN_QUESTIONS_PER_TEST)
                 &&
-                (duration == null || duration <= minimumDurationPerTest());
-
+                (duration == null || duration <= MIN_DURATION_PER_TEST);
     }
 }
