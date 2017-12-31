@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import static com.medi.test.meditest.services.implementation.test.implementation.utils.TestServiceConstants.differentQuestionMinThreshold;
 import static com.medi.test.meditest.services.implementation.test.implementation.utils.TestServiceUtils.shuffle;
 import static com.medi.test.meditest.services.implementation.test.implementation.utils.TestServiceUtils.transform;
 
@@ -86,7 +87,7 @@ public class QuestionGenerator {
                                         List<QuestionDto> questionsOfSameDifficulty) {
         QuestionDto nextQuestion;
 
-        if (differentDifficulty >= 7 && questionWithDiffDifficulty.size() > 0)
+        if (differentDifficulty >= differentQuestionMinThreshold() && questionWithDiffDifficulty.size() > 0)
             nextQuestion = pickQuestion(questionWithDiffDifficulty);
         else
             nextQuestion = pickQuestion(questionsOfSameDifficulty);
