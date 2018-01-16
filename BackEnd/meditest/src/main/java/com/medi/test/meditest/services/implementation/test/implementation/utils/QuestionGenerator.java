@@ -42,7 +42,8 @@ public class QuestionGenerator {
                 List<QuestionDto> picked = TestServiceUtils.createSingleMatchQuestion(possibleQuestions);
 
                 if (picked != null) {
-                    currentQuestionDuration = addSingleMatchQuestionToTest(picked, test, questionsOfSameDifficulty,
+                    currentQuestionDuration = addSingleMatchQuestionToTest(picked, test,
+                            questionsOfSameDifficulty,
                             questionWithDiffDifficulty);
                 }
             }

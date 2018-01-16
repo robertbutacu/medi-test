@@ -7,6 +7,7 @@ import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.repositories.IDomainRepository;
 import com.medi.test.meditest.repositories.IQuestionRepository;
 import com.medi.test.meditest.services.contracts.IDomainService;
+import com.medi.test.meditest.services.implementation.test.implementation.utils.TestServiceConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,11 +72,11 @@ public class DomainService implements IDomainService {
 
         switch (difficulty) {
             case Easy:
-                return getRelatedDomains(toSearch, 1, new HashSet<>());
+                return getRelatedDomains(toSearch, TestServiceConstants.DEPTH_FOR_EASY_TEST, new HashSet<>());
             case Medium:
-                return getRelatedDomains(toSearch, 2, new HashSet<>());
+                return getRelatedDomains(toSearch, TestServiceConstants.DEPTH_FOR_MEDIUM_TEST, new HashSet<>());
             case Hard:
-                return getRelatedDomains(toSearch, 3, new HashSet<>());
+                return getRelatedDomains(toSearch, TestServiceConstants.DEPTH_FOR_HARD_TEST, new HashSet<>());
             default:
                 return null;
         }

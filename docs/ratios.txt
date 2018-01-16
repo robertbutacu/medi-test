@@ -1,0 +1,22 @@
+questionType: 
+		SingleMatch : 0.6
+		MultipleChoice : 1
+		True/False : 1
+		FillIn : 1
+
+Difficulty:
+		Easy : 1
+		Medium : 1.3
+		Hard : 1.8
+
+Ratio : 90
+
+Formula: questionType x difficulty x Ratio
+
+
+For MF, T/F, FI , it gives out : 90, 135, 180, depending on Diff, from Easy to Hard
+
+For SM : 54 sec, 70.2 sec, 97.2 sec, from Easy to Hard.
+
+As easily noticed, numbers are not rounded : ideally, there should be a function that normalizes the result to a multiple of 5. 
+Care to round it up properly: if its, for example 97.2 => 95.
