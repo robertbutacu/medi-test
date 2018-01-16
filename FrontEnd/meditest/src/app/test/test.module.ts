@@ -8,6 +8,7 @@ import { TestGeneratorComponent } from './components/test-generator/test-generat
 import {TestService} from './services/test.service';
 import { FormsModule } from '@angular/forms';
 import {CountdownComponent} from "./components/countdown/countdown.component";
+import {PathprefixService} from "../shared/services/pathprefix.service";
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {CountdownComponent} from "./components/countdown/countdown.component";
     CountdownComponent
   ],
   providers: [
-    TestService
+    TestService,
+    PathprefixService
   ]
 })
 export class TestModule { }

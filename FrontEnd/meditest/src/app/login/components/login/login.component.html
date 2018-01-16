@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="ui segment">
+    <sn-logo></sn-logo>
+    <div class="ui divider"></div>
+    <form class="ui form" #loginForm="ngForm">
+      <div class="ui input left icon">
+        <input type="email"
+               name="username"
+               ngModel
+               email
+               placeholder="Email"
+               required>
+        <i class="open envelope outline icon"></i>
+      </div>
+      <div class="ui input left icon">
+        <input type="password"
+               placeholder="Password"
+               name="password"
+               ngModel
+               required
+               minlength="6">
+        <i class="privacy icon"></i>
+      </div>
+      <button (click)="submit(loginForm)" [ngClass]="{'disabled': loginForm.invalid, 'loading': loading}" class="ui fluid blue button">
+        Login
+      </button>
+      <sui-message *ngIf="error" class="error">
+        <div class="header">
+          Oops!
+        </div>
+        <p>Seems something went wrong!</p>
+      </sui-message>
+      <div class="ui divider"></div>
+      <div class="texts">
+        <a [routerLink]="['/register']">I don't have an account.</a>
+      </div>
+    </form>
+  </div>
+</div>

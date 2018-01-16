@@ -18,12 +18,22 @@ export class QuestionListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getTest();
+    this.startTest();
     this.getCurrentDate();
   }
 
-  getTest() {
-    this.testService.getTestJson().subscribe(
+  // getTest() {
+  //   this.testService.getTestJson().subscribe(
+  //     (response) => {
+  //       this.test = response;
+  //       this.questions = response.questions;
+  //       this.maxLength = response.questions.length;
+  //     }
+  //   )
+  // }
+
+  startTest() {
+    this.testService.generateTest(10,'Hard').subscribe(
       (response) => {
         this.test = response;
         this.questions = response.questions;

@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="ui segment">
+    <sn-logo></sn-logo>
+    <div class="ui divider"></div>
+    <form class="ui form" #registerForm="ngForm">
+      <div class="ui input left icon">
+        <input type="email" placeholder="Username" email required name="username" ngModel>
+        <i class="open envelope outline icon"></i>
+      </div>
+      <!--<div class="ui input left icon">-->
+        <!--<input type="text" placeholder="Name" name="name" ngModel>-->
+        <!--<i class="user icon"></i>-->
+      <!--</div>-->
+      <div class="ui input left icon">
+        <input type="password" placeholder="Password" #password="ngModel" required minlength="6" name="password" ngModel>
+        <i class="privacy icon"></i>
+      </div>
+      <div class="ui input left icon">
+        <input type="password" placeholder="Confirm password"
+               required
+               minlength="6"
+               [equalTo]="password"
+               name="confpass" ngModel>
+        <i class="privacy icon"></i>
+      </div>
+      <button class="ui fluid green button" (click)="submit()" [ngClass]="{'disabled': registerForm.invalid, 'loading': loading}">
+        Register
+      </button>
+      <sui-message *ngIf="error" class="error">
+        <div class="header">
+          Oops!
+        </div>
+        <p>Seems something went wrong!</p>
+      </sui-message>
+      <sui-message *ngIf="success" class="success">
+        <div class="header">
+          Success!
+        </div>
+        <p>The account was created. Now you can <a [routerLink]="['/login']">login</a>.</p>
+      </sui-message>
+      <div class="ui divider"></div>
+      <div class="texts">
+        <a [routerLink]="['/login']">I already have an account.</a>
+      </div>
+    </form>
+  </div>
+</div>

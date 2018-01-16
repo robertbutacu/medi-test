@@ -8,6 +8,7 @@ import {TestModule} from './test/test.module';
 import { HeaderComponent } from './header/header.component';
 import {SharedModule} from './shared/shared.module';
 import {HttpModule} from "@angular/http";
+import {LoginModule} from "./login/login.module";
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {HttpModule} from "@angular/http";
     AppRoutingModule,
     TestModule,
     SharedModule,
+    LoginModule,
     HttpModule
   ],
   providers: [],

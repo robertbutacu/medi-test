@@ -1,0 +1,33 @@
+<div class="navbar">
+  <sn-logo class="white"></sn-logo>
+  <div class="menu">
+    <ul>
+      <li (click)="goTo('/forms')"><i class="file outline icon"></i>My forms</li>
+      <li (click)="goTo('/statistics')"><i class="area chart icon"></i>Statistics</li>
+      <li (click)="goTo('/settings')"><i class="settings icon"></i>Settings</li>
+      <li (click)="logout()"><i class="power icon"></i>Logout</li>
+    </ul>
+  </div>
+  <div class="responsive-menu">
+    <div class="ui dropdown top right pointing" suiDropdown>
+      <div class="open">
+        <i class="sidebar icon"></i>
+      </div>
+      <div class="menu" suiDropdownMenu>
+        <div class="item" (click)="goTo('/forms')">
+          <i class="file outline icon"></i>My forms
+        </div>
+        <div class="item" (click)="goTo('/statistics')">
+          <i class="area chart icon"></i>Statistics
+        </div>
+        <div class="item" (click)="goTo('/settings')">
+          <i class="settings icon"></i>Profile
+        </div>
+        <div class="item" (click)="logout()">
+          <i class="power icon"></i>Logout
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfloat"></div>
+</div>

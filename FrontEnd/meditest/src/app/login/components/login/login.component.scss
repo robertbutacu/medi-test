@@ -1,0 +1,21 @@
+.container {
+  width: 100%;
+  height: 100%;
+  background: #303133;
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
+  align-items: center;
+  .ui.segment {
+    max-width: 400px;
+    width: 90%;
+    min-height: 310px;
+  }
+  .ui.input {
+    width: 100%;
+    margin: 10px 0;
+  }
+  .texts {
+    text-align: center;
+  }
+}
