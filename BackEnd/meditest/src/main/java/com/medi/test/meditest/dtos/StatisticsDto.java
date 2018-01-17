@@ -1,6 +1,7 @@
 package com.medi.test.meditest.dtos;
 
 import com.medi.test.meditest.entities.User;
+import com.medi.test.meditest.entities.enums.Difficulty;
 
 public class StatisticsDto {
 
@@ -8,7 +9,7 @@ public class StatisticsDto {
     private long userId;
     private UserDto userDto;
     private int score;
-    private String difficulty;
+    private Difficulty difficulty;
 
     public int getId() {
         return id;
@@ -38,10 +39,10 @@ public class StatisticsDto {
         this.score = score;
     }
 
-    public String getDifficulty() {
+    public Difficulty getDifficulty() {
         return difficulty;
     }
-    public void setDifficulty(String difficulty) {
+    public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
 }

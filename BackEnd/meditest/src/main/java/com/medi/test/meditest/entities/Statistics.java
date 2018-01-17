@@ -1,5 +1,7 @@
 package com.medi.test.meditest.entities;
 
+import com.medi.test.meditest.entities.enums.Difficulty;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,7 +11,7 @@ public class Statistics {
     private int id;
     private User user;
     private int score;
-    private String difficulty;
+    private Difficulty difficulty;
 
     @Id
     @GeneratedValue
@@ -39,10 +41,10 @@ public class Statistics {
     }
 
     @Column(name = "DIFFICULTY")
-    public String getDifficulty() {
+    public Difficulty getDifficulty() {
         return difficulty;
     }
-    public void setDifficulty(String difficulty) {
+    public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
 }
