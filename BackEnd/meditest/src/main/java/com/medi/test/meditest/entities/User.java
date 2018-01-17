@@ -1,6 +1,6 @@
 package com.medi.test.meditest.entities;
 
-import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,13 +13,11 @@ public class User {
     private long id;
 
     @Column
-    @NotNull
-    @Length(max = 50)
+    @NotEmpty
     private String username;
 
     @Column
-    @NotNull
-    @Length(max = 50)
+    @NotEmpty
     private String password;
 
     public long getId() {
