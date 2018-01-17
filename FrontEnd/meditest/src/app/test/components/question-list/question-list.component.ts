@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TestService} from "../../services/test.service";
+import {Test} from "../../models/Test";
 
 @Component({
   selector: 'app-question-list',
@@ -12,12 +13,24 @@ export class QuestionListComponent implements OnInit {
   public maxLength: number = 0;
   public currentDate: Date = new Date();
   public test: any;
+  public generatedTest: Test = new Test();
   public questions: Array<any> = [];
 
   constructor(public testService: TestService) {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('type') === '0') {
+      this.generatedTest.difficulty = localStorage.getItem('difficulty');
+      this.generatedTest.time = localStorage.getItem('time');
+    } else if (localStorage.getItem('type') === '1') {
+      this.generatedTest.difficulty = localStorage.getItem('difficulty');
+      this.generatedTest.numberOfQuestions = Number(localStorage.getItem('questions'));
+    } else {
+      this.generatedTest.numberOfQuestions = Number(localStorage.getItem('questions'));
+      this.generatedTest.time = localStorage.getItem('time');
+    }
+    this.generatedTest.domain = localStorage.getItem('domain');
     this.startTest();
     this.getCurrentDate();
   }
@@ -33,7 +46,7 @@ export class QuestionListComponent implements OnInit {
   // }
 
   startTest() {
-    this.testService.generateTest(10,'Hard').subscribe(
+    this.testService.generateTest(this.generatedTest).subscribe(
       (response) => {
         this.test = response;
         this.questions = response.questions;
@@ -53,7 +66,7 @@ export class QuestionListComponent implements OnInit {
 
   jumpTo(index) {
     this.questions[this.questionCount - 1].value.answered = true;
-    this.questionCount = index + 1 ;
+    this.questionCount = index + 1;
   }
 
   private generateTest(): void {

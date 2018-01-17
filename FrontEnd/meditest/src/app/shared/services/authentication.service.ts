@@ -14,12 +14,12 @@ export class AuthenticationService {
   }
 
   saveToken(token: string) {
-    localStorage.setItem(this.TOKEN_KEY, token);
+    localStorage.setItem('logged', token);
     console.log(this.userInfo);
   }
 
   getToken(): string {
-    return localStorage.getItem(this.TOKEN_KEY);
+    return localStorage.getItem('logged');
   }
 
   isLogged(): boolean {
