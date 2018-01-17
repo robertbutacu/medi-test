@@ -3,6 +3,7 @@ package com.medi.test.meditest.entities;
 import com.medi.test.meditest.entities.enums.Difficulty;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "STATISTICS")
@@ -12,6 +13,8 @@ public class Statistics {
     private User user;
     private int score;
     private Difficulty difficulty;
+    private String domain;
+    private Date created;
 
     @Id
     @GeneratedValue
@@ -46,5 +49,22 @@ public class Statistics {
     }
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+    @Column(name = "DOMAIN")
+    public String getDomain() {
+        return domain;
+    }
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
+
+    @Column(name = "CREATED", columnDefinition = "DATETIME")
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getCreated() {
+        return created;
+    }
+    public void setCreated(Date created) {
+        this.created = created;
     }
 }

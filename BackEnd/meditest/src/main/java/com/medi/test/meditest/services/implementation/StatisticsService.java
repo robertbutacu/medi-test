@@ -8,6 +8,7 @@ import com.medi.test.meditest.services.contracts.IStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,7 @@ public class StatisticsService implements IStatisticsService {
     @Override
     public void createStatisticsForCurrentUser(StatisticsDto statisticsDto, long userId) {
         statisticsDto.setUserId(userId);
+        statisticsDto.setCreated(new Date());
         statisticsRepository.save(statisticsTransformer.toModel(statisticsDto));
     }
 

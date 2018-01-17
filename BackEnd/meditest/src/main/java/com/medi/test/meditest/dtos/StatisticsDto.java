@@ -3,13 +3,17 @@ package com.medi.test.meditest.dtos;
 import com.medi.test.meditest.entities.User;
 import com.medi.test.meditest.entities.enums.Difficulty;
 
+import java.util.Date;
+
 public class StatisticsDto {
 
     private int id;
     private long userId;
-    private UserDto userDto;
     private int score;
     private Difficulty difficulty;
+    private String domain;
+    private Date created;
+    private String createdFormatted;
 
     public int getId() {
         return id;
@@ -25,13 +29,6 @@ public class StatisticsDto {
         this.userId = userId;
     }
 
-    public UserDto getUserDto() {
-        return userDto;
-    }
-    public void setUserDto(UserDto userDto) {
-        this.userDto = userDto;
-    }
-
     public int getScore() {
         return score;
     }
@@ -44,5 +41,26 @@ public class StatisticsDto {
     }
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public String getCreatedFormatted() {
+        return createdFormatted;
+    }
+    public void setCreatedFormatted(String createdFormatted) {
+        this.createdFormatted = createdFormatted;
     }
 }

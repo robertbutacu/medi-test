@@ -3,14 +3,11 @@ package com.medi.test.meditest.Transformers;
 import com.medi.test.meditest.dtos.StatisticsDto;
 import com.medi.test.meditest.entities.Statistics;
 import com.medi.test.meditest.entities.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.medi.test.meditest.util.DateUtils;
 import org.springframework.stereotype.Component;
 
 @Component
 public class StatisticsTransformer implements ITransformer<Statistics, StatisticsDto> {
-
-    @Autowired
-    private UserTransformer userTransformer;
 
     @Override
     public StatisticsDto toDto(Statistics statistics) {
@@ -20,7 +17,10 @@ public class StatisticsTransformer implements ITransformer<Statistics, Statistic
         statisticsDto.setDifficulty(statistics.getDifficulty());
         statisticsDto.setScore(statistics.getScore());
         statisticsDto.setUserId(statistics.getUser().getId());
-        statisticsDto.setUserDto(userTransformer.toDto(statistics.getUser()));
+        statisticsDto.setCreated(statistics.getCreated());
+        statisticsDto.setCreatedFormatted(DateUtils.getDateDDMMYYYY(statistics.getCreated()));
+
+        statisticsDto.setDomain(statistics.getDomain());
 
         return statisticsDto;
     }
@@ -32,6 +32,8 @@ public class StatisticsTransformer implements ITransformer<Statistics, Statistic
         statistics.setId(statisticsDto.getId());
         statistics.setDifficulty(statisticsDto.getDifficulty());
         statistics.setScore(statisticsDto.getScore());
+        statistics.setCreated(statisticsDto.getCreated());
+        statistics.setDomain(statisticsDto.getDomain());
 
         User user = new User();
         user.setId(statisticsDto.getUserId());
