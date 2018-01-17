@@ -7,10 +7,7 @@ import com.medi.test.meditest.services.implementation.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/user")
@@ -21,7 +18,7 @@ public class UsersController {
     @Autowired
     UserTransformer transformer;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @PostMapping("/login")
     public ResponseEntity<Long> login(@RequestBody UserDto userDto){
         User user = service.getByUsername(userDto.getUsername());
         if(user == null)
@@ -32,7 +29,7 @@ public class UsersController {
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @PostMapping("/register")
     public ResponseEntity register (@RequestBody UserDto userDto){
         if(service.getByUsername(userDto.getUsername()) != null)
             return new ResponseEntity<>(HttpStatus.CONFLICT);
