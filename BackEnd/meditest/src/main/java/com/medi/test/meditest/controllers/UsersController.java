@@ -27,7 +27,7 @@ public class UsersController {
         if(user == null)
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         else
-            if(userDto.getPassword().equals(user.getPassword()))
+            if(service.passwordMatches(userDto.getPassword(),user.getPassword()))
                 return new ResponseEntity<>(user.getId(), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
