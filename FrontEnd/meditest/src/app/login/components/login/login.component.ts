@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
     if (loginModel.valid) {
       this.loading = true;
       this.loginService.login(loginModel.value).subscribe((res: any) => {
+        localStorage.setItem('id', res.toString());
         this.auth.saveToken('succes');
         this.loading = false;
         this.error = false;

@@ -9,6 +9,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import {SharedModule} from './shared/shared.module';
 import {HttpModule} from "@angular/http";
 import {LoginModule} from "./login/login.module";
+import {StatsModule} from "./stats/stats.module";
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {LoginModule} from "./login/login.module";
     TestModule,
     SharedModule,
     LoginModule,
+    StatsModule,
     HttpModule
   ],
   providers: [],
