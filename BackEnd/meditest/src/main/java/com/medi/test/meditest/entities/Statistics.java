@@ -22,7 +22,7 @@ public class Statistics {
     }
 
     @ManyToOne
-    @Column(name = "USER_ID")
+    @JoinColumn(name = "USER_ID")
     public User getUser() {
         return user;
     }
