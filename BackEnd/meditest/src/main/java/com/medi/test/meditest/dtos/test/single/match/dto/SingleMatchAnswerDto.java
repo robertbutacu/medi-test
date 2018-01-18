@@ -2,7 +2,7 @@ package com.medi.test.meditest.dtos.test.single.match.dto;
 
 public class SingleMatchAnswerDto {
     private String body;
-    private String selectedAnswer;
+    private int selectedAnswer;
     private int matchQuestionId;
 
     public int getMatchQuestionId() {
@@ -21,11 +21,11 @@ public class SingleMatchAnswerDto {
         this.body = body;
     }
 
-    public String getSelectedAnswer() {
+    public int getSelectedAnswer() {
         return selectedAnswer;
     }
 
-    public void setSelectedAnswer(String selectedAnswer) {
+    public void setSelectedAnswer(int selectedAnswer) {
         this.selectedAnswer = selectedAnswer;
     }
 }

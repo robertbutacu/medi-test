@@ -7,6 +7,7 @@ public class AnswerDto {
     public boolean isCorrect;
 
     public boolean selected;
+    public String fillin;
 
     public String getBody() {
         return body;
@@ -38,5 +39,13 @@ public class AnswerDto {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public String getFillin() {
+        return fillin;
+    }
+
+    public void setFillin(String fillin) {
+        this.fillin = fillin;
     }
 }

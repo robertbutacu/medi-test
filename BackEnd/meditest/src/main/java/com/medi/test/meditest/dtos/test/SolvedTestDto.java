@@ -8,8 +8,8 @@ import java.util.List;
 public class SolvedTestDto {
 
     private String difficulty;
-
-
+    private String domain;
+    private int duration;
     private List<QuestionDto> questions;
 
     public SolvedTestDto(Difficulty difficulty, List<QuestionDto> questions) {
@@ -23,5 +23,29 @@ public class SolvedTestDto {
 
     public List<QuestionDto> getQuestions() {
         return questions;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public void setQuestions(List<QuestionDto> questions) {
+        this.questions = questions;
     }
 }
