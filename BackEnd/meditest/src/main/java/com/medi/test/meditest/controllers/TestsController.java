@@ -37,8 +37,10 @@ public class TestsController {
             return new ResponseEntity<>(generatedTest, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/score", method = RequestMethod.GET)
-    public int getTestScore(@RequestBody SolvedTestDto testToScore) {
-        return testScoringService.getScore(testToScore);
+    @RequestMapping(value = "/score", method = RequestMethod.POST)
+    public int getTestScore(@RequestBody SolvedTestDto testToScore,
+                            @RequestParam("userId") long userId,
+                            @RequestParam("difficulty") Difficulty difficulty) {
+        return testScoringService.getScore(difficulty, userId, testToScore);
     }
 }
