@@ -29,6 +29,15 @@ public class TestScoringService implements ITestScoringService {
         for (QuestionDto questionDto : testToScore.getQuestions()) {
             switch (questionDto.getType()) {
                 case SingleMatch:
+                    ok=true;
+                    for (AnswerDto answerDto : questionDto.getAnswers()) {
+                        if(answerDto.getSelectedAnswer() != answerDto.getMatchAnswerId()){
+                            ok = false;
+                        }
+                    }
+                    if(ok){
+                        score += 1;
+                    }
                         break;
                 case FillIn:
                     for (AnswerDto answerDto : questionDto.getAnswers()) {

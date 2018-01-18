@@ -8,6 +8,8 @@ public class AnswerDto {
 
     public boolean selected;
     public String fillin;
+    private int matchAnswerId;
+    private int selectedAnswer;
 
     public String getBody() {
         return body;
@@ -47,5 +49,21 @@ public class AnswerDto {
 
     public void setFillin(String fillin) {
         this.fillin = fillin;
+    }
+
+    public int getMatchAnswerId() {
+        return matchAnswerId;
+    }
+
+    public void setMatchAnswerId(int matchAnswerId) {
+        this.matchAnswerId = matchAnswerId;
+    }
+
+    public int getSelectedAnswer() {
+        return selectedAnswer;
+    }
+
+    public void setSelectedAnswer(int selectedAnswer) {
+        this.selectedAnswer = selectedAnswer;
     }
 }
