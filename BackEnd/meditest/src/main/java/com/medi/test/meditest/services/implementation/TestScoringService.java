@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TestScoringService implements ITestScoringService {
     @Override
-    public Pair<Double, Double> getScore(SolvedTestDto testToScore) {
-        return new Pair<>(100.0, 100.0);
+    public int getScore(SolvedTestDto testToScore) {
+        return 0;
     }
 }

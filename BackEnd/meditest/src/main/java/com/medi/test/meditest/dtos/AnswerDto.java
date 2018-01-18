@@ -6,6 +6,8 @@ public class AnswerDto {
 
     public boolean isCorrect;
 
+    public boolean selected;
+
     public String getBody() {
         return body;
     }
@@ -20,5 +22,21 @@ public class AnswerDto {
 
     public void setIsCorrect(boolean correct) {
         isCorrect = correct;
+    }
+
+    public boolean isCorrect() {
+        return isCorrect;
+    }
+
+    public void setCorrect(boolean correct) {
+        isCorrect = correct;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

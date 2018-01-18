@@ -6,7 +6,9 @@ import com.medi.test.meditest.entities.enums.Difficulty;
 import java.util.List;
 
 public class SolvedTestDto {
+
     private String difficulty;
+
 
     private List<QuestionDto> questions;
 
