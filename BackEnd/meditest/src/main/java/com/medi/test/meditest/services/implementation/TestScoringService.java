@@ -3,6 +3,7 @@ package com.medi.test.meditest.services.implementation;
 import com.medi.test.meditest.dtos.AnswerDto;
 import com.medi.test.meditest.dtos.QuestionDto;
 import com.medi.test.meditest.dtos.test.SolvedTestDto;
+import com.medi.test.meditest.dtos.test.score.TestDto;
 import com.medi.test.meditest.entities.Statistics;
 import com.medi.test.meditest.entities.User;
 import com.medi.test.meditest.entities.enums.Difficulty;
@@ -22,12 +23,12 @@ public class TestScoringService implements ITestScoringService {
     private IStatisticsRepository statisticsRepository;
 
     @Override
-    public int getScore(Difficulty difficulty, long userId, SolvedTestDto testToScore) {
+    public int getScore(Difficulty difficulty, long userId, TestDto testDto) {
 
         boolean ok;
         int score = 0;
-        for (QuestionDto questionDto : testToScore.getQuestions()) {
-            switch (questionDto.getType()) {
+        for (com.medi.test.meditest.dtos.test.score.QuestionDto questionDto : testDto.getQuestions()) {
+            switch (questionDto.getKey()) {
                 case SingleMatch:
                     ok=true;
                     for (AnswerDto answerDto : questionDto.getAnswers()) {
@@ -69,8 +70,8 @@ public class TestScoringService implements ITestScoringService {
         user.setId(userId);
         statistics.setUser(user);
         statistics.setDifficulty(difficulty);
-        statistics.setDomain(testToScore.getDomain());
-        statistics.setScore(score/testToScore.getQuestions().size()*100);
+        statistics.setDomain(testDto.getDomain());
+        statistics.setScore(score/testDto.getQuestions().size()*100);
         return statisticsRepository.save(statistics).getId();
     }
 }

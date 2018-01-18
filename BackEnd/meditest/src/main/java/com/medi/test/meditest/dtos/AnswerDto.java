@@ -3,9 +3,7 @@ package com.medi.test.meditest.dtos;
 public class AnswerDto {
 
     public String body;
-
     public boolean isCorrect;
-
     public boolean selected;
     public String fillin;
     private int matchAnswerId;
