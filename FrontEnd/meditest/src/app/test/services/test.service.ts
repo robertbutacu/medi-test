@@ -14,6 +14,7 @@ export class TestService {
   private headers = new Headers({'Content-Type': 'application/json'});
 
   private url: string = this.pathprefixService.prefix + '/v1/test/generate';
+  private urlScore: string = this.pathprefixService.prefix + '/v1/test/score';
 
   constructor(private http: HttpClient,
               private pathprefixService: PathprefixService) {
@@ -27,6 +28,11 @@ export class TestService {
   public generateTest(searchObject) {
     this.setSearch(searchObject);
     return this.http.get(this.url + '?' + this.search )
+      .map((response: Response) => <any>response);
+  }
+
+  public submitTest(test, userId) {
+    return this.http.post(this.urlScore + '?userId=' + userId, test )
       .map((response: Response) => <any>response);
   }
 

@@ -1,198 +1,240 @@
 {
-  "domain": "programming",
-  "difficulty": "Hard",
-  "duration": 10,
   "questions": [
     {
+      "key": "MultipleChoice",
+      "answers": [
+        {
+          "body": "A Programming Language",
+          "isCorrect": true,
+          "selected": true,
+          "fillin": null,
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": true
+        },
+        {
+          "body": "An island",
+          "isCorrect": false,
+          "selected": false,
+          "fillin": null,
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": false
+        },
+        {
+          "body": "an animal",
+          "isCorrect": false,
+          "selected": false,
+          "fillin": null,
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": false
+        }
+      ]
+    },
+    {
       "key": "SingleMatch",
-      "value": {
-        "matches": [
-          {
-            "key": {
-              "matchAnswerId": 0,
-              "body": "Cobol shoulnt"
-            },
-            "value": {
-              "body": " is concise",
-              "matchQuestionId": 1
-            }
-          },
-          {
-            "key": {
-              "matchAnswerId": 1,
-              "body": "Scala code, generally, "
-            },
-            "value": {
-              "body": "is verbose",
-              "matchQuestionId": 2
-            }
-          },
-          {
-            "key": {
-              "matchAnswerId": 2,
-              "body": "Java code, generally, "
-            },
-            "value": {
-              "body": "exist",
-              "matchQuestionId": 0
-            }
-          }
-        ],
-        "answered": false
-      }
-    },
-    {
-      "key": "TrueOrFalse",
-      "value": {
-        "answered": false,
-        "body": "Cobol is a fresh language",
-        "answers": [
-          {
-            "body": "false",
-            "isCorrect": true
-          },
-          {
-            "body": "true",
-            "isCorrect": false
-          }
-        ]
-      }
+      "answers": [
+        {
+          "matchAnswerId": 0,
+          "body": "Scala code, generally, ",
+          "selectedAnswer": "1",
+          "expectedSecsToAnswer": 20,
+          "difficulty": "Hard"
+        },
+        {
+          "matchAnswerId": 1,
+          "body": "Java code, generally, ",
+          "selectedAnswer": "0",
+          "expectedSecsToAnswer": 20,
+          "difficulty": "Hard"
+        },
+        {
+          "matchAnswerId": 2,
+          "body": "Cobol shoulnt",
+          "selectedAnswer": "2",
+          "expectedSecsToAnswer": 20,
+          "difficulty": "Hard"
+        }
+      ]
     },
     {
       "key": "MultipleChoice",
-      "value": {
-        "answered": false,
-        "body": "What is Scala",
-        "answers": [
-          {
-            "body": "A Functional Programming Language",
-            "isCorrect": true
-          },
-          {
-            "body": "A tasty beverage",
-            "isCorrect": false
-          },
-          {
-            "body": "A framework",
-            "isCorrect": false
-          }
-        ]
-      }
-    },
-    {
-      "key": "FillIn",
-      "value": {
-        "answered": false,
-        "body": "Cobol is...",
-        "answers": [
-          {
-            "body": "An ancient Programming Language",
-            "isCorrect": true
-          }
-        ]
-      }
-    },
-    {
-      "key": "TrueOrFalse",
-      "value": {
-        "answered": false,
-        "body": "Java 10 is out",
-        "answers": [
-          {
-            "body": "false",
-            "isCorrect": true
-          },
-          {
-            "body": "true",
-            "isCorrect": false
-          }
-        ]
-      }
-    },
-    {
-      "key": "FillIn",
-      "value": {
-        "answered": false,
-        "body": "Java is",
-        "answers": [
-          {
-            "body": "A Programming Language",
-            "isCorrect": true
-          }
-        ]
-      }
+      "answers": [
+        {
+          "body": "A Functional Programming Language",
+          "isCorrect": true,
+          "selected": false,
+          "fillin": null,
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": true
+        },
+        {
+          "body": "A tasty beverage",
+          "isCorrect": false,
+          "selected": true,
+          "fillin": null,
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": false
+        },
+        {
+          "body": "A framework",
+          "isCorrect": false,
+          "selected": false,
+          "fillin": null,
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": false
+        }
+      ]
     },
     {
       "key": "TrueOrFalse",
-      "value": {
-        "answered": false,
-        "body": "Scala 2.13 is out",
-        "answers": [
-          {
-            "body": "false",
-            "isCorrect": true
-          },
-          {
-            "body": "true",
-            "isCorrect": false
-          }
-        ]
-      }
+      "answers": [
+        {
+          "body": "false",
+          "isCorrect": true,
+          "selected": true,
+          "fillin": null,
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": true
+        },
+        {
+          "body": "true",
+          "isCorrect": false,
+          "selected": false,
+          "fillin": null,
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": false
+        }
+      ]
     },
     {
-      "key": "MultipleChoice",
-      "value": {
-        "answered": false,
-        "body": "What is Java",
-        "answers": [
-          {
-            "body": "A Programming Language",
-            "isCorrect": true
-          },
-          {
-            "body": "An island",
-            "isCorrect": false
-          },
-          {
-            "body": "an animal",
-            "isCorrect": false
-          }
-        ]
-      }
-    },
-    {
-      "key": "MultipleChoice",
-      "value": {
-        "answered": false,
-        "body": "What is Cobol",
-        "answers": [
-          {
-            "body": "An ancient Programming Language",
-            "isCorrect": true
-          },
-          {
-            "body": "A rat",
-            "isCorrect": false
-          },
-          {
-            "body": "a mistake",
-            "isCorrect": false
-          }
-        ]
-      }
+      "key": "TrueOrFalse",
+      "answers": [
+        {
+          "body": "false",
+          "isCorrect": true,
+          "selected": true,
+          "fillin": null,
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": true
+        },
+        {
+          "body": "true",
+          "isCorrect": false,
+          "selected": false,
+          "fillin": null,
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": false
+        }
+      ]
     },
     {
       "key": "FillIn",
-      "value": {
-        "answered": false,
-        "body": "Scala is...",
-        "answers": [
-          {
-            "body": "A Functional Programming Language",
-            "isCorrect": true
-          }
-        ]
-      }
+      "answers": [
+        {
+          "body": "A Programming Language",
+          "isCorrect": true,
+          "selected": false,
+          "fillin": "asdas",
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": true
+        }
+      ]
+    },
+    {
+      "key": "FillIn",
+      "answers": [
+        {
+          "body": "An ancient Programming Language",
+          "isCorrect": true,
+          "selected": false,
+          "fillin": "asdasd",
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": true
+        }
+      ]
+    },
+    {
+      "key": "TrueOrFalse",
+      "answers": [
+        {
+          "body": "false",
+          "isCorrect": true,
+          "selected": false,
+          "fillin": null,
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": true
+        },
+        {
+          "body": "true",
+          "isCorrect": false,
+          "selected": true,
+          "fillin": null,
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": false
+        }
+      ]
+    },
+    {
+      "key": "MultipleChoice",
+      "answers": [
+        {
+          "body": "An ancient Programming Language",
+          "isCorrect": true,
+          "selected": false,
+          "fillin": null,
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": true
+        },
+        {
+          "body": "A rat",
+          "isCorrect": false,
+          "selected": true,
+          "fillin": null,
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": false
+        },
+        {
+          "body": "a mistake",
+          "isCorrect": false,
+          "selected": false,
+          "fillin": null,
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": false
+        }
+      ]
+    },
+    {
+      "key": "FillIn",
+      "answers": [
+        {
+          "body": "A Functional Programming Language",
+          "isCorrect": true,
+          "selected": false,
+          "fillin": "asdasdasda",
+          "matchAnswerId": 0,
+          "selectedAnswer": 0,
+          "correct": true
+        }
+      ]
     }
-  ]
+  ],
+  "domain": "programming",
+  "difficulty": "Hard",
+  "duration": 230
 }

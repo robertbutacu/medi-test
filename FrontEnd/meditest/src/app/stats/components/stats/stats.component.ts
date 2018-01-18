@@ -27,4 +27,12 @@ export class StatsComponent implements OnInit {
     );
   }
 
+  deleteStat(id) {
+    this.statsService.deleteStat(id,this.memberId).subscribe(
+      (response) => {
+        this.getStats();
+      }
+    );
+  }
+
 }

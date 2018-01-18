@@ -3,12 +3,14 @@
   <div class="statistics">
     <div class="col-sm-12">
       <div class="col-sm-3" *ngFor="let stat of stats; let index = index;">
-        <div class="stat" [class.even]='index % 2 == 0' [class.odd]='index % 2 != 0'>
+        <div class="stat" [class.weak]='stat.score < 30' [class.medium]='stat.score > 29 && stat.score <70'
+             [class.hard]='stat.score > 69'>
           <i class="fa fa-bar-chart" aria-hidden="true"></i> <br/>
           Date: {{stat.createdFormatted}} <br/>
           Domain: {{stat.domain}} <br/>
           Difficulty: {{stat.difficulty}} <br/>
-          Score: {{stat.score}}
+          Score: {{stat.score}} <br/>
+          <span (click)="deleteStat(stat.id)" class="delete">(DELETE)</span>
         </div>
       </div>
     </div>

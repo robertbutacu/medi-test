@@ -15,4 +15,9 @@ export class StatsService {
     return this.http.get(this.url + '?userId=' + id)
       .map((response: Response) => <any>response);
   }
+
+  public deleteStat(statId, id) {
+    return this.http.delete(this.url + statId + '?userId=' + id)
+      .map((response: Response) => <any>response);
+  }
 }

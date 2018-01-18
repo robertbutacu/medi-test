@@ -1,5 +1,4 @@
 .stat {
-  color: black;
   text-align: center;
   height: auto;
   padding: 20px;
@@ -15,22 +14,35 @@
   transform: rotateZ(360deg);
 }
 
-.even {
-  background-color: lightcyan;
-  border: 1px solid cyan;
+.weak {
+  background-color: #e10021;
+  border: 1px solid black;
+  color: white;
 }
 
-.even:hover {
-  background-color: #d2ffd4;
+.weak:hover {
+  background-color: #ff4d00;
   transform: scale(1.1);
 }
 
-.odd {
-  background-color: lightgreen;
-  border: 1px solid #00eea0;
+.medium {
+  background-color: #f19900;
+  border: 1px solid black;
+  color: white;
 }
 
-.odd:hover {
+.medium:hover {
+  background-color: #eecc00;
+  transform: scale(1.1);
+}
+
+.hard {
+  background-color: #00ce1e;
+  border: 1px solid black;
+  color: white;
+}
+
+.hard:hover {
   background-color: #92ee09;
   transform: scale(1.1);
 }
@@ -38,4 +50,10 @@
 .col-sm-3 {
   display: block;
   margin: 0 auto;
+  margin-top: 15px;
+}
+
+.delete {
+  cursor: pointer;
+  font-weight: bold;
 }

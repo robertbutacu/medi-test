@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output} from '@angular/core';
 import {Question} from "../../../models/question.model";
 
 @Component({
@@ -6,7 +6,7 @@ import {Question} from "../../../models/question.model";
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss']
 })
-export class QuestionComponent implements OnInit,OnChanges {
+export class QuestionComponent implements OnInit {
 
   @Input() public question: any;
 
@@ -18,13 +18,13 @@ export class QuestionComponent implements OnInit,OnChanges {
   ];
 
   public alphabets: Array<any> = [
-    {id: 0, letter: 'a)'},
-    {id: 0, letter: 'b)'},
-    {id: 0, letter: 'c)'},
-    {id: 0, letter: 'd)'},
-    {id: 0, letter: 'e)'},
-    {id: 0, letter: 'f)'},
-    {id: 0, letter: 'g)'},
+    {id: 0, letter: '0)'},
+    {id: 0, letter: '1)'},
+    {id: 0, letter: '2)'},
+    {id: 0, letter: '3)'},
+    {id: 0, letter: '4)'},
+    {id: 0, letter: '5)'},
+    {id: 0, letter: '6)'},
   ];
 
   constructor() {
@@ -33,7 +33,8 @@ export class QuestionComponent implements OnInit,OnChanges {
   ngOnInit() {
   }
 
-  ngOnChanges() {
+  updateAnswered() {
+    this.question.value.answered = true;
   }
 
 }

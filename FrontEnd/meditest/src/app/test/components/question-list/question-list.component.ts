@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TestService} from "../../services/test.service";
 import {Test} from "../../models/Test";
+import {Router} from "@angular/router";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-question-list',
@@ -15,8 +17,11 @@ export class QuestionListComponent implements OnInit {
   public test: any;
   public generatedTest: Test = new Test();
   public questions: Array<any> = [];
+  public userId;
+  public testSubmit: Test = new Test();
 
-  constructor(public testService: TestService) {
+  constructor(public testService: TestService,
+              public router: Router) {
   }
 
   ngOnInit() {
@@ -31,6 +36,7 @@ export class QuestionListComponent implements OnInit {
       this.generatedTest.time = localStorage.getItem('time');
     }
     this.generatedTest.domain = localStorage.getItem('domain');
+    this.userId = localStorage.getItem('id');
     this.startTest();
     this.getCurrentDate();
   }
@@ -56,7 +62,7 @@ export class QuestionListComponent implements OnInit {
   }
 
   countQuestion(value) {
-    this.questions[this.questionCount - 1].value.answered = true;
+    // this.questions[this.questionCount - 1].value.answered = true;
     this.questionCount = this.questionCount + value;
     if (this.questionCount == 0)
       this.questionCount = 1;
@@ -65,7 +71,7 @@ export class QuestionListComponent implements OnInit {
   }
 
   jumpTo(index) {
-    this.questions[this.questionCount - 1].value.answered = true;
+    // this.questions[this.questionCount - 1].value.answered = true;
     this.questionCount = index + 1;
   }
 
@@ -76,6 +82,31 @@ export class QuestionListComponent implements OnInit {
 
   private getCurrentDate(): void {
     this.currentDate = new Date(this.currentDate.getTime() + 30 * 60000);
+  }
+
+  submitTest() {
+    this.testSubmit.questions = [];
+    this.testSubmit.domain = this.test.domain;
+    this.testSubmit.difficulty = this.test.difficulty;
+    this.testSubmit.duration = this.test.duration;
+    for (let i = 0; i < this.test.questions.length; i++) {
+      this.testSubmit.questions.push({'key': this.test.questions[i].key, 'answers': []});
+      if (!isNullOrUndefined(this.test.questions[i].value.answers)) {
+        for (let j = 0; j < this.test.questions[i].value.answers.length; j++) {
+          this.testSubmit.questions[i].answers.push(this.test.questions[i].value.answers[j]);
+        }
+      } else {
+        for (let j = 0; j < this.test.questions[i].value.matches.length; j++) {
+          this.testSubmit.questions[i].answers.push(this.test.questions[i].value.matches[j].key);
+        }
+      }
+    }
+    // console.log(this.testSubmit);
+    this.testService.submitTest(this.testSubmit, this.userId).subscribe(
+      (succes) => {
+        this.router.navigateByUrl('statistics');
+      }
+    )
   }
 
 }
