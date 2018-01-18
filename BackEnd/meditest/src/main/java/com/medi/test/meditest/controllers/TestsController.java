@@ -39,8 +39,7 @@ public class TestsController {
 
     @RequestMapping(value = "/score", method = RequestMethod.POST)
     public int getTestScore(@RequestBody com.medi.test.meditest.dtos.test.score.TestDto testDto,
-                            @RequestParam("userId") long userId,
-                            @RequestParam("difficulty") Difficulty difficulty) {
-        return testScoringService.getScore(difficulty, userId, testDto);
+                            @RequestParam("userId") long userId) {
+        return testScoringService.getScore(userId, testDto);
     }
 }

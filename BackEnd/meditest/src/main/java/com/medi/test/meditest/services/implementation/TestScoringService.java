@@ -23,7 +23,7 @@ public class TestScoringService implements ITestScoringService {
     private IStatisticsRepository statisticsRepository;
 
     @Override
-    public int getScore(Difficulty difficulty, long userId, TestDto testDto) {
+    public int getScore(long userId, TestDto testDto) {
 
         boolean ok;
         int score = 0;
@@ -69,7 +69,7 @@ public class TestScoringService implements ITestScoringService {
         User user = new User();
         user.setId(userId);
         statistics.setUser(user);
-        statistics.setDifficulty(difficulty);
+        statistics.setDifficulty(testDto.getDifficulty());
         statistics.setDomain(testDto.getDomain());
         statistics.setScore(score/testDto.getQuestions().size()*100);
         return statisticsRepository.save(statistics).getId();

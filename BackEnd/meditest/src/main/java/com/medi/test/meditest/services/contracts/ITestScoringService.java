@@ -6,5 +6,5 @@ import com.medi.test.meditest.entities.enums.Difficulty;
 import javafx.util.Pair;
 
 public interface ITestScoringService {
-    int getScore(Difficulty difficulty, long userId, TestDto testDto);
+    int getScore(long userId, TestDto testDto);
 }
