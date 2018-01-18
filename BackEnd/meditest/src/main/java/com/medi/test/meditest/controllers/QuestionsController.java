@@ -154,13 +154,14 @@ public class QuestionsController {
         scalaQuestions.add(question2);
 
         scala.setQuestions(scalaQuestions);
-        scalaQuestions.forEach(q -> q.setDomain(scala));
+        scalaQuestions.forEach(q -> q.setDomain(programming));
 
         List<Question> javaQuestions = new ArrayList<>();
         javaQuestions.add(question1);
 
         java.setQuestions(javaQuestions);
-        javaQuestions.forEach(q -> q.setDomain(java));
+        javaQuestions.forEach(q -> q.setDomain(programming
+        ));
 
         domainService.save(programming);
         domainService.save(scala);
@@ -262,13 +263,13 @@ public class QuestionsController {
         scalaQuestions.add(question2);
 
         scala.setQuestions(scalaQuestions);
-        scalaQuestions.forEach(q -> q.setDomain(scala));
+        scalaQuestions.forEach(q -> q.setDomain(programming));
 
         List<Question> javaQuestions = new ArrayList<>();
         javaQuestions.add(question1);
 
         java.setQuestions(javaQuestions);
-        javaQuestions.forEach(q -> q.setDomain(java));
+        javaQuestions.forEach(q -> q.setDomain(programming));
 
         domainService.save(programming);
         domainService.save(scala);
@@ -336,13 +337,13 @@ public class QuestionsController {
         scalaQuestions.add(question2);
 
         scala.setQuestions(scalaQuestions);
-        scalaQuestions.forEach(q -> q.setDomain(scala));
+        scalaQuestions.forEach(q -> q.setDomain(programming));
 
         List<Question> javaQuestions = new ArrayList<>();
         javaQuestions.add(question1);
 
         java.setQuestions(javaQuestions);
-        javaQuestions.forEach(q -> q.setDomain(java));
+        javaQuestions.forEach(q -> q.setDomain(programming));
 
         domainService.save(programming);
         domainService.save(scala);
@@ -428,13 +429,13 @@ public class QuestionsController {
         scalaQuestions.add(question2);
 
         scala.setQuestions(scalaQuestions);
-        scalaQuestions.forEach(q -> q.setDomain(scala));
+        scalaQuestions.forEach(q -> q.setDomain(programming));
 
         List<Question> javaQuestions = new ArrayList<>();
         javaQuestions.add(question1);
 
         java.setQuestions(javaQuestions);
-        javaQuestions.forEach(q -> q.setDomain(java));
+        javaQuestions.forEach(q -> q.setDomain(programming));
 
         domainService.save(programming);
         domainService.save(scala);

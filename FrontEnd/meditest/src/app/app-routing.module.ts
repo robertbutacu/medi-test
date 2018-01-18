@@ -2,18 +2,18 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from "./login/components/login/login.component";
 import {RegisterComponent} from "./login/components/register/register.component";
+import {TestGeneratorComponent} from "./test/components/test-generator/test-generator.component";
+import {AuthGuard} from "./shared/guards/auth.guard";
+import {QuestionListComponent} from "./test/components/question-list/question-list.component";
+import {StatsComponent} from "./stats/components/stats/stats.component";
+
 const routes: Routes = [
-  {
-    path: 'test',
-    children: [
-      {
-        path: '',
-        loadChildren: './test/test.module#TestModule'
-      }
-    ]
-  },
+  {path: '', redirectTo: '/login', pathMatch: 'full' },
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'generate', component: TestGeneratorComponent, canActivate: [AuthGuard]},
+  {path: 'newtest', component: QuestionListComponent, canActivate: [AuthGuard]},
+  {path: 'statistics', component: StatsComponent, canActivate: [AuthGuard]},
   {
     path: '**',
     redirectTo: ''
@@ -24,5 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }

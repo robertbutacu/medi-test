@@ -1,8 +1,9 @@
+<sn-navbar></sn-navbar>
+<app-header [title]="title"></app-header>
 <div>
-  <form>
     <br>
     <label> Choose the domain field:</label>
-    <select>
+    <select [(ngModel)]="test.domain">
       <option *ngFor="let field of fields" [value]="field.value">
         {{ field.viewValue }}
       </option>
@@ -17,11 +18,11 @@
       </option>
     </select>
 
-    <br><br>
+    <br>
 
     <div *ngIf="opValue == 'level-time-0' || opValue == 'level-questions-1'">
       <label> Choose difficulty level:</label>
-      <select>
+      <select [(ngModel)]="test.difficulty">
         <option *ngFor="let level of levels" [value]="level.value">
           {{ level.viewValue }}
         </option>
@@ -31,7 +32,7 @@
 
     <div *ngIf="opValue == 'level-time-0' || opValue == 'questions-time-2'">
       <label> Choose time:</label>
-      <select>
+      <select [(ngModel)]="test.time">
         <option *ngFor="let time of times" [value]="time.value">
           {{ time.viewValue }}
         </option>
@@ -41,14 +42,13 @@
 
     <div *ngIf="opValue == 'level-questions-1' || opValue == 'questions-time-2'">
       <label> Choose number of questions:</label>
-      <select>
+      <select [(ngModel)]="test.numberOfQuestions">
         <option *ngFor="let question of questions" [value]="question.value">
           {{ question.viewValue }}
         </option>
       </select>
     </div>
-  </form>
   <div class="padding-top-15">
-    Create the form for test generating here!
     <button (click)="generateTest()" class="btn btn-primary">GenerateTest</button>
   </div>
+</div>

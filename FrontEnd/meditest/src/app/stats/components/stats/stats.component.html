@@ -1,0 +1,16 @@
+<sn-navbar></sn-navbar>
+<div class="container">
+  <div class="statistics">
+    <div class="col-sm-12">
+      <div class="col-sm-3" *ngFor="let stat of stats; let index = index;">
+        <div class="stat" [class.even]='index % 2 == 0' [class.odd]='index % 2 != 0'>
+          <i class="fa fa-bar-chart" aria-hidden="true"></i> <br/>
+          Date: {{stat.createdFormatted}} <br/>
+          Domain: {{stat.domain}} <br/>
+          Difficulty: {{stat.difficulty}} <br/>
+          Score: {{stat.score}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

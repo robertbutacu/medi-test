@@ -7,6 +7,7 @@ import {AuthGuard} from "./guards/auth.guard";
 import {LogoComponent} from "./components/logo/logo.component";
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {SuiModule} from 'ng2-semantic-ui';
+import {HeaderComponent} from "./components/header/header.component";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {SuiModule} from 'ng2-semantic-ui';
   ],
   declarations: [
     LogoComponent,
-    NavbarComponent
+    NavbarComponent,
+    HeaderComponent
   ],
   providers: [
     HttpService,
@@ -27,7 +29,8 @@ import {SuiModule} from 'ng2-semantic-ui';
   exports: [
     LogoComponent,
     NavbarComponent,
-    SuiModule
+    SuiModule,
+    HeaderComponent
   ]
 })
 export class SharedModule { }

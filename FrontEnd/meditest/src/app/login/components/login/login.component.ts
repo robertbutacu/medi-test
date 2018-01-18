@@ -27,10 +27,11 @@ export class LoginComponent implements OnInit {
     if (loginModel.valid) {
       this.loading = true;
       this.loginService.login(loginModel.value).subscribe((res: any) => {
-        this.auth.saveToken(res.token);
+        localStorage.setItem('id', res.toString());
+        this.auth.saveToken('succes');
         this.loading = false;
         this.error = false;
-        this.router.navigate(['/forms']);
+        this.router.navigate(['/generate']);
       }, () => {
         this.loading = false;
         this.error = true;

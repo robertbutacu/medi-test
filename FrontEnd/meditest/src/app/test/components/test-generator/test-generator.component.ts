@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TestService} from '../../services/test.service';
+import {Test} from "../../models/Test";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-test-generator',
@@ -8,11 +10,13 @@ import {TestService} from '../../services/test.service';
 })
 export class TestGeneratorComponent implements OnInit {
   public opValue: string;
+  public title: string = 'MediTest';
+  test: Test = new Test();
 
   fields = [
-    {value: 'field-0', viewValue: 'A'},
-    {value: 'field-1', viewValue: 'B'},
-    {value: 'field-2', viewValue: 'C'}
+    {value: 'programming', viewValue: 'programming'},
+    {value: 'culture', viewValue: 'culture'},
+    {value: 'science', viewValue: 'science'}
   ];
 
   options = [
@@ -22,25 +26,24 @@ export class TestGeneratorComponent implements OnInit {
   ];
 
   levels = [
-    {value: 'easy-0', viewValue: 'Easy'},
-    {value: 'normal-1', viewValue: 'Normal'},
-    {value: 'hard-2', viewValue: 'Hard'},
-    {value: 'very-hard-3', viewValue: 'Very hard'}
+    {value: 'Easy', viewValue: 'Easy'},
+    {value: 'Normal', viewValue: 'Normal'},
+    {value: 'Hard', viewValue: 'Hard'}
   ];
 
   times = [
-    {value: '5min-0', viewValue: '5 Minutes'},
-    {value: '10min-1', viewValue: '10 Minutes'},
-    {value: '15min-2', viewValue: '15 Minutes'},
-    {value: '20min-3', viewValue: '20 Minutes'},
-    {value: '25min-4', viewValue: '25 Minutes'},
-    {value: '30min-5', viewValue: '30 Minutes'},
-    {value: '35min-6', viewValue: '35 Minutes'},
-    {value: '40min-7', viewValue: '40 Minutes'},
-    {value: '45min-8', viewValue: '45 Minutes'},
-    {value: '50min-9', viewValue: '50 Minutes'},
-    {value: '55min-10', viewValue: '55 Minutes'},
-    {value: '60min-11', viewValue: '60 Minutes'}
+    {value: '5', viewValue: '5 Minutes'},
+    {value: '10', viewValue: '10 Minutes'},
+    {value: '15', viewValue: '15 Minutes'},
+    {value: '20', viewValue: '20 Minutes'},
+    {value: '25', viewValue: '25 Minutes'},
+    {value: '30', viewValue: '30 Minutes'},
+    {value: '35', viewValue: '35 Minutes'},
+    {value: '40', viewValue: '40 Minutes'},
+    {value: '45', viewValue: '45 Minutes'},
+    {value: '50', viewValue: '50 Minutes'},
+    {value: '55', viewValue: '55 Minutes'},
+    {value: '60', viewValue: '60 Minutes'}
   ];
 
   questions = [
@@ -65,15 +68,26 @@ export class TestGeneratorComponent implements OnInit {
     {value: '24', viewValue: '24 questions'}
   ];
 
-  constructor(public testService: TestService) {
+  constructor(public testService: TestService,
+              private router: Router) {
   }
 
   ngOnInit() {
   }
 
   private generateTest(): void {
-    // populate test list with information from backend
-    this.testService.isGenerated = true;
+    localStorage.setItem('domain', this.test.domain);
+    localStorage.setItem('difficulty', this.test.difficulty);
+    localStorage.setItem('time', this.test.time);
+    localStorage.setItem('questions', this.test.numberOfQuestions.toString());
+    if (this.opValue === 'level-time-0') {
+      localStorage.setItem('type', '0');
+    } else if (this.opValue === 'level-questions-1') {
+      localStorage.setItem('type', '1');
+    } else {
+      localStorage.setItem('type', '2');
+    }
+    this.router.navigateByUrl('newtest');
   }
 
   setValue(value: string): void {
