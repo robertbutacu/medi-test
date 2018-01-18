@@ -27,7 +27,7 @@ public class StatisticsService implements IStatisticsService {
 
     @Override
     public List<StatisticsDto> getStatisticsForCurrentUser(long userId) {
-        return convertListToDTO(statisticsRepository.findByUserId(userId));
+        return convertListToDTO(statisticsRepository.findByUserIdOrderByIdDesc(userId));
     }
 
     @Override

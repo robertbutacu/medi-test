@@ -6,6 +6,7 @@ public class SingleMatchQuestionDto {
     private int matchAnswerId;
 
     private String body;
+    private String selectedAnswer;
 
     private int expectedSecsToAnswer;
 
@@ -41,5 +42,13 @@ public class SingleMatchQuestionDto {
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public String getSelectedAnswer() {
+        return selectedAnswer;
+    }
+
+    public void setSelectedAnswer(String selectedAnswer) {
+        this.selectedAnswer = selectedAnswer;
     }
 }
