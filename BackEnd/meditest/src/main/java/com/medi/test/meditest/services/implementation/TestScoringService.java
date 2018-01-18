@@ -48,14 +48,14 @@ public class TestScoringService implements ITestScoringService {
                     break;
                 case TrueOrFalse:
                     for (AnswerDto answerDto : questionDto.getAnswers()) {
-                        if (answerDto.isCorrect() == answerDto.isSelected())
+                        if ((answerDto.isCorrect())&&(answerDto.isCorrect() == answerDto.isSelected()))
                             score += 1;
                     }
                     break;
                 case MultipleChoice:
                     ok = true;
                     for (AnswerDto answerDto : questionDto.getAnswers()) {
-                        if (answerDto.isCorrect() != answerDto.isSelected())
+                        if ((answerDto.isCorrect())&&(answerDto.isCorrect() != answerDto.isSelected()))
                             ok = false;
                     }
                     if (ok) {
@@ -71,7 +71,7 @@ public class TestScoringService implements ITestScoringService {
         statistics.setUser(user);
         statistics.setDifficulty(testDto.getDifficulty());
         statistics.setDomain(testDto.getDomain());
-        statistics.setScore(score/testDto.getQuestions().size()*100);
+        statistics.setScore(score*100/testDto.getQuestions().size());
         return statisticsRepository.save(statistics).getId();
     }
 }
