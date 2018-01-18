@@ -27,10 +27,10 @@ public class TestScoringService implements ITestScoringService {
         boolean ok;
         int score = 0;
         for (QuestionDto questionDto : testToScore.getQuestions()) {
-            switch (questionDto.getType()) {
+            switch (questionDto.getKey()) {
                 case SingleMatch:
                     ok=true;
-                    for (AnswerDto answerDto : questionDto.getAnswers()) {
+                    for (AnswerDto answerDto : questionDto.getValue().getAnswers()) {
                         if(answerDto.getSelectedAnswer() != answerDto.getMatchAnswerId()){
                             ok = false;
                         }
@@ -40,20 +40,20 @@ public class TestScoringService implements ITestScoringService {
                     }
                         break;
                 case FillIn:
-                    for (AnswerDto answerDto : questionDto.getAnswers()) {
+                    for (AnswerDto answerDto : questionDto.getValue().getAnswers()) {
                         if (answerDto.getBody().equals(answerDto.getFillin()))
                             score += 1;
                     }
                     break;
                 case TrueOrFalse:
-                    for (AnswerDto answerDto : questionDto.getAnswers()) {
+                    for (AnswerDto answerDto : questionDto.getValue().getAnswers()) {
                         if (answerDto.isCorrect() == answerDto.isSelected())
                             score += 1;
                     }
                     break;
                 case MultipleChoice:
                     ok = true;
-                    for (AnswerDto answerDto : questionDto.getAnswers()) {
+                    for (AnswerDto answerDto : questionDto.getValue().getAnswers()) {
                         if (answerDto.isCorrect() != answerDto.isSelected())
                             ok = false;
                     }

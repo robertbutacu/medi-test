@@ -1,5 +1,6 @@
 package com.medi.test.meditest.dtos;
 
+import com.medi.test.meditest.dtos.test.ValueDto;
 import com.medi.test.meditest.entities.enums.Difficulty;
 import com.medi.test.meditest.entities.enums.QuestionType;
 
@@ -13,9 +14,9 @@ public class QuestionDto {
 
     private DomainDto domain;
 
-    private List<AnswerDto> answers;
+    private ValueDto value;
 
-    private QuestionType type;
+    private QuestionType key;
 
     private int expectedSecsToAnswer;
 
@@ -35,14 +36,6 @@ public class QuestionDto {
         this.difficulty = difficulty;
     }
 
-    public List<AnswerDto> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(List<AnswerDto> answers) {
-        this.answers = answers;
-    }
-
     public DomainDto getDomain() {
         return domain;
     }
@@ -51,12 +44,20 @@ public class QuestionDto {
         this.domain = domain;
     }
 
-    public QuestionType getType() {
-        return type;
+    public ValueDto getValue() {
+        return value;
     }
 
-    public void setType(QuestionType type) {
-        this.type = type;
+    public void setValue(ValueDto value) {
+        this.value = value;
+    }
+
+    public QuestionType getKey() {
+        return key;
+    }
+
+    public void setKey(QuestionType key) {
+        this.key = key;
     }
 
     public int getExpectedSecsToAnswer() {
