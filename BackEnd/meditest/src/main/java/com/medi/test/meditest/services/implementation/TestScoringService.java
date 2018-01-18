@@ -70,7 +70,7 @@ public class TestScoringService implements ITestScoringService {
         statistics.setUser(user);
         statistics.setDifficulty(difficulty);
         statistics.setDomain(testToScore.getDomain());
-        statistics.setScore(score);
+        statistics.setScore(score/testToScore.getQuestions().size()*100);
         return statisticsRepository.save(statistics).getId();
     }
 }
