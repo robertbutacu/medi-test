@@ -30,7 +30,7 @@ export class TestGeneratorComponent implements OnInit {
 
   levels = [
     {value: 'Easy', viewValue: 'Easy'},
-    {value: 'Normal', viewValue: 'Normal'},
+    {value: 'Medium', viewValue: 'Normal'},
     {value: 'Hard', viewValue: 'Hard'}
   ];
 
