@@ -36,8 +36,10 @@ public class TestService implements ITestService {
     public TestDto generateTest(DomainDto domain, Difficulty difficulty,
                                 Integer numberOfQuestions,
                                 Integer duration) {
-        if (areCriteriaInvalid(numberOfQuestions, duration))
+        if (areCriteriaInvalid(numberOfQuestions, duration)){
+            System.out.println("Invalid criteria");
             return null;
+        }
 
         if (difficulty != null && numberOfQuestions != null && duration == null)
             return testByNoOfQuestionsAndDifficulty.generateTest(domain, numberOfQuestions, difficulty);
@@ -48,6 +50,7 @@ public class TestService implements ITestService {
         if (difficulty == null && numberOfQuestions != null && duration != null)
             return testByDurationAndNoOfQuestions.generateTest(domain, duration, numberOfQuestions);
 
+        System.out.println("Bad parameters set");
         return null;
     }
 

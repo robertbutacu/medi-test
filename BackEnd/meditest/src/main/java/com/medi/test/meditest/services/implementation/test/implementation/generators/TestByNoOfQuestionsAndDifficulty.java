@@ -43,8 +43,10 @@ public class TestByNoOfQuestionsAndDifficulty implements ITestByNoOfQuestionsAnd
         List<QuestionDto> questionsOfSameDifficulty = getQuestionsOfSameDifficulty(possibleQuestions, difficulty);
         List<QuestionDto> questionWithDiffDifficulty = getQuestionsWithDiffDifficulty(possibleQuestions, difficulty);
 
-        if (questionsOfSameDifficulty.size() < numberOfQuestions)
+        if (questionsOfSameDifficulty.size() < numberOfQuestions){
+            System.out.println("Not enough questions!");
             return null;
+        }
 
         TestDto test = new TestDto(domain, difficulty);
 

@@ -31,10 +31,15 @@ public class TestsController {
 
         TestDto generatedTest = testService.generateTest(domain, difficulty, numberOfQuestions, duration);
 
-        if (generatedTest == null)
+
+        if (generatedTest == null){
+            System.out.println("Test generation bad request.");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        else
+        }
+        else{
+            System.out.println("Returning back the generated test.");
             return new ResponseEntity<>(generatedTest, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/score", method = RequestMethod.POST)

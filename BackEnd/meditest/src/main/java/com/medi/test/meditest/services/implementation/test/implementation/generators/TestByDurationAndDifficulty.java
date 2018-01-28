@@ -49,8 +49,10 @@ public class TestByDurationAndDifficulty implements ITestByDurationAndDifficulty
         List<QuestionDto> questionsOfSameDifficulty = getQuestionsOfSameDifficulty(possibleQuestions, difficulty);
         List<QuestionDto> questionWithDiffDifficulty = getQuestionsWithDiffDifficulty(possibleQuestions, difficulty);
 
-        if (questionsOfSameDifficulty.size() == 0)
+        if (questionsOfSameDifficulty.size() == 0){
+            System.out.println("Not enough questions of same difficulty");
             return null;
+        }
 
         TestDto test = new TestDto(domain, difficulty);
 

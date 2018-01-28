@@ -40,8 +40,10 @@ public class TestByDurationAndNoOfQuestions implements ITestByDurationAndNoOfQue
         List<QuestionDto> notFavorableQuestions = getQuestionsFarFromAverageDuration(possibleQuestions,
                 averageDurationPerQuestion);
 
-        if (favorableQuestions.size() < numberOfQuestions)
+        if (favorableQuestions.size() < numberOfQuestions){
+            System.out.println("Not enough questions!");
             return null;
+        }
 
         TestDto test = new TestDto();
         test.setDomain(domain);
