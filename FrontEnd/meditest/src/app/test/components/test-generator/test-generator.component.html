@@ -2,7 +2,7 @@
 <app-header [title]="title"></app-header>
 <div>
     <br>
-    <label> Choose the domain field:</label>
+    <label> Alegeti domeniul:</label>
     <select [(ngModel)]="test.domain">
       <option *ngFor="let field of fields" [value]="field.value">
         {{ field.viewValue }}
@@ -11,7 +11,7 @@
 
     <br><br>
 
-    <label> Choose option:</label>
+    <label> Alegeti optiunea:</label>
     <select [(ngModel)]="opValue" [ngModelOptions]="{standalone: true}">
       <option *ngFor="let option of options" [value]="option.value">
         {{ option.viewValue }}
@@ -21,7 +21,7 @@
     <br>
 
     <div *ngIf="opValue == 'level-time-0' || opValue == 'level-questions-1'">
-      <label> Choose difficulty level:</label>
+      <label> Alegeti dificultate:</label>
       <select [(ngModel)]="test.difficulty">
         <option *ngFor="let level of levels" [value]="level.value">
           {{ level.viewValue }}
@@ -31,7 +31,7 @@
     </div>
 
     <div *ngIf="opValue == 'level-time-0' || opValue == 'questions-time-2'">
-      <label> Choose time:</label>
+      <label> Alegeti durata:</label>
       <select [(ngModel)]="test.time">
         <option *ngFor="let time of times" [value]="time.value">
           {{ time.viewValue }}
@@ -41,7 +41,7 @@
     </div>
 
     <div *ngIf="opValue == 'level-questions-1' || opValue == 'questions-time-2'">
-      <label> Choose number of questions:</label>
+      <label> Alegeti numarul de intrebari:</label>
       <select [(ngModel)]="test.numberOfQuestions">
         <option *ngFor="let question of questions" [value]="question.value">
           {{ question.viewValue }}
@@ -49,6 +49,6 @@
       </select>
     </div>
   <div class="padding-top-15">
-    <button (click)="generateTest()" class="btn btn-primary">GenerateTest</button>
+    <button (click)="generateTest()" class="btn btn-primary">Genereaza!</button>
   </div>
 </div>
