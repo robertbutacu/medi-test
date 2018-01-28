@@ -13,12 +13,11 @@ import java.util.Set;
 @Table(name = "domains")
 public class Domain {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @NotNull
     @Column(name = "name")
-    @Length(max = 30)
+    @Length(max = 50)
     private String name;
 
     @OneToMany(

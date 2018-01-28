@@ -13,21 +13,24 @@ import java.util.List;
 @Table(name = "questions")
 public class Question {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "domain_id")
+    private Domain domain;
+
+
+    @NotNull
+    @Column(name = "difficulty")
+    private Difficulty difficulty;
 
     @NotNull
     @Column(name = "body")
     @Length(max = 500)
     private String body;
 
-    @NotNull
-    @Column(name = "difficulty")
-    private Difficulty difficulty;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "domain_id")
-    private Domain domain;
+    @Column(name = "question_type")
+    private QuestionType questionType;
 
     @NotNull
     @Column(name = "expectedSecsToAnswer")
@@ -36,8 +39,6 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     public List<Answer> answers = new ArrayList<>();
 
-    @Column(name = "question_type")
-    private QuestionType questionType;
 
     public Question() {
     }

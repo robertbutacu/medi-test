@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 @Table(name = "answers")
 public class Answer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @ManyToOne(optional = false)
