@@ -14,9 +14,12 @@ export class TestGeneratorComponent implements OnInit {
   test: Test = new Test();
 
   fields = [
-    {value: 'programming', viewValue: 'programming'},
-    {value: 'culture', viewValue: 'culture'},
-    {value: 'science', viewValue: 'science'}
+    {value: 'Cutia craniana', viewValue: 'Cutia craniana'},
+    {value: 'Urechea', viewValue: 'Urechea'},
+    {value: 'Inima', viewValue: 'Inima'},
+    {value: 'Schelet', viewValue: 'Schelet'},
+    {value: 'Circulatia sangelui', viewValue: 'Circulatia sangelui'},
+    {value: 'Maduva spinarii', viewValue: 'Maduva spinarii'}
   ];
 
   options = [
