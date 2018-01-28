@@ -4,7 +4,6 @@
   width: 70%;
   text-align: left;
   padding: 15px;
-  border: 1px solid lightgray;
 }
 .small {
   width: 40px;
@@ -41,4 +40,12 @@
 
 .align-center {
   text-align:center;
+}
+
+.bordered {
+  border: 1px solid #828282;
+}
+
+.col-sm-12 {
+  padding: 10px;
 }

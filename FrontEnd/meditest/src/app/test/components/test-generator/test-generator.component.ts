@@ -80,14 +80,20 @@ export class TestGeneratorComponent implements OnInit {
 
   private generateTest(): void {
     localStorage.setItem('domain', this.test.domain);
-    localStorage.setItem('difficulty', this.test.difficulty);
-    localStorage.setItem('time', this.test.time);
-    localStorage.setItem('questions', this.test.numberOfQuestions.toString());
+    // localStorage.setItem('difficulty', this.test.difficulty);
+    // localStorage.setItem('time', this.test.time);
+    // localStorage.setItem('questions', this.test.numberOfQuestions.toString());
     if (this.opValue === 'level-time-0') {
+      localStorage.setItem('difficulty', this.test.difficulty);
+      localStorage.setItem('time', this.test.time);
       localStorage.setItem('type', '0');
     } else if (this.opValue === 'level-questions-1') {
+      localStorage.setItem('difficulty', this.test.difficulty);
+      localStorage.setItem('questions', this.test.numberOfQuestions.toString());
       localStorage.setItem('type', '1');
     } else {
+      localStorage.setItem('questions', this.test.numberOfQuestions.toString());
+      localStorage.setItem('time', this.test.time);
       localStorage.setItem('type', '2');
     }
     this.router.navigateByUrl('newtest');

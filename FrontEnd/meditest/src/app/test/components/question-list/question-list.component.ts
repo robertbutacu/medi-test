@@ -27,18 +27,18 @@ export class QuestionListComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('type') === '0') {
       this.generatedTest.difficulty = localStorage.getItem('difficulty');
-      this.generatedTest.time = localStorage.getItem('time');
+      this.generatedTest.time = Number(localStorage.getItem('time')) * 60;
     } else if (localStorage.getItem('type') === '1') {
       this.generatedTest.difficulty = localStorage.getItem('difficulty');
       this.generatedTest.numberOfQuestions = Number(localStorage.getItem('questions'));
     } else {
       this.generatedTest.numberOfQuestions = Number(localStorage.getItem('questions'));
-      this.generatedTest.time = localStorage.getItem('time');
+      this.generatedTest.time = Number(localStorage.getItem('time')) * 60;
     }
     this.generatedTest.domain = localStorage.getItem('domain');
     this.userId = localStorage.getItem('id');
     this.startTest();
-    this.getCurrentDate();
+    // this.getCurrentDate();
   }
 
   // getTest() {
@@ -57,6 +57,7 @@ export class QuestionListComponent implements OnInit {
         this.test = response;
         this.questions = response.questions;
         this.maxLength = response.questions.length;
+        this.getCurrentDate();
       }
     )
   }
@@ -81,7 +82,12 @@ export class QuestionListComponent implements OnInit {
   }
 
   private getCurrentDate(): void {
-    this.currentDate = new Date(this.currentDate.getTime() + 30 * 60000);
+    console.log(this.test.duration);
+    this.currentDate = new Date(this.currentDate.getTime() + (this.test.duration / 60) * 60000);
+    console.log(this.currentDate);
+    // this.currentDate = new Date();
+    // this.currentDate.setSeconds(this.currentDate.getSeconds() + this.test.duration);
+
   }
 
   submitTest() {
@@ -107,6 +113,10 @@ export class QuestionListComponent implements OnInit {
         this.router.navigateByUrl('statistics');
       }
     )
+  }
+
+  goTo(routing) {
+    this.router.navigateByUrl(routing);
   }
 
 }

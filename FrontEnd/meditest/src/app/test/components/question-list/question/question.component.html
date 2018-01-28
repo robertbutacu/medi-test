@@ -5,7 +5,7 @@
   <!--<div class="title">-->
   <!--<i class="fa fa-question-circle" aria-hidden="true"></i> Ce este craniul?-->
   <!--</div>-->
-  <div class="col-sm-12" *ngIf="question.key == 'SingleMatch'">
+  <div class="col-sm-12 bordered" *ngIf="question.key == 'SingleMatch'">
     <div class="col-sm-6">
       <div *ngFor="let q of question.value.matches" class="padding-bottom-10">
         <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="1"
@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="col-sm-12" *ngIf="question.key == 'MultipleChoice'">
+  <div class="col-sm-12 bordered" *ngIf="question.key == 'MultipleChoice'">
     <div class="title">
       <i class="fa fa-question-circle" aria-hidden="true"></i> {{question.value.body}}
     </div>
@@ -30,7 +30,7 @@
     </div>
   </div>
 
-  <div class="col-sm-12" *ngIf="question.key == 'TrueOrFalse'">
+  <div class="col-sm-12 bordered" *ngIf="question.key == 'TrueOrFalse'">
     <div class="title">
       <i class="fa fa-question-circle" aria-hidden="true"></i> {{question.value.body}}
     </div>
@@ -40,7 +40,7 @@
     </div>
   </div>
 
-  <div class="col-sm-12" *ngIf="question.key == 'FillIn'">
+  <div class="col-sm-12 bordered" *ngIf="question.key == 'FillIn'">
     <div class="title">
       <i class="fa fa-question-circle" aria-hidden="true"></i> {{question.value.body}}
     </div>
