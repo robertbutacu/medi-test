@@ -27,13 +27,13 @@ export class QuestionListComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('type') === '0') {
       this.generatedTest.difficulty = localStorage.getItem('difficulty');
-      this.generatedTest.time = Number(localStorage.getItem('time')) * 60;
+      this.generatedTest.duration = Number(localStorage.getItem('time')) * 60;
     } else if (localStorage.getItem('type') === '1') {
       this.generatedTest.difficulty = localStorage.getItem('difficulty');
       this.generatedTest.numberOfQuestions = Number(localStorage.getItem('questions'));
     } else {
       this.generatedTest.numberOfQuestions = Number(localStorage.getItem('questions'));
-      this.generatedTest.time = Number(localStorage.getItem('time')) * 60;
+      this.generatedTest.duration = Number(localStorage.getItem('time')) * 60;
     }
     this.generatedTest.domain = localStorage.getItem('domain');
     this.userId = localStorage.getItem('id');
